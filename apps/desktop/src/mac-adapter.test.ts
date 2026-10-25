@@ -151,5 +151,12 @@ describe('MacAdapter dla różnych wersji macOS (10.13, 10.15, 12, 15)', () => {
     expect(mainCode).not.toMatch(/require\(["']readdirp["']\)/);
     expect(mainCode).not.toMatch(/require\(["']chokidar["']\)/);
     expect(mainCode).not.toMatch(/require\(["']@macknow\//);
+
+    // Upewniamy się, że statyczny eksport web/out/index.html istnieje i nie został nadpisany przez cache next dev
+    const webIndexHtml = path.resolve(__dirname, '../../web/out/index.html');
+    expect(fs.existsSync(webIndexHtml)).toBe(true);
+    const htmlContent = fs.readFileSync(webIndexHtml, 'utf8');
+    expect(htmlContent.toLowerCase()).toContain('<!doctype html>');
+    expect(htmlContent).toContain('MacKnow');
   });
 });

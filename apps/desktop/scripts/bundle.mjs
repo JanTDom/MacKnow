@@ -33,4 +33,12 @@ const wasmSrc = require.resolve('sql.js/dist/sql-wasm.wasm');
 const wasmDest = path.join(distDir, 'sql-wasm.wasm');
 fs.copyFileSync(wasmSrc, wasmDest);
 
-console.log('[desktop:bundle] Zbudowano samodzielne pakiety dist/main.js, dist/preload.js oraz dist/sql-wasm.wasm');
+// 3. Verify that ../web/out/index.html exists before packaging
+const webIndexHtml = path.resolve(desktopRoot, '../web/out/index.html');
+if (!fs.existsSync(webIndexHtml)) {
+  throw new Error(
+    `[desktop:bundle] Brak pliku ${webIndexHtml}! Uruchom najpierw 'pnpm --filter @macknow/web run build'.`
+  );
+}
+
+console.log('[desktop:bundle] Zbudowano samodzielne pakiety dist/main.js, dist/preload.js oraz dist/sql-wasm.wasm (zweryfikowano web/out/index.html)');

@@ -11,8 +11,8 @@
     "lint": "pnpm -r run typecheck && node scripts/lint-pl.mjs",
     "lint:pl": "node scripts/lint-pl.mjs",
     "dev:web": "pnpm --filter @macknow/web dev",
-    "dev:desktop": "pnpm --filter @macknow/desktop dev",
-    "dist:desktop": "pnpm --filter @macknow/desktop dist"
+    "dev:desktop": "pnpm --filter @macknow/web run build && pnpm --filter @macknow/desktop dev",
+    "dist:desktop": "pnpm --filter @macknow/web run build && pnpm --filter @macknow/desktop dist"
   },
   "browserslist": [
     "safari >= 11",
