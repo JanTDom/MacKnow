@@ -79,16 +79,22 @@ export function MaksLoginScreen({ onSuccess }: MaksLoginScreenProps) {
   return (
     <main
       role="main"
-      className="min-h-screen bg-gradient-to-b from-slate-900 via-indigo-950 to-slate-950 text-slate-100 flex flex-col justify-center items-center px-4 py-8 select-none"
+      className="min-h-screen bg-[#0C0D12] bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(200,90,50,0.18),rgba(255,255,255,0))] text-slate-100 flex flex-col justify-center items-center px-4 py-8 select-none relative overflow-hidden"
     >
-      <div className="w-full max-w-md bg-slate-900/90 backdrop-blur-xl border-2 border-indigo-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
-        {/* Dekoracyjny blask w tle */}
+      {/* Dynamiczne tło z miękkimi plamami światła */}
+      <div
+        className="absolute -top-32 -right-32 w-80 h-80 bg-amber-500/10 rounded-full blur-[100px] pointer-events-none"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute -bottom-32 -left-32 w-80 h-80 bg-orange-600/10 rounded-full blur-[100px] pointer-events-none"
+        aria-hidden="true"
+      />
+
+      <div className="w-full max-w-md bg-slate-900/80 backdrop-blur-2xl border border-white/10 rounded-[32px] p-6 sm:p-8 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.8)] relative overflow-hidden">
+        {/* Delikatny wewnętrzny odblask na górnej krawędzi */}
         <div
-          className="absolute -top-24 -right-24 w-56 h-56 bg-amber-400/10 rounded-full blur-3xl pointer-events-none"
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-24 -left-24 w-56 h-56 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"
+          className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none"
           aria-hidden="true"
         />
 
@@ -97,14 +103,14 @@ export function MaksLoginScreen({ onSuccess }: MaksLoginScreenProps) {
           <MacKnowLogo />
         </div>
 
-        {/* Kotek Maks wita użytkownika */}
-        <div className="flex items-center gap-4 bg-slate-800/80 border border-slate-700/80 rounded-2xl p-4 mb-6">
-          <div className="shrink-0 bg-slate-950/60 p-2 rounded-2xl border border-amber-400/40 shadow-inner">
+        {/* Kotek Maks wita użytkownika – ekskluzywny akcent maskotki */}
+        <div className="flex items-center gap-4 bg-gradient-to-br from-slate-800/90 to-slate-900/90 border border-white/10 rounded-2xl p-4 mb-6 shadow-lg shadow-black/20">
+          <div className="shrink-0 bg-slate-950/80 p-2.5 rounded-2xl border border-amber-400/30 shadow-inner flex items-center justify-center">
             <BlackCatGuide mood={catMood} className="w-16 h-16 sm:w-20 sm:h-20" />
           </div>
           <div className="flex-1 min-w-0">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-400/20 text-amber-300 border border-amber-400/30 mb-1">
-              <Sparkles className="w-3.5 h-3.5" />
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-400/15 text-amber-300 border border-amber-400/25 mb-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
               {pl('Kotek Maks')}
             </span>
             <p className="text-sm sm:text-base font-medium text-slate-100 leading-snug">
@@ -140,12 +146,12 @@ export function MaksLoginScreen({ onSuccess }: MaksLoginScreenProps) {
                 placeholder={pl('Wpisz hasło…')}
                 autoFocus
                 disabled={isSuccess}
-                className={`w-full pl-11 pr-12 py-3.5 sm:py-4 bg-slate-950 border-2 ${
+                className={`w-full pl-11 pr-12 py-3.5 sm:py-4 bg-slate-950/90 border-2 ${
                   error
-                    ? 'border-rose-500 focus:ring-rose-500'
+                    ? 'border-rose-500/80 focus:ring-rose-500/30'
                     : isSuccess
-                    ? 'border-emerald-500 focus:ring-emerald-500'
-                    : 'border-slate-700 focus:border-amber-400 focus:ring-amber-400/30'
+                    ? 'border-emerald-500/80 focus:ring-emerald-500/30'
+                    : 'border-slate-700/80 focus:border-amber-400 focus:ring-amber-400/25'
                 } rounded-2xl text-slate-100 text-lg sm:text-xl font-medium tracking-wide placeholder-slate-500 focus:outline-none focus:ring-4 transition-all`}
               />
               <button
@@ -161,7 +167,7 @@ export function MaksLoginScreen({ onSuccess }: MaksLoginScreenProps) {
             {error && (
               <p
                 role="alert"
-                className="mt-2 text-sm text-rose-300 bg-rose-950/60 border border-rose-800/80 rounded-xl px-3 py-2 leading-relaxed"
+                className="mt-2 text-sm text-rose-300 bg-rose-950/70 border border-rose-800/80 rounded-xl px-3 py-2 leading-relaxed"
               >
                 {pl(error)}
               </p>

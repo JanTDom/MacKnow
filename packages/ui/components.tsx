@@ -42,12 +42,19 @@ export function MacKnowLogo({ compact = false }: { compact?: boolean }) {
     <div className="inline-flex items-center gap-3 select-none">
       <svg
         viewBox="0 0 48 48"
-        className="w-10 h-10 shrink-0"
+        className="w-10 h-10 shrink-0 drop-shadow-sm"
         fill="none"
         role="img"
         aria-label="Sygnet MacKnow"
       >
-        <rect x="2" y="2" width="44" height="44" rx="12" fill="var(--mk-primary)" />
+        <defs>
+          <linearGradient id="mkLogoMarkBg" x1="2" y1="2" x2="46" y2="46" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#DE6438" />
+            <stop offset="100%" stopColor="#A83917" />
+          </linearGradient>
+        </defs>
+        <rect x="2" y="2" width="44" height="44" rx="12" fill="url(#mkLogoMarkBg)" />
+        <rect x="2" y="2" width="44" height="44" rx="12" stroke="#FFFFFF" strokeOpacity="0.25" strokeWidth="1" />
         <path
           d="M14 34V18C14 16.8954 14.8954 16 16 16H20.5L24 22L27.5 16H32C33.1046 16 34 16.8954 34 18V34"
           stroke="#FAF7F2"
@@ -62,7 +69,7 @@ export function MacKnowLogo({ compact = false }: { compact?: boolean }) {
           <span className="font-display text-xl font-bold tracking-tight text-mk-text leading-none">
             MacKnow
           </span>
-          <span className="text-xs text-mk-muted mt-1">
+          <span className="text-xs text-mk-muted mt-1 font-medium">
             {pl('Przewodnik Małgorzaty')}
           </span>
         </div>

@@ -1,12 +1,41 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none" role="img" aria-label="Ikona aplikacji MacKnow">
-  <rect x="32" y="32" width="448" height="448" rx="112" fill="#C85A32" />
-  <rect x="52" y="52" width="408" height="408" rx="96" stroke="#FAF7F2" stroke-opacity="0.22" stroke-width="8" />
+  <defs>
+    <!-- Głęboki gradient ikony w standardzie macOS squircle -->
+    <linearGradient id="mkIconBg" x1="256" y1="32" x2="256" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#DE6438" />
+      <stop offset="50%" stopColor="#C85A32" />
+      <stop offset="100%" stopColor="#9C3414" />
+    </linearGradient>
+    <linearGradient id="mkIconRim" x1="256" y1="52" x2="256" y2="460" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.45" />
+      <stop offset="40%" stopColor="#FFFFFF" stopOpacity="0.12" />
+      <stop offset="100%" stopColor="#000000" stopOpacity="0.25" />
+    </linearGradient>
+    <filter id="mkIconShadow" x="100" y="120" width="312" height="280" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.32" />
+    </filter>
+  </defs>
+
+  <!-- Obrys squircle macOS z subtelnym cieniem -->
+  <rect x="32" y="32" width="448" height="448" rx="112" fill="url(#mkIconBg)" />
+  <rect x="32" y="32" width="448" height="448" rx="112" stroke="url(#mkIconRim)" stroke-width="4" />
+
+  <!-- Wewnętrzny odblask szkła na górnej krawędzi -->
   <path
-    d="M144 352V176C144 162.745 154.745 152 168 152H212L256 216L300 152H344C357.255 152 368 162.745 368 176V352"
-    stroke="#FAF7F2"
-    stroke-width="38"
-    stroke-linecap="round"
-    stroke-linejoin="round"
+    d="M64 52C80 40 100 36 144 36H368C412 36 432 40 448 52C432 80 390 96 256 96C122 96 80 80 64 52Z"
+    fill="#FFFFFF"
+    fill-opacity="0.08"
   />
-  <circle cx="256" cy="336" r="32" fill="#FAF7F2" />
+
+  <!-- Centralny sygnet kompasu i księgi MacKnow z cieniem -->
+  <g filter="url(#mkIconShadow)">
+    <path
+      d="M144 352V176C144 162.745 154.745 152 168 152H212L256 216L300 152H344C357.255 152 368 162.745 368 176V352"
+      stroke="#FAF7F2"
+      stroke-width="38"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <circle cx="256" cy="336" r="32" fill="#FAF7F2" />
+  </g>
 </svg>

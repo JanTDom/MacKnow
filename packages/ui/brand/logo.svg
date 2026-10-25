@@ -1,6 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 56" fill="none" role="img" aria-label="Logo MacKnow">
+  <defs>
+    <linearGradient id="mkLogoBg" x1="4" y1="4" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#DE6438" />
+      <stop offset="100%" stopColor="#A83917" />
+    </linearGradient>
+  </defs>
   <!-- Sygnet MacKnow: geometryczny kompas i otwarta księga wiedzy -->
-  <rect x="4" y="4" width="48" height="48" rx="13" fill="#C85A32" />
+  <rect x="4" y="4" width="48" height="48" rx="13" fill="url(#mkLogoBg)" />
+  <rect x="4" y="4" width="48" height="48" rx="13" stroke="#FFFFFF" stroke-opacity="0.2" stroke-width="1" />
   <path
     d="M16 36V20C16 18.8954 16.8954 18 18 18H23L28 24.5L33 18H38C39.1046 18 40 18.8954 40 20V36"
     stroke="#FAF7F2"

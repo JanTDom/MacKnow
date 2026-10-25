@@ -12,9 +12,10 @@ export type CatMood =
   | 'chasing';
 
 /**
- * Animowany Czarny Kotek Przewodnik „Maks” – towarzysz Małgorzaty w nauce MacBooka.
- * Posiada płynne animacje SVG/CSS: mruganie bursztynowymi oczami, machanie puszystym ogonkiem,
- * strzyżenie uszkami, machanie łapką i zabawne rekwizyty zależnie od sytuacji.
+ * Animowany Czarny Kotek Przewodnik „Maks” – wierny, uroczy towarzysz Małgorzaty w nauce MacBooka.
+ * Posiada w 100% kocie proporcje (zaokrąglone uszka z puszystym wnętrzem, pulchne policzki z poduszeczkami wąsów,
+ * migdałowe bursztynowe oczy z błyskiem, delikatny różowy nosek i aksamitny, zwinny ogonek).
+ * Płynne animacje SVG/CSS: mruganie, machanie ogonkiem, strzyżenie uszkami, unoszenie łapki i sytuacyjne rekwizyty.
  */
 export function BlackCatGuide({
   mood = 'pointing',
@@ -32,248 +33,391 @@ export function BlackCatGuide({
       aria-label="Czarny kotek przewodnik Maks"
     >
       <defs>
+        {/* Ciepła aksamitna poświata w tle */}
         <radialGradient id="catBgGlow" cx="50%" cy="50%" r="50%">
           <stop offset="0%" stopColor="var(--mk-primary-soft)" stopOpacity="0.95" />
           <stop offset="100%" stopColor="var(--mk-primary-soft)" stopOpacity="0.1" />
         </radialGradient>
-        <linearGradient id="catFur" x1="24" y1="18" x2="100" y2="116" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#2E3140" />
-          <stop offset="55%" stopColor="#1B1D26" />
-          <stop offset="100%" stopColor="#0F1016" />
+
+        {/* Jedwabiste czarne futerko z bogatymi odcieniami głębokiego grafitu i nocnego granatu */}
+        <linearGradient id="catFur" x1="24" y1="16" x2="104" y2="116" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#34384B" />
+          <stop offset="42%" stopColor="#1B1D28" />
+          <stop offset="100%" stopColor="#0B0C12" />
         </linearGradient>
-        <linearGradient id="catBelly" x1="48" y1="74" x2="80" y2="112" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#3B3F52" />
-          <stop offset="100%" stopColor="#232530" />
+
+        {/* Akcent klatki piersiowej (tuxedo bib) */}
+        <linearGradient id="catChest" x1="52" y1="72" x2="76" y2="100" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#3C4154" />
+          <stop offset="100%" stopColor="#1E212E" />
         </linearGradient>
+
+        {/* Ciepłe, miękkie różowe wnętrze kocich uszek */}
+        <linearGradient id="catEarInner" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#FBCFE8" />
+          <stop offset="100%" stopColor="#F472B6" />
+        </linearGradient>
+
+        {/* Głębokie, bursztynowe kocie oczy z ciepłym blaskiem */}
         <linearGradient id="amberEye" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#FFE074" />
-          <stop offset="100%" stopColor="#E6921A" />
+          <stop offset="0%" stopColor="#FEF08A" />
+          <stop offset="30%" stopColor="#F59E0B" />
+          <stop offset="100%" stopColor="#B45309" />
+        </linearGradient>
+
+        {/* Złoty medalik z literą M */}
+        <linearGradient id="medalGold" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#FEF08A" />
+          <stop offset="45%" stopColor="#EAB308" />
+          <stop offset="100%" stopColor="#A16207" />
+        </linearGradient>
+
+        {/* Skórzana terakotowa obróżka */}
+        <linearGradient id="collarLeather" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#E15A36" />
+          <stop offset="50%" stopColor="#C85A32" />
+          <stop offset="100%" stopColor="#9A2C11" />
+        </linearGradient>
+
+        {/* Połysk szkła w okularach i lupie detektywa */}
+        <linearGradient id="lensGlass" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.6" />
+          <stop offset="100%" stopColor="#BAE6FD" stopOpacity="0.2" />
         </linearGradient>
       </defs>
 
       {/* Ciepła poświata w tle */}
       <circle cx="64" cy="66" r="54" fill="url(#catBgGlow)" />
-      <ellipse cx="64" cy="113" rx="34" ry="6" fill="#000000" opacity="0.14" />
+      <ellipse cx="64" cy="115" rx="36" ry="6" fill="#000000" opacity="0.16" />
 
-      {/* Animowany puszysty ogonek Maksa */}
+      {/* Zwinny, smukły koci ogonek Maksa (naturalny koci kształt S, a nie puszysty lis) */}
       <g className="mk-maks-tail">
-        <path
-          d={
-            mood === 'celebrating' || mood === 'chasing'
-              ? 'M86 96C106 90 116 70 108 54C103 45 94 50 97 59C100 68 94 82 82 89'
-              : 'M86 100C106 98 114 82 108 68C104 60 96 64 98 72C100 80 94 90 82 93'
-          }
-          stroke="url(#catFur)"
-          strokeWidth="10"
-          strokeLinecap="round"
-          fill="none"
-        />
+        {mood === 'sleeping' ? (
+          <path
+            d="M42 110 C52 115 80 115 94 109 C100 106 102 99 96 96 C90 93 82 98 70 102 C60 105 48 106 42 110"
+            stroke="url(#catFur)"
+            strokeWidth="8.5"
+            strokeLinecap="round"
+            fill="none"
+          />
+        ) : mood === 'celebrating' || mood === 'chasing' ? (
+          <path
+            d="M84 94 C104 88 114 70 108 52 C103 44 94 48 98 58 C101 68 94 82 82 88"
+            stroke="url(#catFur)"
+            strokeWidth="8.5"
+            strokeLinecap="round"
+            fill="none"
+          />
+        ) : (
+          <path
+            d="M84 100 C102 98 112 85 107 70 C103 60 95 64 97 72 C99 80 94 90 82 93"
+            stroke="url(#catFur)"
+            strokeWidth="8.5"
+            strokeLinecap="round"
+            fill="none"
+          />
+        )}
       </g>
 
-      {/* Tułów i głowa w lekko unoszącej się grupie */}
+      {/* Główna sylwetka kotka w łagodnie unoszącej się grupie */}
       <g className="mk-maks-body">
-        {/* Tułów Maksa */}
+        {/* Tułów Maksa – miękka, kocia postawa siedząca */}
         <path
-          d="M38 82C36 68 47 62 64 62C81 62 92 68 90 82L92 105C92 110 86 113 78 113H50C42 113 36 110 36 105L38 82Z"
+          d="M40 80 C36 68 46 62 64 62 C82 62 92 68 88 80 L92 104 C92 110 86 113 78 113 H50 C42 113 36 110 36 104 Z"
           fill="url(#catFur)"
         />
-        {/* Jasny krawacik na piersi */}
+
+        {/* Aksamitny jaśniejszy krawacik na klatce piersiowej */}
         <path
-          d="M55 74C59 72 69 72 73 74C75 84 71 95 64 98C57 95 53 84 55 74Z"
-          fill="url(#catBelly)"
+          d="M55 74 C59 72 69 72 73 74 C75 84 71 95 64 98 C57 95 53 84 55 74 Z"
+          fill="url(#catChest)"
         />
 
-        {/* Tylne łapki z różowymi poduszeczkami */}
-        <ellipse cx="47" cy="111" rx="9" ry="5" fill="#181920" />
-        <ellipse cx="81" cy="111" rx="9" ry="5" fill="#181920" />
-        <circle cx="44" cy="111" r="1.6" fill="#F4A3B4" opacity="0.8" />
-        <circle cx="48" cy="110.5" r="1.6" fill="#F4A3B4" opacity="0.8" />
-        <circle cx="80" cy="110.5" r="1.6" fill="#F4A3B4" opacity="0.8" />
-        <circle cx="84" cy="111" r="1.6" fill="#F4A3B4" opacity="0.8" />
+        {/* Tylne łapki ze słodkimi różowymi poduszeczkami */}
+        <ellipse cx="44" cy="111" rx="8.5" ry="5.5" fill="#151720" />
+        <ellipse cx="84" cy="111" rx="8.5" ry="5.5" fill="#151720" />
+        <circle cx="41.5" cy="111" r="1.5" fill="#F472B6" opacity="0.85" />
+        <circle cx="44.5" cy="110.5" r="1.5" fill="#F472B6" opacity="0.85" />
+        <circle cx="47.5" cy="111" r="1.5" fill="#F472B6" opacity="0.85" />
+        <circle cx="80.5" cy="111" r="1.5" fill="#F472B6" opacity="0.85" />
+        <circle cx="83.5" cy="110.5" r="1.5" fill="#F472B6" opacity="0.85" />
+        <circle cx="86.5" cy="111" r="1.5" fill="#F472B6" opacity="0.85" />
 
-        {/* Terakotowa obróżka ze złotym medalikiem „M” (Maks) */}
+        {/* Terakotowa obróżka ze złotym medalikiem „M” */}
         <path
-          d="M44 71C52 76 76 76 84 71"
-          stroke="#D4593B"
-          strokeWidth="5.5"
+          d="M44 71 C52 76 76 76 84 71"
+          stroke="url(#collarLeather)"
+          strokeWidth="5"
           strokeLinecap="round"
         />
-        <circle cx="64" cy="76.5" r="6" fill="#F6C445" stroke="#B7791F" strokeWidth="1.5" />
+        <circle cx="64" cy="77" r="6" fill="url(#medalGold)" stroke="#854D0E" strokeWidth="1.2" />
+        <circle cx="64" cy="77" r="4.6" stroke="#FEF08A" strokeWidth="0.8" fill="none" opacity="0.75" />
         <text
           x="64"
-          y="79.2"
+          y="79.5"
           textAnchor="middle"
-          fill="#744210"
-          fontSize="7.5"
+          fill="#713F12"
+          fontSize="6.8"
           fontWeight="900"
           fontFamily="sans-serif"
         >
           M
         </text>
 
-        {/* Animowane uszka Maksa */}
+        {/* Prawdziwe, zaokrąglone kocie uszka z puszkiem w środku (żadnych lisich szpiców!) */}
         <g className="mk-maks-ear-left">
+          {/* Zewnętrzne ucho: łagodnie wygięty koci kontur z zaokrąglonym czubkiem */}
           <path
-            d="M31 45L25 16L51 30Z"
+            d="M35 42 C33 34 32 26 34 22 C35 20 38 20.5 41 23 C46 27 51 29 55 29 L53 39 Z"
             fill="url(#catFur)"
-            stroke="#181920"
-            strokeWidth="1.5"
+            stroke="#151720"
+            strokeWidth="1.4"
             strokeLinejoin="round"
           />
-          <path d="M33 41L29 22L47 32Z" fill="#F29AA7" opacity="0.88" />
-        </g>
-        <g className="mk-maks-ear-right">
+          {/* Różowe wnętrze uszka */}
           <path
-            d="M97 45L103 16L77 30Z"
-            fill="url(#catFur)"
-            stroke="#181920"
-            strokeWidth="1.5"
-            strokeLinejoin="round"
+            d="M38 38 C37 32 36 27 37 24 C38 23 40 23.5 42 25.5 C46 29 49 30 51 31 Z"
+            fill="url(#catEarInner)"
+            opacity="0.9"
           />
-          <path d="M95 41L99 22L81 32Z" fill="#F29AA7" opacity="0.88" />
+          {/* Delikatne jasne kępki futerka u nasady uszka */}
+          <path
+            d="M50 33 C47 32 45 34 43 32 C45 35 48 35 51 35"
+            stroke="#E2E8F0"
+            strokeWidth="1.3"
+            strokeLinecap="round"
+          />
         </g>
 
-        {/* Głowa Maksa */}
-        <ellipse cx="64" cy="48" rx="31" ry="26" fill="url(#catFur)" />
-        {/* Kępka futerka na czubku głowy */}
+        <g className="mk-maks-ear-right">
+          <path
+            d="M93 42 C95 34 96 26 94 22 C93 20 90 20.5 87 23 C82 27 77 29 73 29 L75 39 Z"
+            fill="url(#catFur)"
+            stroke="#151720"
+            strokeWidth="1.4"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M90 38 C91 32 92 27 91 24 C90 23 88 23.5 86 25.5 C82 29 79 30 77 31 Z"
+            fill="url(#catEarInner)"
+            opacity="0.9"
+          />
+          <path
+            d="M77 33 C80 32 82 34 84 32 C82 35 79 35 76 35"
+            stroke="#E2E8F0"
+            strokeWidth="1.3"
+            strokeLinecap="round"
+          />
+        </g>
+
+        {/* Kocia główka z pulchnymi policzkami i słodkimi zaokrągleniami */}
         <path
-          d="M59 23L64 17L67 23"
-          stroke="#2E3140"
-          strokeWidth="3"
+          d="M64 26 C75 26 84 28 89 35 C94 41 96 48 96 54 C96 61 90 66 82 67 C74 68 68 68.5 64 68.5 C60 68.5 54 68 46 67 C38 66 32 61 32 54 C32 48 34 41 39 35 C44 28 53 26 64 26 Z"
+          fill="url(#catFur)"
+        />
+
+        {/* Drobne kępki futerka na policzkach */}
+        <path d="M32 51 L28 53 L32 56" stroke="#25293A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M96 51 L100 53 L96 56" stroke="#25293A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+
+        {/* Łagodny odblask światła na czole dający trójwymiarowość */}
+        <path
+          d="M46 32 C54 28 74 28 82 32"
+          stroke="#4A5168"
+          strokeWidth="2.2"
           strokeLinecap="round"
-          strokeLinejoin="round"
+          opacity="0.55"
         />
         <path
-          d="M43 32C52 26 76 26 85 32"
-          stroke="#494D60"
-          strokeWidth="2.5"
+          d="M60 25 L64 20 L68 25"
+          stroke="#2B2F40"
+          strokeWidth="2.4"
           strokeLinecap="round"
-          opacity="0.65"
         />
 
         {/* Czapeczka detektywa w trybie 'detective' */}
         {mood === 'detective' && (
           <g>
-            <ellipse cx="64" cy="23" rx="22" ry="7" fill="#B45309" stroke="#78350F" strokeWidth="1.8" />
-            <path d="M46 23C46 13 82 13 82 23Z" fill="#D97706" stroke="#78350F" strokeWidth="1.8" />
-            <path d="M78 23L92 26L80 27Z" fill="#78350F" />
+            <ellipse cx="64" cy="23" rx="22" ry="7" fill="#B45309" stroke="#78350F" strokeWidth="1.6" />
+            <path d="M46 23 C46 13 82 13 82 23 Z" fill="#D97706" stroke="#78350F" strokeWidth="1.6" />
+            <path d="M78 23 L94 26 L81 27 Z" fill="#78350F" />
+            <circle cx="64" cy="13" r="2.5" fill="#78350F" />
           </g>
         )}
 
-        {/* Oczy Maksa (z animacją mrugania lub przymknięte w trybie 'sleeping') */}
+        {/* Wyraziste, migdałowo-okrągłe kocie oczy z podwójnym blaskiem refleksu */}
         {mood === 'sleeping' ? (
           <g>
             <path
-              d="M42 48C46 53 54 53 58 48"
+              d="M42 47 C45 52 54 52 57 47"
               stroke="#FBBF24"
-              strokeWidth="3"
+              strokeWidth="3.2"
               strokeLinecap="round"
             />
             <path
-              d="M70 48C74 53 82 53 86 48"
+              d="M71 47 C74 52 83 52 86 47"
               stroke="#FBBF24"
-              strokeWidth="3"
+              strokeWidth="3.2"
               strokeLinecap="round"
             />
-            <text x="92" y="28" fill="var(--mk-primary)" fontSize="14" fontWeight="900">
+            <text x="94" y="26" fill="var(--mk-primary)" fontSize="15" fontWeight="900" fontFamily="sans-serif">
               Zzz
             </text>
           </g>
         ) : (
           <g className="mk-maks-eyes">
-            <ellipse cx="50" cy="47" rx="8.8" ry="9.2" fill="url(#amberEye)" />
-            <ellipse cx="78" cy="47" rx="8.8" ry="9.2" fill="url(#amberEye)" />
+            {/* Tęczówka lewego oka z kocim kształtem */}
+            <ellipse cx="49.5" cy="46.5" rx="8.5" ry="9" fill="url(#amberEye)" />
+            {/* Tęczówka prawego oka */}
+            <ellipse cx="78.5" cy="46.5" rx="8.5" ry="9" fill="url(#amberEye)" />
+
+            {/* Górna linia rzęs (koci eyeliner) */}
+            <path d="M41 46 C43 39 55 38 58 45" stroke="#0B0C12" strokeWidth="2.2" strokeLinecap="round" />
+            <path d="M70 45 C73 38 85 39 87 46" stroke="#0B0C12" strokeWidth="2.2" strokeLinecap="round" />
+
+            {/* Feline źrenice – pionowe, kocie owoidy */}
             <ellipse
-              cx={mood === 'pointing' || mood === 'chasing' ? '52' : '50'}
-              cy="47.5"
-              rx={mood === 'celebrating' ? '4.5' : '5.2'}
-              ry="6.6"
-              fill="#12131A"
+              cx={mood === 'pointing' || mood === 'chasing' ? 51.5 : 49.5}
+              cy="47"
+              rx={mood === 'celebrating' || mood === 'curious' ? 4.8 : 4.2}
+              ry="7.5"
+              fill="#090A0E"
             />
             <ellipse
-              cx={mood === 'pointing' || mood === 'chasing' ? '80' : '78'}
-              cy="47.5"
-              rx={mood === 'celebrating' ? '4.5' : '5.2'}
-              ry="6.6"
-              fill="#12131A"
+              cx={mood === 'pointing' || mood === 'chasing' ? 80.5 : 78.5}
+              cy="47"
+              rx={mood === 'celebrating' || mood === 'curious' ? 4.8 : 4.2}
+              ry="7.5"
+              fill="#090A0E"
             />
-            <circle cx="47.5" cy="43.8" r="2.5" fill="#FFFFFF" />
-            <circle cx="53" cy="50" r="1.2" fill="#FFFFFF" opacity="0.88" />
-            <circle cx="75.5" cy="43.8" r="2.5" fill="#FFFFFF" />
-            <circle cx="81" cy="50" r="1.2" fill="#FFFFFF" opacity="0.88" />
+
+            {/* Dolny złocisty odblask tęczówki */}
+            <path d="M43 49 C47 54 52 54 56 49" stroke="#FEF08A" strokeWidth="1.2" fill="none" opacity="0.75" />
+            <path d="M72 49 C76 54 81 54 85 49" stroke="#FEF08A" strokeWidth="1.2" fill="none" opacity="0.75" />
+
+            {/* Główne błyski światła (Catchlights) dodające kotkowi życia i inteligencji */}
+            <circle cx="47" cy="43.5" r="2.5" fill="#FFFFFF" />
+            <circle cx="76" cy="43.5" r="2.5" fill="#FFFFFF" />
+            <circle cx="53" cy="49.5" r="1.3" fill="#FFFFFF" opacity="0.85" />
+            <circle cx="82" cy="49.5" r="1.3" fill="#FFFFFF" opacity="0.85" />
           </g>
         )}
 
         {/* Okulary do czytania w trybie 'reading' */}
         {mood === 'reading' && (
           <g>
-            <circle cx="50" cy="47" r="11.2" stroke="#F6C445" strokeWidth="2.4" fill="none" />
-            <circle cx="78" cy="47" r="11.2" stroke="#F6C445" strokeWidth="2.4" fill="none" />
-            <line x1="61.2" y1="47" x2="66.8" y2="47" stroke="#F6C445" strokeWidth="2.4" />
+            <circle cx="49.5" cy="46.5" r="11" stroke="#EAB308" strokeWidth="2.2" fill="url(#lensGlass)" />
+            <circle cx="78.5" cy="46.5" r="11" stroke="#EAB308" strokeWidth="2.2" fill="url(#lensGlass)" />
+            <line x1="60.5" y1="46.5" x2="67.5" y2="46.5" stroke="#EAB308" strokeWidth="2.2" />
+            <line x1="38.5" y1="46.5" x2="34" y2="44" stroke="#EAB308" strokeWidth="1.8" strokeLinecap="round" />
+            <line x1="89.5" y1="46.5" x2="94" y2="44" stroke="#EAB308" strokeWidth="1.8" strokeLinecap="round" />
           </g>
         )}
 
-        {/* Różowy nosek i uśmiechnięty pyszczek */}
-        <path d="M61 54.5H67L64 58Z" fill="#F48FB1" />
+        {/* KOCIE PODUSZECZKI WĄSÓW („ω”) – element, który jednoznacznie czyni go kotem */}
+        <ellipse cx="58.5" cy="58" rx="6.2" ry="4.4" fill="#232738" opacity="0.9" />
+        <ellipse cx="69.5" cy="58" rx="6.2" ry="4.4" fill="#232738" opacity="0.9" />
+
+        {/* Słodki różowy koci nosek w kształcie zaokrąglonego serduszka */}
         <path
-          d={
-            mood === 'celebrating' || mood === 'chasing'
-              ? 'M55 59C58.5 63.5 63 62 64 58C65 62 69.5 63.5 73 59'
-              : 'M57 58.5C59.5 61.5 63 61 64 58C65 61 68.5 61.5 71 58.5'
-          }
-          stroke="#F8BBD0"
-          strokeWidth="2.1"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          d="M60.8 53.5 C60.8 52.6 61.6 52 62.6 52 H65.4 C66.4 52 67.2 52.6 67.2 53.5 C67.2 54.4 65.2 57.5 64 57.5 C62.8 57.5 60.8 54.4 60.8 53.5 Z"
+          fill="#F472B6"
         />
-        {/* Rumieńce */}
-        <ellipse cx="39" cy="55" rx="4.5" ry="2.5" fill="#F48FB1" opacity="0.4" />
-        <ellipse cx="89" cy="55" rx="4.5" ry="2.5" fill="#F48FB1" opacity="0.4" />
+        <ellipse cx="64" cy="53.2" rx="1.8" ry="0.6" fill="#FFFFFF" opacity="0.85" />
 
-        {/* Białe wąsiki */}
-        <line x1="20" y1="50" x2="36" y2="52" stroke="#E2E8F0" strokeWidth="1.6" strokeLinecap="round" />
-        <line x1="19" y1="56" x2="35" y2="56" stroke="#E2E8F0" strokeWidth="1.6" strokeLinecap="round" />
-        <line x1="22" y1="62" x2="36" y2="59" stroke="#E2E8F0" strokeWidth="1.6" strokeLinecap="round" />
-        <line x1="108" y1="50" x2="92" y2="52" stroke="#E2E8F0" strokeWidth="1.6" strokeLinecap="round" />
-        <line x1="109" y1="56" x2="93" y2="56" stroke="#E2E8F0" strokeWidth="1.6" strokeLinecap="round" />
-        <line x1="106" y1="62" x2="92" y2="59" stroke="#E2E8F0" strokeWidth="1.6" strokeLinecap="round" />
+        {/* Rynienka podnosowa i koci uśmiech */}
+        <line x1="64" y1="56.8" x2="64" y2="58.2" stroke="#F472B6" strokeWidth="1.6" strokeLinecap="round" />
+        {mood === 'celebrating' ? (
+          <g>
+            <path d="M60 58.5 C60 63.5 68 63.5 68 58.5 Z" fill="#E11D48" />
+            <ellipse cx="64" cy="61" rx="2.5" ry="1.4" fill="#F472B6" />
+            <path
+              d="M57 58 C59 60.5 62.5 60 64 58.2 C65.5 60 69 60.5 71 58"
+              stroke="#F472B6"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              fill="none"
+            />
+          </g>
+        ) : (
+          <path
+            d="M57 58 C59 61 62.8 60.5 64 58.2 C65.2 60.5 69 61 71 58"
+            stroke="#F472B6"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+        )}
 
-        {/* Przednie łapki zależnie od nastroju */}
+        {/* Kropeczki mieszków włosowych na poduszeczkach */}
+        <circle cx="56" cy="57" r="0.75" fill="#64748B" />
+        <circle cx="58" cy="59" r="0.75" fill="#64748B" />
+        <circle cx="56" cy="60" r="0.75" fill="#64748B" />
+        <circle cx="72" cy="57" r="0.75" fill="#64748B" />
+        <circle cx="70" cy="59" r="0.75" fill="#64748B" />
+        <circle cx="72" cy="60" r="0.75" fill="#64748B" />
+
+        {/* Długie, sprężyste kocie wąsy (vibrissae) – lekko wygięte, nie proste kreski */}
+        <path d="M54 56 C38 54 22 55 10 58" stroke="#F1F5F9" strokeWidth="1.3" strokeLinecap="round" opacity="0.9" />
+        <path d="M53 58.5 C36 60 20 63 9 68" stroke="#F1F5F9" strokeWidth="1.3" strokeLinecap="round" opacity="0.9" />
+        <path d="M54 61 C39 65 24 71 14 77" stroke="#F1F5F9" strokeWidth="1.3" strokeLinecap="round" opacity="0.85" />
+
+        <path d="M74 56 C90 54 106 55 118 58" stroke="#F1F5F9" strokeWidth="1.3" strokeLinecap="round" opacity="0.9" />
+        <path d="M75 58.5 C92 60 108 63 119 68" stroke="#F1F5F9" strokeWidth="1.3" strokeLinecap="round" opacity="0.9" />
+        <path d="M74 61 C89 65 104 71 114 77" stroke="#F1F5F9" strokeWidth="1.3" strokeLinecap="round" opacity="0.85" />
+
+        {/* Drobne wąsiki nadoczne */}
+        <path d="M46 36 C42 32 38 30 34 29" stroke="#E2E8F0" strokeWidth="1.1" strokeLinecap="round" opacity="0.75" />
+        <path d="M82 36 C86 32 90 30 94 29" stroke="#E2E8F0" strokeWidth="1.1" strokeLinecap="round" opacity="0.75" />
+
+        {/* Rumieńce na pulchnych policzkach */}
+        <ellipse cx="38" cy="56" rx="5" ry="2.8" fill="#F472B6" opacity="0.32" />
+        <ellipse cx="90" cy="56" rx="5" ry="2.8" fill="#F472B6" opacity="0.32" />
+
+        {/* Przednie łapki i rekwizyty zależnie od sytuacji */}
         {(mood === 'pointing' || mood === 'peeking') && (
           <g>
-            <ellipse cx="46" cy="88" rx="7" ry="11" fill="#181920" />
+            <ellipse cx="46" cy="88" rx="7" ry="11" fill="#181A24" />
+            <ellipse cx="46" cy="95" rx="4" ry="2.5" fill="#242838" />
             <g className="mk-maks-paw">
               <path
-                d="M84 82C94 74 103 66 109 62"
-                stroke="#181920"
-                strokeWidth="12"
+                d="M84 82 C94 74 103 66 109 61"
+                stroke="#181A24"
+                strokeWidth="11"
                 strokeLinecap="round"
               />
-              <circle cx="110" cy="61" r="6" fill="#232530" />
-              <circle cx="112" cy="59" r="2.2" fill="#F48FB1" />
+              <circle cx="110" cy="60" r="6" fill="#232738" />
+              {/* Różowe poduszeczki uniesionej kociej łapki */}
+              <circle cx="112" cy="58" r="2.4" fill="#F472B6" />
+              <circle cx="108" cy="56" r="1.2" fill="#F472B6" />
+              <circle cx="111" cy="54" r="1.2" fill="#F472B6" />
+              {/* Magiczna iskierka podpowiedzi na czubku łapki */}
               <path
-                d="M118 46L120 51L125 53L120 55L118 60L116 55L111 53L116 51L118 46Z"
-                fill="#F6C445"
+                d="M118 45 L120 51 L126 53 L120 55 L118 61 L116 55 L110 53 L116 51 Z"
+                fill="#FBBF24"
               />
+              <circle cx="118" cy="53" r="1.5" fill="#FFFFFF" />
             </g>
           </g>
         )}
 
         {mood === 'chasing' && (
           <g className="mk-maks-paw">
-            <path d="M40 84C30 76 24 68 20 62" stroke="#181920" strokeWidth="11" strokeLinecap="round" />
-            <path d="M86 84C96 76 104 68 108 62" stroke="#181920" strokeWidth="11" strokeLinecap="round" />
-            {/* Czerwony kłębuszek / kursor, który goni Maks */}
-            <circle cx="112" cy="54" r="7" fill="#EF4444" stroke="#FCA5A5" strokeWidth="2" />
-            <path d="M107 52C111 49 115 57 117 53" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" />
+            <path d="M40 84 C30 76 24 68 20 62" stroke="#181A24" strokeWidth="11" strokeLinecap="round" />
+            <path d="M86 84 C96 76 104 68 108 62" stroke="#181A24" strokeWidth="11" strokeLinecap="round" />
+            {/* Czerwona kropka laserka / wskaźnik, za którym pędzi kotek */}
+            <circle cx="112" cy="54" r="9" fill="#EF4444" opacity="0.25" />
+            <circle cx="112" cy="54" r="6" fill="#EF4444" stroke="#FCA5A5" strokeWidth="1.5" />
+            <path d="M108 52 C111 49 115 57 117 53" stroke="#FFFFFF" strokeWidth="1.2" strokeLinecap="round" />
           </g>
         )}
 
         {mood === 'curious' && (
           <g>
-            <ellipse cx="48" cy="90" rx="7" ry="11" fill="#181920" />
-            <path d="M80 86C86 78 88 68 82 62" stroke="#181920" strokeWidth="11" strokeLinecap="round" />
-            <text x="98" y="34" fill="var(--mk-primary)" fontSize="22" fontWeight="800">
+            <ellipse cx="48" cy="90" rx="7" ry="11" fill="#181A24" />
+            <path d="M80 86 C86 78 88 68 82 62" stroke="#181A24" strokeWidth="11" strokeLinecap="round" />
+            <text x="96" y="34" fill="var(--mk-primary)" fontSize="22" fontWeight="800" fontFamily="sans-serif">
               ?
             </text>
           </g>
@@ -281,42 +425,55 @@ export function BlackCatGuide({
 
         {mood === 'celebrating' && (
           <g className="mk-maks-paw">
-            <path d="M40 80C30 70 24 60 22 52" stroke="#181920" strokeWidth="11" strokeLinecap="round" />
-            <path d="M88 80C98 70 104 60 106 52" stroke="#181920" strokeWidth="11" strokeLinecap="round" />
-            <path d="M18 32L20.5 38L27 40.5L20.5 43L18 49L15.5 43L9 40.5L15.5 38L18 32Z" fill="#F6C445" />
-            <path d="M110 28L112 33L117 35L112 37L110 42L108 37L103 35L108 33L110 28Z" fill="#34D399" />
-            <circle cx="64" cy="14" r="3.5" fill="#F48FB1" />
+            <path d="M40 80 C30 70 24 58 22 50" stroke="#181A24" strokeWidth="11" strokeLinecap="round" />
+            <path d="M88 80 C98 70 104 58 106 50" stroke="#181A24" strokeWidth="11" strokeLinecap="round" />
+            {/* Słodkie poduszeczki łapek uniesionych w geście radości */}
+            <circle cx="21" cy="49" r="6" fill="#232738" />
+            <circle cx="21" cy="49" r="2.8" fill="#F472B6" />
+            <circle cx="107" cy="49" r="6" fill="#232738" />
+            <circle cx="107" cy="49" r="2.8" fill="#F472B6" />
+            {/* Konfetti sukcesu */}
+            <path d="M18 30 L20.5 36 L27 38.5 L20.5 41 L18 47 L15.5 41 L9 38.5 L15.5 36 Z" fill="#F6C445" />
+            <path d="M110 26 L112 31 L117 33 L112 35 L110 40 L108 35 L103 33 L108 31 Z" fill="#34D399" />
+            <circle cx="64" cy="12" r="3.5" fill="#F472B6" />
+            <path d="M25 20 L27 24 L31 25 L27 26 L25 30 L23 26 L19 25 L23 24 Z" fill="#A78BFA" />
           </g>
         )}
 
         {mood === 'reading' && (
           <g>
-            <path d="M42 86L64 91L86 86V104L64 109L42 104V86Z" fill="#FFFBEB" stroke="#D97706" strokeWidth="2.2" />
-            <line x1="64" y1="91" x2="64" y2="109" stroke="#D97706" strokeWidth="2" />
-            <ellipse cx="42" cy="94" rx="5.5" ry="5" fill="#181920" />
-            <ellipse cx="86" cy="94" rx="5.5" ry="5" fill="#181920" />
+            <path d="M40 86 L64 91 L88 86 V105 L64 110 L40 105 Z" fill="#FFFDF8" stroke="#D97706" strokeWidth="2" />
+            <line x1="64" y1="91" x2="64" y2="110" stroke="#D97706" strokeWidth="1.8" />
+            <line x1="46" y1="93" x2="59" y2="95" stroke="#CBD5E1" strokeWidth="1.5" strokeLinecap="round" />
+            <line x1="46" y1="98" x2="57" y2="100" stroke="#CBD5E1" strokeWidth="1.5" strokeLinecap="round" />
+            <line x1="69" y1="95" x2="82" y2="93" stroke="#CBD5E1" strokeWidth="1.5" strokeLinecap="round" />
+            <line x1="71" y1="100" x2="82" y2="98" stroke="#CBD5E1" strokeWidth="1.5" strokeLinecap="round" />
+            <ellipse cx="40" cy="95" rx="5.5" ry="5" fill="#181A24" />
+            <ellipse cx="88" cy="95" rx="5.5" ry="5" fill="#181A24" />
           </g>
         )}
 
         {mood === 'detective' && (
           <g>
-            <ellipse cx="46" cy="90" rx="7" ry="10" fill="#181920" />
+            <ellipse cx="46" cy="90" rx="7" ry="10" fill="#181A24" />
             <g className="mk-maks-paw">
-              <path d="M82 86L96 74" stroke="#181920" strokeWidth="10" strokeLinecap="round" />
-              <circle cx="103" cy="64" r="12" fill="#E0F2FE" fillOpacity="0.75" stroke="#D97706" strokeWidth="3.2" />
-              <line x1="94" y1="73" x2="86" y2="83" stroke="#92400E" strokeWidth="4" strokeLinecap="round" />
+              <path d="M82 86 L96 74" stroke="#181A24" strokeWidth="10" strokeLinecap="round" />
+              <circle cx="104" cy="63" r="12" fill="#E0F2FE" fillOpacity="0.75" stroke="#D97706" strokeWidth="3" />
+              <line x1="95" y1="72" x2="86" y2="82" stroke="#92400E" strokeWidth="4.2" strokeLinecap="round" />
+              <path d="M97 58 C99 55 106 55 109 57" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" />
             </g>
           </g>
         )}
 
         {mood === 'comforting' && (
           <g>
-            <ellipse cx="48" cy="88" rx="7" ry="10" fill="#181920" />
-            <ellipse cx="80" cy="88" rx="7" ry="10" fill="#181920" />
             <path
-              d="M64 100C64 100 53 93 53 86C53 82.5 55.8 80 59 80C61.2 80 63 81.2 64 83C65 81.2 66.8 80 69 80C72.2 80 75 82.5 75 86C75 93 64 100 64 100Z"
+              d="M64 102 C64 102 52 94 52 86 C52 81.5 55.5 78.5 59.5 78.5 C62 78.5 64 80 64 82 C64 80 66 78.5 68.5 78.5 C72.5 78.5 76 81.5 76 86 C76 94 64 102 64 102 Z"
               fill="#F43F5E"
             />
+            <circle cx="58" cy="83" r="2.5" fill="#FDA4AF" opacity="0.8" />
+            <ellipse cx="50" cy="89" rx="6.5" ry="9" fill="#181A24" transform="rotate(20 50 89)" />
+            <ellipse cx="78" cy="89" rx="6.5" ry="9" fill="#181A24" transform="rotate(-20 78 89)" />
           </g>
         )}
       </g>
@@ -373,14 +530,23 @@ export function TrackIllustration({
           <path d="M16 35C16 33.5 17.2 32.5 18.5 32.5H26L29 35.5H38C39.5 35.5 40.5 36.7 40.5 38V50C40.5 51.5 39.3 52.5 38 52.5H18.5C17.2 52.5 16 51.5 16 50V35Z" fill="#38BDF8" stroke="#0284C7" strokeWidth="1.8" />
           <rect x="20" y="57" width="48" height="6" rx="3" fill="var(--mk-track-macos)" opacity="0.8" />
           <path d="M34 68L28 80H60L54 68" stroke="var(--mk-track-macos)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M62 46L59 31L70 39Z" fill="#1B1C24" />
-          <path d="M86 46L89 31L78 39Z" fill="#1B1C24" />
-          <circle cx="74" cy="50" r="14" fill="#1B1C24" />
-          <circle cx="69" cy="49" r="3.2" fill="#FBBF24" />
-          <circle cx="79" cy="49" r="3.2" fill="#FBBF24" />
-          <circle cx="69" cy="49" r="1.6" fill="#111218" />
-          <circle cx="79" cy="49" r="1.6" fill="#111218" />
-          <path d="M72.5 54H75.5L74 56Z" fill="#F48FB1" />
+          {/* Kotek Maks wyglądający zza okna – w 100% kocia anatomia */}
+          <path d="M63 43 C61 36 61 32 63.5 30 C65 29 67 30 69 32 C71 34 72 37 72 40 Z" fill="#1B1D28" />
+          <path d="M64.5 40 C63.5 36 64 33 65 31.5 C65.8 30.5 67 31 68 32.5 C69 34 69.5 36 70 38 Z" fill="#F472B6" />
+          <path d="M85 43 C87 36 87 32 84.5 30 C83 29 81 30 79 32 C77 34 76 37 76 40 Z" fill="#1B1D28" />
+          <path d="M83.5 40 C84.5 36 84 33 83 31.5 C82.2 30.5 81 31 80 32.5 C79 34 78.5 36 78 38 Z" fill="#F472B6" />
+          <path d="M74 36 C79 36 84 38 86 42 C88 45 88 49 87 53 C86 57 82 61 74 61 C66 61 62 57 61 53 C60 49 60 45 62 42 C64 38 69 36 74 36 Z" fill="#1B1D28" />
+          <ellipse cx="69" cy="46" rx="2.8" ry="3.2" fill="#F59E0B" />
+          <ellipse cx="79" cy="46" rx="2.8" ry="3.2" fill="#F59E0B" />
+          <ellipse cx="69" cy="46" rx="1.3" ry="2.2" fill="#0D0E15" />
+          <ellipse cx="79" cy="46" rx="1.3" ry="2.2" fill="#0D0E15" />
+          <circle cx="68" cy="44.8" r="0.9" fill="#FFFFFF" />
+          <circle cx="78" cy="44.8" r="0.9" fill="#FFFFFF" />
+          <ellipse cx="72" cy="51" rx="1.8" ry="1.3" fill="#25293A" />
+          <ellipse cx="76" cy="51" rx="1.8" ry="1.3" fill="#25293A" />
+          <path d="M72.5 49.5 H75.5 L74 51 Z" fill="#F472B6" />
+          <line x1="62" y1="50" x2="69" y2="50.8" stroke="#F1F5F9" strokeWidth="0.8" strokeLinecap="round" />
+          <line x1="86" y1="50" x2="79" y2="50.8" stroke="#F1F5F9" strokeWidth="0.8" strokeLinecap="round" />
         </svg>
       );
     case 'programy':
@@ -392,13 +558,23 @@ export function TrackIllustration({
           <line x1="40" y1="47" x2="66" y2="47" stroke="var(--mk-track-programy)" strokeWidth="2.5" strokeLinecap="round" />
           <line x1="40" y1="56" x2="60" y2="56" stroke="var(--mk-track-programy)" strokeWidth="2.5" strokeLinecap="round" opacity="0.65" />
           <path d="M40 67C45 63 50 69 56 64" stroke="var(--mk-primary)" strokeWidth="2.5" strokeLinecap="round" />
-          <path d="M64 60L61 46L71 53Z" fill="#1B1C24" />
-          <path d="M86 60L89 46L79 53Z" fill="#1B1C24" />
-          <circle cx="75" cy="64" r="13" fill="#1B1C24" />
-          <circle cx="70.5" cy="63" r="3" fill="#FBBF24" />
-          <circle cx="79.5" cy="63" r="3" fill="#FBBF24" />
-          <circle cx="70.5" cy="63" r="1.5" fill="#111218" />
-          <circle cx="79.5" cy="63" r="1.5" fill="#111218" />
+          {/* Kotek Maks przy programach – kocia główka */}
+          <path d="M64 56 C62 50 62 46 64.5 44 C66 43 68 44 70 46 C72 48 73 51 73 54 Z" fill="#1B1D28" />
+          <path d="M65.5 53 C64.5 49 65 46.5 66 45 C66.8 44 68 44.5 69 46 C70 47.5 70.5 49.5 71 51 Z" fill="#F472B6" />
+          <path d="M86 56 C88 50 88 46 85.5 44 C84 43 82 44 80 46 C78 48 77 51 77 54 Z" fill="#1B1D28" />
+          <path d="M84.5 53 C85.5 49 85 46.5 84 45 C83.2 44 82 44.5 81 46 C80 47.5 79.5 49.5 79 51 Z" fill="#F472B6" />
+          <path d="M75 49 C80 49 85 51 87 55 C89 58 89 62 88 66 C87 70 83 74 75 74 C67 74 63 70 62 66 C61 62 61 58 63 55 C65 51 70 49 75 49 Z" fill="#1B1D28" />
+          <ellipse cx="70.5" cy="59" rx="2.8" ry="3.2" fill="#F59E0B" />
+          <ellipse cx="80.5" cy="59" rx="2.8" ry="3.2" fill="#F59E0B" />
+          <ellipse cx="70.5" cy="59" rx="1.3" ry="2.2" fill="#0D0E15" />
+          <ellipse cx="80.5" cy="59" rx="1.3" ry="2.2" fill="#0D0E15" />
+          <circle cx="69.5" cy="57.8" r="0.9" fill="#FFFFFF" />
+          <circle cx="79.5" cy="57.8" r="0.9" fill="#FFFFFF" />
+          <ellipse cx="73.5" cy="64" rx="1.8" ry="1.3" fill="#25293A" />
+          <ellipse cx="77.5" cy="64" rx="1.8" ry="1.3" fill="#25293A" />
+          <path d="M74 62.5 H77 L75.5 64 Z" fill="#F472B6" />
+          <line x1="64" y1="63" x2="71" y2="63.8" stroke="#F1F5F9" strokeWidth="0.8" strokeLinecap="round" />
+          <line x1="87" y1="63" x2="80" y2="63.8" stroke="#F1F5F9" strokeWidth="0.8" strokeLinecap="round" />
         </svg>
       );
     case 'iphone':
@@ -409,13 +585,23 @@ export function TrackIllustration({
           <rect x="56" y="28" width="28" height="50" rx="7" fill="var(--mk-surface)" stroke="var(--mk-track-iphone)" strokeWidth="3" />
           <line x1="66" y1="34" x2="74" y2="34" stroke="var(--mk-track-iphone)" strokeWidth="2.5" strokeLinecap="round" />
           <path d="M36 18C45 10 57 10 66 18" stroke="var(--mk-primary)" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="4 4" />
-          <path d="M22 44L19 32L28 38Z" fill="#1B1C24" />
-          <path d="M42 44L45 32L36 38Z" fill="#1B1C24" />
-          <circle cx="32" cy="47" r="11" fill="#1B1C24" />
-          <circle cx="28" cy="46" r="2.6" fill="#FBBF24" />
-          <circle cx="36" cy="46" r="2.6" fill="#FBBF24" />
-          <circle cx="28" cy="46" r="1.3" fill="#111218" />
-          <circle cx="36" cy="46" r="1.3" fill="#111218" />
+          {/* Kotek Maks przy iPhonie – kocia główka */}
+          <path d="M22 41 C20 35 20 31 22.5 29 C24 28 26 29 28 31 C30 33 31 36 31 39 Z" fill="#1B1D28" />
+          <path d="M23.5 38 C22.5 34 23 31.5 24 30 C24.8 29 26 29.5 27 31 C28 32.5 28.5 34.5 29 36 Z" fill="#F472B6" />
+          <path d="M42 41 C44 35 44 31 41.5 29 C40 28 38 29 36 31 C34 33 33 36 33 39 Z" fill="#1B1D28" />
+          <path d="M40.5 38 C41.5 34 41 31.5 40 30 C39.2 29 38 29.5 37 31 C36 32.5 35.5 34.5 35 36 Z" fill="#F472B6" />
+          <path d="M32 35 C37 35 41 37 43 41 C45 44 45 47 44 51 C43 55 39 58 32 58 C25 58 21 55 20 51 C19 47 19 44 21 41 C23 37 27 35 32 35 Z" fill="#1B1D28" />
+          <ellipse cx="28" cy="45" rx="2.5" ry="2.9" fill="#F59E0B" />
+          <ellipse cx="36" cy="45" rx="2.5" ry="2.9" fill="#F59E0B" />
+          <ellipse cx="28" cy="45" rx="1.2" ry="2" fill="#0D0E15" />
+          <ellipse cx="36" cy="45" rx="1.2" ry="2" fill="#0D0E15" />
+          <circle cx="27.2" cy="44" r="0.8" fill="#FFFFFF" />
+          <circle cx="35.2" cy="44" r="0.8" fill="#FFFFFF" />
+          <ellipse cx="30.5" cy="49" rx="1.6" ry="1.2" fill="#25293A" />
+          <ellipse cx="33.5" cy="49" rx="1.6" ry="1.2" fill="#25293A" />
+          <path d="M31 47.8 H33 L32 49.2 Z" fill="#F472B6" />
+          <line x1="22" y1="48.5" x2="28" y2="49.2" stroke="#F1F5F9" strokeWidth="0.8" strokeLinecap="round" />
+          <line x1="42" y1="48.5" x2="36" y2="49.2" stroke="#F1F5F9" strokeWidth="0.8" strokeLinecap="round" />
         </svg>
       );
     case 'ai':
@@ -425,13 +611,23 @@ export function TrackIllustration({
           <rect x="10" y="16" width="66" height="50" rx="14" fill="var(--mk-success-soft)" stroke="var(--mk-track-ai)" strokeWidth="3" />
           <path d="M28 66L20 78L38 66" fill="var(--mk-success-soft)" stroke="var(--mk-track-ai)" strokeWidth="3" strokeLinejoin="round" />
           <path d="M40 25L43 34L52 37L43 40L40 49L37 40L28 37L37 34L40 25Z" fill="var(--mk-track-ai)" />
-          <path d="M62 56L59 42L69 49Z" fill="#1B1C24" />
-          <path d="M84 56L87 42L77 49Z" fill="#1B1C24" />
-          <circle cx="73" cy="60" r="13" fill="#1B1C24" />
-          <circle cx="68.5" cy="59" r="3" fill="#FBBF24" />
-          <circle cx="77.5" cy="59" r="3" fill="#FBBF24" />
-          <circle cx="68.5" cy="59" r="1.5" fill="#111218" />
-          <circle cx="77.5" cy="59" r="1.5" fill="#111218" />
+          {/* Kotek Maks asystujący AI – kocia główka */}
+          <path d="M63 52 C61 46 61 42 63.5 40 C65 39 67 40 69 42 C71 44 72 47 72 50 Z" fill="#1B1D28" />
+          <path d="M64.5 49 C63.5 45 64 42.5 65 41 C65.8 40 67 40.5 68 42 C69 43.5 69.5 45.5 70 47 Z" fill="#F472B6" />
+          <path d="M85 52 C87 46 87 42 84.5 40 C83 39 81 40 79 42 C77 44 76 47 76 50 Z" fill="#1B1D28" />
+          <path d="M83.5 49 C84.5 45 84 42.5 83 41 C82.2 40 81 40.5 80 42 C79 43.5 78.5 45.5 78 47 Z" fill="#F472B6" />
+          <path d="M74 46 C79 46 84 48 86 52 C88 55 88 59 87 63 C86 67 82 71 74 71 C66 71 62 67 61 63 C60 59 60 55 62 52 C64 48 69 46 74 46 Z" fill="#1B1D28" />
+          <ellipse cx="69" cy="56" rx="2.8" ry="3.2" fill="#F59E0B" />
+          <ellipse cx="79" cy="56" rx="2.8" ry="3.2" fill="#F59E0B" />
+          <ellipse cx="69" cy="56" rx="1.3" ry="2.2" fill="#0D0E15" />
+          <ellipse cx="79" cy="56" rx="1.3" ry="2.2" fill="#0D0E15" />
+          <circle cx="68" cy="54.8" r="0.9" fill="#FFFFFF" />
+          <circle cx="78" cy="54.8" r="0.9" fill="#FFFFFF" />
+          <ellipse cx="72" cy="61" rx="1.8" ry="1.3" fill="#25293A" />
+          <ellipse cx="76" cy="61" rx="1.8" ry="1.3" fill="#25293A" />
+          <path d="M72.5 59.5 H75.5 L74 61 Z" fill="#F472B6" />
+          <line x1="62" y1="60" x2="69" y2="60.8" stroke="#F1F5F9" strokeWidth="0.8" strokeLinecap="round" />
+          <line x1="86" y1="60" x2="79" y2="60.8" stroke="#F1F5F9" strokeWidth="0.8" strokeLinecap="round" />
         </svg>
       );
   }
@@ -503,15 +699,38 @@ export function MacLookIllustration({
 
 function MiniCatBadge() {
   return (
-    <g transform="translate(74, 70)">
-      <path d="M6 16L3 3L14 10Z" fill="#1B1C24" />
-      <path d="M32 16L35 3L24 10Z" fill="#1B1C24" />
-      <circle cx="19" cy="20" r="15" fill="#1B1C24" stroke="#FFFFFF" strokeWidth="2" />
-      <circle cx="13.5" cy="19" r="3.4" fill="#FBBF24" />
-      <circle cx="24.5" cy="19" r="3.4" fill="#FBBF24" />
-      <circle cx="13.5" cy="19" r="1.7" fill="#111218" />
-      <circle cx="24.5" cy="19" r="1.7" fill="#111218" />
-      <path d="M17.5 24H20.5L19 26Z" fill="#F48FB1" />
+    <g transform="translate(72, 68)">
+      {/* Cień pod odznaką */}
+      <ellipse cx="20" cy="37" rx="13" ry="3" fill="#000000" opacity="0.14" />
+      {/* Zaokrąglone kocie uszka z różowym wnętrzem (żadnych lisich szpiców) */}
+      <path d="M7 16 C5 10 5 6 7.5 4 C9 3 11.5 4 13.5 6 C15.5 8 16.5 11 17 14 Z" fill="#1B1D28" />
+      <path d="M8.5 13 C7.5 9.5 8 6.5 9 5 C9.8 4.2 11 5 12 6.5 C13 8 13.5 10 14 12 Z" fill="#F472B6" />
+      <path d="M33 16 C35 10 35 6 32.5 4 C31 3 28.5 4 26.5 6 C24.5 8 23.5 11 23 14 Z" fill="#1B1D28" />
+      <path d="M31.5 13 C32.5 9.5 32 6.5 31 5 C30.2 4.2 29 5 28 6.5 C27 8 26.5 10 26 12 Z" fill="#F472B6" />
+      {/* Kocia główka z pulchnymi policzkami */}
+      <path
+        d="M20 9 C26 9 32 11 34 15 C36 18 36.5 22 36 26 C35 30.5 30 35 20 35 C10 35 5 30.5 4 26 C3.5 22 4 18 6 15 C8 11 14 9 20 9 Z"
+        fill="#1B1D28"
+        stroke="#FFFFFF"
+        strokeWidth="2.2"
+        strokeLinejoin="round"
+      />
+      {/* Bursztynowe kocie oczy z żywym blaskiem */}
+      <ellipse cx="14" cy="20" rx="3.4" ry="3.8" fill="#F59E0B" />
+      <ellipse cx="26" cy="20" rx="3.4" ry="3.8" fill="#F59E0B" />
+      <ellipse cx="14" cy="20.2" rx="1.6" ry="2.7" fill="#0D0E15" />
+      <ellipse cx="26" cy="20.2" rx="1.6" ry="2.7" fill="#0D0E15" />
+      <circle cx="12.8" cy="18.8" r="1.1" fill="#FFFFFF" />
+      <circle cx="24.8" cy="18.8" r="1.1" fill="#FFFFFF" />
+      {/* Kocie poduszeczki wąsów i różowy nosek */}
+      <ellipse cx="17.8" cy="25.5" rx="2.4" ry="1.7" fill="#25293A" />
+      <ellipse cx="22.2" cy="25.5" rx="2.4" ry="1.7" fill="#25293A" />
+      <path d="M18.2 23.8 H21.8 L20 25.5 Z" fill="#F472B6" />
+      {/* Wąsiki */}
+      <line x1="7" y1="23.8" x2="15" y2="24.8" stroke="#FFFFFF" strokeWidth="0.9" strokeLinecap="round" />
+      <line x1="7" y1="26.5" x2="15" y2="26.2" stroke="#FFFFFF" strokeWidth="0.9" strokeLinecap="round" />
+      <line x1="33" y1="23.8" x2="25" y2="24.8" stroke="#FFFFFF" strokeWidth="0.9" strokeLinecap="round" />
+      <line x1="33" y1="26.5" x2="25" y2="26.2" stroke="#FFFFFF" strokeWidth="0.9" strokeLinecap="round" />
     </g>
   );
 }

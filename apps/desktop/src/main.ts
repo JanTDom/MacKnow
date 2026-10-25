@@ -326,22 +326,25 @@ function buildOverlayHtml(spec: LiveHighlightSpec, screenW: number, screenH: num
     position: fixed;
     left: ${cardX}px;
     top: ${cardY}px;
-    width: 356px;
-    background: rgba(24, 22, 20, 0.96);
+    width: 364px;
+    background: rgba(20, 22, 28, 0.92);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
     color: #FAF7F2;
-    border: 2.5px solid #F59E0B;
-    border-radius: 22px;
-    padding: 14px 16px;
-    box-shadow: 0 20px 44px rgba(0, 0, 0, 0.48);
+    border: 1.5px solid rgba(245, 158, 11, 0.5);
+    border-radius: 24px;
+    padding: 16px 18px;
+    box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
   }
   .cat-header {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 8px;
+    gap: 13px;
+    margin-bottom: 9px;
   }
   .cat-avatar {
     animation: maksFloat 2.8s infinite ease-in-out;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
   }
   .cat-eyes {
     transform-origin: 48px 45px;
@@ -351,34 +354,36 @@ function buildOverlayHtml(spec: LiveHighlightSpec, screenW: number, screenH: num
     font-size: 12px;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     color: #FBBF24;
   }
   .cat-instruction {
-    font-size: 14px;
+    font-size: 14.5px;
     font-weight: 700;
-    line-height: 1.38;
+    line-height: 1.4;
     color: #FFFFFF;
-    margin-bottom: 6px;
+    margin-bottom: 7px;
   }
   .cat-hint {
     font-size: 12.5px;
-    line-height: 1.35;
-    color: #E2E8F0;
-    background: rgba(255,255,255,0.09);
-    padding: 7px 10px;
-    border-radius: 10px;
+    line-height: 1.38;
+    color: #F1F5F9;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 8px 12px;
+    border-radius: 12px;
     margin-bottom: 8px;
   }
   .shortcut-pill {
     display: inline-block;
-    background: #F59E0B;
+    background: linear-gradient(135deg, #F59E0B, #D97706);
     color: #111218;
     font-weight: 800;
-    font-size: 12px;
+    font-size: 11.5px;
     padding: 3px 10px;
     border-radius: 999px;
     margin-top: 3px;
+    box-shadow: 0 2px 6px rgba(245, 158, 11, 0.35);
   }
   .side-tips {
     margin: 6px 0 0 0;
@@ -400,25 +405,46 @@ function buildOverlayHtml(spec: LiveHighlightSpec, screenW: number, screenH: num
 
   <div class="cat-coach-card">
     <div class="cat-header">
-      <svg class="cat-avatar" width="52" height="52" viewBox="0 0 96 96" fill="none">
-        <circle cx="48" cy="50" r="40" fill="#D4593B" fill-opacity="0.25" />
-        <path d="M22 38L17 14L38 26Z" fill="#1B1C24" stroke="#FBBF24" stroke-width="1.5"/>
-        <path d="M74 38L79 14L58 26Z" fill="#1B1C24" stroke="#FBBF24" stroke-width="1.5"/>
-        <path d="M25 35L21 19L35 27Z" fill="#F48FB1"/>
-        <path d="M71 35L75 19L61 27Z" fill="#F48FB1"/>
-        <ellipse cx="48" cy="46" rx="26" ry="22" fill="#1B1C24" stroke="#FBBF24" stroke-width="1.5"/>
+      <svg class="cat-avatar" width="56" height="56" viewBox="0 0 96 96" fill="none">
+        <circle cx="48" cy="48" r="42" fill="#D4593B" fill-opacity="0.18" />
+        <!-- Zaokrąglone kocie uszka z różowym wnętrzem -->
+        <path d="M25 38 C23 30 22 23 24 20 C25.5 18 28 18.5 31 21 C35 24 39 26 42 26 L40 35 Z" fill="#1B1D28" stroke="#151720" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M27 34 C26 29 25 24 26.5 22 C27.5 21 29 21.5 31 23 C34 26 37 27 38.5 27 Z" fill="#F472B6" opacity="0.9"/>
+        <path d="M71 38 C73 30 74 23 72 20 C70.5 18 68 18.5 65 21 C61 24 57 26 54 26 L56 35 Z" fill="#1B1D28" stroke="#151720" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M69 34 C70 29 71 24 69.5 22 C68.5 21 67 21.5 65 23 C62 26 59 27 57.5 27 Z" fill="#F472B6" opacity="0.9"/>
+
+        <!-- Kocia główka z pulchnymi policzkami -->
+        <path d="M48 23 C57 23 64 25 68 31 C72 36 74 42 74 47 C74 53 69 57 63 58 C56 59 52 59.5 48 59.5 C44 59.5 40 59 33 58 C27 57 22 53 22 47 C22 42 24 36 28 31 C32 25 39 23 48 23 Z" fill="#1B1D28"/>
+
+        <!-- Kocie migdałowe oczy z bursztynowym blaskiem i podwójnym refleksem -->
         <g class="cat-eyes">
-          <circle cx="37" cy="45" r="6.5" fill="#FBBF24"/>
-          <circle cx="59" cy="45" r="6.5" fill="#FBBF24"/>
-          <circle cx="37" cy="45" r="3.4" fill="#111218"/>
-          <circle cx="59" cy="45" r="3.4" fill="#111218"/>
-          <circle cx="35" cy="42.5" r="1.6" fill="#FFFFFF"/>
-          <circle cx="57" cy="42.5" r="1.6" fill="#FFFFFF"/>
+          <ellipse cx="37" cy="42" rx="6.5" ry="7" fill="#F59E0B"/>
+          <ellipse cx="59" cy="42" rx="6.5" ry="7" fill="#F59E0B"/>
+          <ellipse cx="37" cy="42.2" rx="3.2" ry="5.8" fill="#0D0E15"/>
+          <ellipse cx="59" cy="42.2" rx="3.2" ry="5.8" fill="#0D0E15"/>
+          <circle cx="35" cy="39.5" r="2" fill="#FFFFFF"/>
+          <circle cx="57" cy="39.5" r="2" fill="#FFFFFF"/>
+          <circle cx="39.5" cy="44.2" r="1" fill="#FFFFFF" opacity="0.85"/>
+          <circle cx="61.5" cy="44.2" r="1" fill="#FFFFFF" opacity="0.85"/>
         </g>
-        <path d="M45 52H51L48 55Z" fill="#F48FB1"/>
-        <path d="M41 56C44 59 47 58 48 55C49 58 52 59 55 56" stroke="#F8BBD0" stroke-width="1.8" stroke-linecap="round"/>
-        <path d="M32 66C40 70 56 70 64 66" stroke="#D4593B" stroke-width="4.5" stroke-linecap="round"/>
-        <circle cx="48" cy="70" r="4.8" fill="#F6C445"/>
+
+        <!-- Kocie poduszeczki wąsów i nosek serduszko -->
+        <ellipse cx="43.5" cy="51" rx="4.8" ry="3.4" fill="#25293A" opacity="0.9"/>
+        <ellipse cx="52.5" cy="51" rx="4.8" ry="3.4" fill="#25293A" opacity="0.9"/>
+        <path d="M45.5 47.5 C45.5 46.8 46.2 46.2 47 46.2 H49 C49.8 46.2 50.5 46.8 50.5 47.5 C50.5 48.3 49 50.5 48 50.5 C47 50.5 45.5 48.3 45.5 47.5 Z" fill="#F472B6"/>
+        <line x1="48" y1="50" x2="48" y2="51.2" stroke="#F472B6" stroke-width="1.3" stroke-linecap="round"/>
+        <path d="M42.5 51 C44 53.2 47 52.8 48 51.2 C49 52.8 52 53.2 53.5 51" stroke="#F472B6" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+
+        <!-- Długie kocie wąsiki -->
+        <line x1="20" y1="49.5" x2="39" y2="50.5" stroke="#F1F5F9" stroke-width="1.1" stroke-linecap="round" opacity="0.9"/>
+        <line x1="19" y1="53" x2="38" y2="52.5" stroke="#F1F5F9" stroke-width="1.1" stroke-linecap="round" opacity="0.9"/>
+        <line x1="76" y1="49.5" x2="57" y2="50.5" stroke="#F1F5F9" stroke-width="1.1" stroke-linecap="round" opacity="0.9"/>
+        <line x1="77" y1="53" x2="58" y2="52.5" stroke="#F1F5F9" stroke-width="1.1" stroke-linecap="round" opacity="0.9"/>
+
+        <!-- Obróżka i złoty medalik M -->
+        <path d="M32 63 C40 67 56 67 64 63" stroke="#D4593B" stroke-width="4.5" stroke-linecap="round"/>
+        <circle cx="48" cy="67.5" r="5" fill="#F6C445" stroke="#B7791F" stroke-width="1"/>
+        <text x="48" y="69.8" text-anchor="middle" fill="#78350F" font-size="5.5" font-weight="900" font-family="sans-serif">M</text>
       </svg>
       <div>
         <div class="cat-title">Kotek Maks • Podpowiedź na ekranie</div>
