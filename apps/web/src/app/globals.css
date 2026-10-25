@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --mk-bg: #FAF7F2;
+  --mk-surface: #FFFFFF;
+  --mk-surface-elevated: #F3EDE2;
+  --mk-text: #1E1B18;
+  --mk-text-muted: #5C554E;
+  --mk-border: #E4DDD3;
+  --mk-primary: #C85A32;
+  --mk-primary-hover: #AD4822;
+  --mk-primary-soft: #F9EAE3;
+  --mk-success: #2A6F4E;
+  --mk-success-soft: #E5F3EC;
+  --mk-warning: #B86B19;
+  --mk-track-macos: #C85A32;
+  --mk-track-programy: #2B6CB0;
+  --mk-track-iphone: #6B46C1;
+  --mk-track-ai: #2A6F4E;
+  --mk-font-display: 'Fraunces', Georgia, serif;
+  --mk-font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+[data-theme="dark"] {
+  --mk-bg: #161412;
+  --mk-surface: #211E1B;
+  --mk-surface-elevated: #2C2824;
+  --mk-text: #F5F1EA;
+  --mk-text-muted: #B5ACA1;
+  --mk-border: #38332E;
+  --mk-primary: #E0744C;
+  --mk-primary-hover: #EE8964;
+  --mk-primary-soft: #36221B;
+  --mk-success: #48A878;
+  --mk-success-soft: #1B3327;
+  --mk-warning: #E0943A;
+  --mk-track-macos: #E0744C;
+  --mk-track-programy: #5A9CE2;
+  --mk-track-iphone: #9F7AEA;
+  --mk-track-ai: #48A878;
+}
+
+body {
+  background-color: var(--mk-bg);
+  color: var(--mk-text);
+  font-family: var(--mk-font-sans);
+  margin: 0;
+  padding: 0;
+}

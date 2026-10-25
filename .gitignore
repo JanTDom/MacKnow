@@ -1,0 +1,12 @@
+node_modules/
+dist/
+out/
+.next/
+release/
+build/
+coverage/
+*.log
+.DS_Store
+*.tsbuildinfo
+playwright-report/
+test-results/
