@@ -132,19 +132,18 @@ async function setupIpcAndWindow(): Promise<void> {
   // aby nie zasłaniało programu, na którym ćwiczy Małgorzata.
   const primaryDisplay = screen.getPrimaryDisplay();
   const workArea = primaryDisplay.workArea;
-  const winWidth = Math.min(440, Math.floor(workArea.width * 0.38));
-  const winHeight = Math.min(760, workArea.height - 32);
-  const winX = workArea.x + workArea.width - winWidth - 16;
-  const winY = workArea.y + 16;
+  const winWidth = Math.min(1220, workArea.width - 48);
+  const winHeight = Math.min(860, workArea.height - 40);
+  const winX = workArea.x + Math.max(16, Math.floor((workArea.width - winWidth) / 2));
+  const winY = workArea.y + Math.max(16, Math.floor((workArea.height - winHeight) / 2));
 
   mainWindow = new BrowserWindow({
     width: winWidth,
     height: winHeight,
     x: winX,
     y: winY,
-    minWidth: 360,
-    minHeight: 520,
-    alwaysOnTop: true,
+    minWidth: 380,
+    minHeight: 540,
     title: 'MacKnow – Przewodnik Małgorzaty',
     backgroundColor: '#FAF7F2',
     webPreferences: {
@@ -154,8 +153,6 @@ async function setupIpcAndWindow(): Promise<void> {
       spellcheck: false,
     },
   });
-
-  mainWindow.setAlwaysOnTop(true, 'floating');
 
   const webRoot = resolveStaticWebRoot();
   const port = await startStaticServer(webRoot);
