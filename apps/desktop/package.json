@@ -2,13 +2,50 @@
   "name": "@macknow/desktop",
   "version": "1.0.0",
   "private": true,
-  "description": "MacKnow – aplikacja na Maca dla Małgorzaty",
+  "description": "MacKnow – osobisty przewodnik po MacBooku dla Małgorzaty",
+  "author": "MacKnow",
   "main": "dist/main.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "dev": "tsc -p tsconfig.json && electron .",
-    "dist": "pnpm run build && electron-builder --mac dmg --x64 --arm64"
+    "dist:x64": "pnpm run build && electron-builder --mac dmg --x64 --config.mac.artifactName=\"MacKnow-${version}-Intel-x64.${ext}\"",
+    "dist:arm64": "pnpm run build && electron-builder --mac dmg --arm64 --config.mac.artifactName=\"MacKnow-${version}-AppleSilicon-arm64.${ext}\"",
+    "dist": "pnpm run dist:x64 && pnpm run dist:arm64"
+  },
+  "build": {
+    "appId": "pl.malgorzata.macknow",
+    "productName": "MacKnow",
+    "copyright": "Copyright © 2026 MacKnow dla Małgorzaty",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "../web/out",
+        "to": "web-out"
+      }
+    ],
+    "mac": {
+      "category": "public.app-category.education",
+      "icon": "build/icon.icns",
+      "minimumSystemVersion": "10.13.0",
+      "identity": null,
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["x64", "arm64"]
+        }
+      ]
+    },
+    "dmg": {
+      "title": "MacKnow – Instalator (${arch})"
+    }
   },
   "dependencies": {
     "@macknow/core": "workspace:*",
