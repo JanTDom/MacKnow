@@ -64,6 +64,7 @@ import {
   TrackIllustration,
 } from '@macknow/ui';
 import { MacSimulator } from './MacSimulator';
+import { MaksLoginScreen, isUserAuthenticated, logoutUser } from './MaksLoginScreen';
 import {
   createRuntimeAdapter,
   loadPersistedProgress,
@@ -94,6 +95,14 @@ export function MacKnowApp() {
   const [activeScreen, setActiveScreen] = useState<ScreenId>('start');
   const [detectedOsVersion, setDetectedOsVersion] = useState<string | null>(null);
   const [needsDesktopPermissions, setNeedsDesktopPermissions] = useState(false);
+  const isDesktop = typeof window !== 'undefined' && Boolean(window.macknowDesktop?.isElectron);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (hydrated) {
+      setIsAuthenticated(isUserAuthenticated());
+    }
+  }, [hydrated]);
 
   // Zabawne odzywki kota Maksa w nagłówku
   const [maksQuipIndex, setMaksQuipIndex] = useState<number>(0);
@@ -545,6 +554,10 @@ export function MacKnowApp() {
     );
   }
 
+  if (!isAuthenticated) {
+    return <MaksLoginScreen onSuccess={() => setIsAuthenticated(true)} />;
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-mk-bg text-mk-text">
       {/* Stuprocentowo nieprzezroczysty pasek górny aplikacji MacKnow (żadne napisy nie prześwitują przy przewijaniu) */}
@@ -642,6 +655,22 @@ export function MacKnowApp() {
                   </button>
                 );
               })}
+
+              {!isDesktop && (
+                <button
+                  type="button"
+                  data-testid="header-logout-btn"
+                  onClick={() => {
+                    logoutUser();
+                    setIsAuthenticated(false);
+                  }}
+                  title={pl('Wyloguj z przewodnika (wymaga ponownego wpisania hasła Maksik123)')}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-mk text-sm font-semibold transition-colors duration-150 text-slate-300 hover:text-rose-300 hover:bg-rose-950/30 border border-transparent hover:border-rose-500/40 ml-1"
+                >
+                  <Lock className="w-4 h-4 shrink-0 text-amber-400" />
+                  <span className="hidden md:inline">{pl('Wyloguj')}</span>
+                </button>
+              )}
             </nav>
           </div>
         </div>
@@ -2321,6 +2350,31 @@ export function MacKnowApp() {
                   <p className="text-xs font-semibold text-mk-primary">{importStatusMsg}</p>
                 )}
               </div>
+
+              {!isDesktop && (
+                <div className="space-y-3 pt-6 border-t border-mk-border">
+                  <h2 className="font-display font-bold text-lg text-mk-text">
+                    {pl('Dostęp i logowanie (Kotek Maks)')}
+                  </h2>
+                  <p className="text-xs text-mk-muted">
+                    {pl('Aplikacja na stronie WWW chroniona jest hasłem dostępu Maksik123.')}
+                  </p>
+                  <div>
+                    <button
+                      type="button"
+                      data-testid="settings-logout-btn"
+                      onClick={() => {
+                        logoutUser();
+                        setIsAuthenticated(false);
+                      }}
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-mk border border-rose-500/50 bg-rose-950/20 text-rose-300 hover:bg-rose-900/30 text-xs font-semibold transition-colors"
+                    >
+                      <Lock className="w-4 h-4 text-rose-400" />
+                      <span>{pl('Wyloguj z przewodnika (wymaga hasła Maksik123)')}</span>
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}
