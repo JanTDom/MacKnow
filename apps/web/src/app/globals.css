@@ -21,6 +21,29 @@
   --mk-track-ai: #2A6F4E;
   --mk-font-display: 'Fraunces', Georgia, serif;
   --mk-font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* 5-stopniowa skala typograficzna (tekst misji min. 18 px) */
+  --mk-size-sm: 14px;
+  --mk-size-base: 16px;
+  --mk-size-step: 18px;
+  --mk-size-h2: 24px;
+  --mk-size-h1: 32px;
+}
+
+[data-font-scale="large"] {
+  --mk-size-sm: 15px;
+  --mk-size-base: 18px;
+  --mk-size-step: 20px;
+  --mk-size-h2: 26px;
+  --mk-size-h1: 35px;
+}
+
+[data-font-scale="xlarge"] {
+  --mk-size-sm: 16px;
+  --mk-size-base: 20px;
+  --mk-size-step: 22px;
+  --mk-size-h2: 28px;
+  --mk-size-h1: 38px;
 }
 
 [data-theme="dark"] {
@@ -46,6 +69,83 @@ body {
   background-color: var(--mk-bg);
   color: var(--mk-text);
   font-family: var(--mk-font-sans);
+  font-size: var(--mk-size-base);
+  line-height: 1.6;
   margin: 0;
   padding: 0;
+}
+
+.mk-step-text {
+  font-size: var(--mk-size-step);
+  line-height: 1.65;
+}
+
+.mk-heading-1 {
+  font-family: var(--mk-font-display);
+  font-size: var(--mk-size-h1);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.mk-heading-2 {
+  font-family: var(--mk-font-display);
+  font-size: var(--mk-size-h2);
+  line-height: 1.28;
+  letter-spacing: -0.015em;
+}
+
+/* Dostępny focus klawiaturowy (WCAG AA) */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--mk-primary);
+  outline-offset: 2px;
+}
+
+/* Lekka, dyskretna animacja odznaki i podświetlenia w symulatorze (bez obciążania starych Maców) */
+@keyframes mkPulseTarget {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(200, 90, 50, 0.55);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(200, 90, 50, 0.12);
+  }
+}
+
+@keyframes mkPopIn {
+  0% {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.mk-sim-highlight {
+  animation: mkPulseTarget 1.8s infinite ease-in-out;
+  border: 2px solid var(--mk-primary) !important;
+}
+
+.mk-celebration-emblem {
+  animation: mkPopIn 0.2s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .mk-sim-highlight {
+    animation: none !important;
+    box-shadow: 0 0 0 4px var(--mk-primary) !important;
+  }
 }

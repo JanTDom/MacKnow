@@ -13,7 +13,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pl">
-      <body>{children}</body>
+      <head>
+        <link rel="stylesheet" href="/fonts/fonts.css" />
+      </head>
+      <body className="antialiased selection:bg-mk-primarySoft selection:text-mk-text">
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none" role="img" aria-label="Ikona aplikacji MacKnow">
+  <rect x="32" y="32" width="448" height="448" rx="112" fill="#C85A32" />
+  <rect x="52" y="52" width="408" height="408" rx="96" stroke="#FAF7F2" stroke-opacity="0.22" stroke-width="8" />
+  <path
+    d="M144 352V176C144 162.745 154.745 152 168 152H212L256 216L300 152H344C357.255 152 368 162.745 368 176V352"
+    stroke="#FAF7F2"
+    stroke-width="38"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <circle cx="256" cy="336" r="32" fill="#FAF7F2" />
+</svg>
