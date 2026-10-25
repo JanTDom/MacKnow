@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { Mission, polishMission } from './types';
-import { MACOS_MISSIONS } from './macos-missions';
+import { ALL_MISSIONS } from './index';
 import { validatePolishText } from '@macknow/ui';
 
 describe('Mission schema and Polish typography formatter', () => {
@@ -49,17 +49,30 @@ describe('Mission schema and Polish typography formatter', () => {
     expect(validatePolishText(formatted.steps[0].variants![0].instruction)).toEqual([]);
   });
 
-  it('posiada komplet 10 misji macOS zgodnych z polską typografią i wymaganymi wariantami wersji', () => {
-    expect(MACOS_MISSIONS).toHaveLength(10);
-    for (const m of MACOS_MISSIONS) {
+  it('posiada pełny zestaw 32 misji (10 macOS, 10 Programy, 6 iPhone, 6 AI) zgodnych ze schematem i polszczyzną', () => {
+    expect(ALL_MISSIONS).toHaveLength(32);
+    expect(ALL_MISSIONS.filter((m) => m.track === 'macos')).toHaveLength(10);
+    expect(ALL_MISSIONS.filter((m) => m.track === 'programy')).toHaveLength(10);
+    expect(ALL_MISSIONS.filter((m) => m.track === 'iphone')).toHaveLength(6);
+    expect(ALL_MISSIONS.filter((m) => m.track === 'ai')).toHaveLength(6);
+
+    for (const m of ALL_MISSIONS) {
+      expect(m.synonyms?.length || 0).toBeGreaterThanOrEqual(10);
       expect(validatePolishText(m.title)).toEqual([]);
       expect(validatePolishText(m.realLifeHook)).toEqual([]);
+      expect(validatePolishText(m.theory.title)).toEqual([]);
+      expect(validatePolishText(m.theory.metaphor)).toEqual([]);
       expect(validatePolishText(m.theory.story)).toEqual([]);
       expect(validatePolishText(m.theory.realExplanation)).toEqual([]);
       expect(validatePolishText(m.theory.oneLiner)).toEqual([]);
+      if (m.theory.commonMyth) {
+        expect(validatePolishText(m.theory.commonMyth)).toEqual([]);
+      }
       expect(m.steps.length).toBeGreaterThanOrEqual(3);
       for (const s of m.steps) {
         expect(validatePolishText(s.instruction)).toEqual([]);
+        if (s.hint) expect(validatePolishText(s.hint)).toEqual([]);
+        if (s.hint2) expect(validatePolishText(s.hint2)).toEqual([]);
       }
     }
   });
