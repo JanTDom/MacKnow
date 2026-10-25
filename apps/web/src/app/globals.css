@@ -3,22 +3,22 @@
 @tailwind utilities;
 
 :root {
-  --mk-bg: #FAF7F2;
+  --mk-bg: #FAF6F0;
   --mk-surface: #FFFFFF;
-  --mk-surface-elevated: #F3EDE2;
-  --mk-text: #1E1B18;
-  --mk-text-muted: #5C554E;
-  --mk-border: #E4DDD3;
+  --mk-surface-elevated: #F3ECE1;
+  --mk-text: #1B1815;
+  --mk-text-muted: #5A524B;
+  --mk-border: #E2D9CE;
   --mk-primary: #C85A32;
   --mk-primary-hover: #AD4822;
-  --mk-primary-soft: #F9EAE3;
-  --mk-success: #2A6F4E;
-  --mk-success-soft: #E5F3EC;
+  --mk-primary-soft: #F9E9E2;
+  --mk-success: #246B48;
+  --mk-success-soft: #E3F3EB;
   --mk-warning: #B86B19;
   --mk-track-macos: #C85A32;
-  --mk-track-programy: #2B6CB0;
-  --mk-track-iphone: #6B46C1;
-  --mk-track-ai: #2A6F4E;
+  --mk-track-programy: #2563EB;
+  --mk-track-iphone: #6D28D9;
+  --mk-track-ai: #1E7A52;
   --mk-font-display: 'Fraunces', Georgia, serif;
   --mk-font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 
@@ -47,32 +47,70 @@
 }
 
 [data-theme="dark"] {
-  --mk-bg: #161412;
-  --mk-surface: #211E1B;
-  --mk-surface-elevated: #2C2824;
-  --mk-text: #F5F1EA;
-  --mk-text-muted: #B5ACA1;
-  --mk-border: #38332E;
-  --mk-primary: #E0744C;
-  --mk-primary-hover: #EE8964;
-  --mk-primary-soft: #36221B;
+  --mk-bg: #141210;
+  --mk-surface: #1F1C19;
+  --mk-surface-elevated: #2B2723;
+  --mk-text: #F6F2EB;
+  --mk-text-muted: #B8AEA3;
+  --mk-border: #3A342E;
+  --mk-primary: #E2764E;
+  --mk-primary-hover: #F08B66;
+  --mk-primary-soft: #38231B;
   --mk-success: #48A878;
   --mk-success-soft: #1B3327;
   --mk-warning: #E0943A;
-  --mk-track-macos: #E0744C;
-  --mk-track-programy: #5A9CE2;
-  --mk-track-iphone: #9F7AEA;
+  --mk-track-macos: #E2764E;
+  --mk-track-programy: #60A5FA;
+  --mk-track-iphone: #A78BFA;
   --mk-track-ai: #48A878;
 }
 
 body {
   background-color: var(--mk-bg);
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(200, 90, 50, 0.07), transparent 34%),
+    radial-gradient(circle at 88% 14%, rgba(246, 196, 69, 0.08), transparent 32%);
   color: var(--mk-text);
   font-family: var(--mk-font-sans);
   font-size: var(--mk-size-base);
   line-height: 1.6;
   margin: 0;
   padding: 0;
+}
+
+/* Stuprocentowo nieprzezroczysty pasek pod menu — tekst nigdy nie prześwituje podczas przewijania */
+.mk-sticky-header {
+  background-color: var(--mk-surface) !important;
+  opacity: 1 !important;
+  box-shadow: 0 4px 20px -4px rgba(27, 24, 21, 0.08), 0 1px 0 0 var(--mk-border);
+}
+
+.mk-bento-card {
+  background-color: var(--mk-surface);
+  border: 1px solid var(--mk-border);
+  border-radius: 24px;
+  box-shadow: 0 10px 28px -10px rgba(27, 24, 21, 0.07), 0 2px 6px -1px rgba(27, 24, 21, 0.04);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.mk-bento-card-interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px -10px rgba(200, 90, 50, 0.14), 0 4px 10px -2px rgba(27, 24, 21, 0.06);
+  border-color: var(--mk-primary);
+}
+
+.mk-hero-surface {
+  background: linear-gradient(135deg, var(--mk-surface) 0%, var(--mk-primary-soft) 100%);
+  border: 1.5px solid var(--mk-border);
+  border-radius: 28px;
+  box-shadow: 0 18px 40px -14px rgba(200, 90, 50, 0.14);
+}
+
+.mk-ai-surface {
+  background: linear-gradient(145deg, var(--mk-surface) 0%, var(--mk-surface-elevated) 100%);
+  border: 2px solid var(--mk-primary);
+  border-radius: 24px;
+  box-shadow: 0 14px 32px -10px rgba(200, 90, 50, 0.16);
 }
 
 .mk-step-text {
@@ -83,14 +121,14 @@ body {
 .mk-heading-1 {
   font-family: var(--mk-font-display);
   font-size: var(--mk-size-h1);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  line-height: 1.18;
+  letter-spacing: -0.022em;
 }
 
 .mk-heading-2 {
   font-family: var(--mk-font-display);
   font-size: var(--mk-size-h2);
-  line-height: 1.28;
+  line-height: 1.25;
   letter-spacing: -0.015em;
 }
 
@@ -126,6 +164,90 @@ textarea:focus-visible,
   }
 }
 
+/* Animacje czarnego kotka Maksa (transformacje SVG przyjazne dla starszych Maców) */
+@keyframes mkMaksTailWag {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(9deg);
+  }
+}
+
+@keyframes mkMaksBlink {
+  0%, 92%, 100% {
+    transform: scaleY(1);
+  }
+  96% {
+    transform: scaleY(0.12);
+  }
+}
+
+@keyframes mkMaksEarLeft {
+  0%, 84%, 100% {
+    transform: rotate(0deg);
+  }
+  90% {
+    transform: rotate(-6deg);
+  }
+}
+
+@keyframes mkMaksEarRight {
+  0%, 76%, 100% {
+    transform: rotate(0deg);
+  }
+  82% {
+    transform: rotate(7deg);
+  }
+}
+
+@keyframes mkMaksPawWave {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-2.5px) rotate(-5deg);
+  }
+}
+
+@keyframes mkMaksFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.mk-maks-tail {
+  transform-origin: 72px 72px;
+  animation: mkMaksTailWag 2.6s infinite ease-in-out;
+}
+
+.mk-maks-eyes {
+  transform-origin: 48px 45px;
+  animation: mkMaksBlink 4.4s infinite ease-in-out;
+}
+
+.mk-maks-ear-left {
+  transform-origin: 28px 32px;
+  animation: mkMaksEarLeft 5.2s infinite ease-in-out;
+}
+
+.mk-maks-ear-right {
+  transform-origin: 68px 32px;
+  animation: mkMaksEarRight 6.1s infinite ease-in-out;
+}
+
+.mk-maks-paw {
+  transform-origin: 74px 55px;
+  animation: mkMaksPawWave 1.9s infinite ease-in-out;
+}
+
+.mk-maks-body {
+  animation: mkMaksFloat 3.4s infinite ease-in-out;
+}
+
 .mk-sim-highlight {
   animation: mkPulseTarget 1.8s infinite ease-in-out;
   border: 2px solid var(--mk-primary) !important;
@@ -147,5 +269,13 @@ textarea:focus-visible,
   .mk-sim-highlight {
     animation: none !important;
     box-shadow: 0 0 0 4px var(--mk-primary) !important;
+  }
+  .mk-maks-tail,
+  .mk-maks-eyes,
+  .mk-maks-ear-left,
+  .mk-maks-ear-right,
+  .mk-maks-paw,
+  .mk-maks-body {
+    animation: none !important;
   }
 }

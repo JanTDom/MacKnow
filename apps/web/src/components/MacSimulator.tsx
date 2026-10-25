@@ -1436,6 +1436,15 @@ export function MacSimulator({
           </div>
         </div>
 
+        {/* Czarny Kotek Maks wyglądający z rogu ekranu symulatora */}
+        <div className="hidden sm:flex items-center gap-2 bg-slate-900/90 text-amber-50 px-3 py-1.5 rounded-2xl border border-amber-400/50 shadow-lg max-w-xs">
+          <BlackCatGuide className="w-9 h-9 shrink-0" mood="pointing" />
+          <span className="text-[11px] leading-tight">
+            <strong className="text-amber-300">{pl('Maks podpowiada:')}</strong>{' '}
+            {pl('Szukaj elementu z pulsującą pomarańczową obwódką!')}
+          </span>
+        </div>
+
         {/* Potwierdzenie kroku w symulatorze */}
         {stepConfirmed && (
           <div className="absolute inset-0 bg-emerald-950/35 flex items-center justify-center z-40">

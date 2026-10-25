@@ -6,9 +6,16 @@ test.describe('MacKnow E2E (Chromium oraz WebKit / Safari)', () => {
   }) => {
     await page.goto('/');
 
-    // 1. Ekran Start
+    // 1. Ekran Start + weryfikacja stuprocentowo nieprzezroczystego paska górnego i kota Maksa
     await expect(page.getByTestId('screen-start')).toBeVisible();
     await expect(page.locator('h1')).toContainText('Małgorzato');
+    await expect(page.getByTestId('screen-start')).toContainText('Kotek Maks');
+
+    const headerBg = await page.locator('header.mk-sticky-header').evaluate((el) => {
+      return window.getComputedStyle(el).backgroundColor;
+    });
+    expect(headerBg).not.toBe('rgba(0, 0, 0, 0)');
+    expect(headerBg).not.toBe('transparent');
 
     // Wybieramy „Nowe Ustawienia systemowe” (motyw modern)
     await page.getByTestId('mac-look-new').click();
@@ -21,10 +28,19 @@ test.describe('MacKnow E2E (Chromium oraz WebKit / Safari)', () => {
     await expect(page.getByTestId('mission-theory-card')).toBeVisible();
     await page.getByTestId('start-steps-btn').click();
 
-    // Krok 1 z 3 (motyw modern)
+    // Krok 1 z 3 (motyw modern) + test asystenta sytuacyjnego Maks AI oraz przełącznika Prawdziwy Mac
     await expect(page.getByTestId('step-counter')).toContainText('krok 1 z 3');
     const simModern = page.getByTestId('mac-simulator');
     await expect(simModern).toHaveAttribute('data-simulator-theme', 'modern');
+
+    await expect(page.getByTestId('step-ai-assistant')).toBeVisible();
+    await page.getByTestId('step-ai-input').fill('U mnie na ekranie wygląda to inaczej');
+    await page.getByTestId('step-ai-submit').click();
+    await expect(page.getByTestId('step-ai-response')).toBeVisible();
+
+    await page.getByTestId('header-real-mac-toggle').click();
+    await expect(page.getByTestId('real-mac-global-bar')).toBeVisible();
+    await expect(page.getByTestId('real-mac-step-panel')).toContainText('Tryb Prawdziwego Maca AKTYWNY');
 
     // Testujemy „Zacięłam się” (hint 1 -> hint 2) oraz powrót do teorii
     await page.getByTestId('stuck-btn').click();

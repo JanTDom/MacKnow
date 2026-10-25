@@ -10,3 +10,6 @@ coverage/
 *.tsbuildinfo
 playwright-report/
 test-results/
+.env
+.env.*
+.agents/

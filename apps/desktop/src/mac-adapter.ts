@@ -341,7 +341,7 @@ export class MacAdapter implements EnvironmentAdapter {
 
   /**
    * Wylicza dokładny prostokąt zakreślenia na żywo na prawdziwym ekranie Maca oraz dodatkowe wskazówki
-   * wyświetlane obok przez czarnego kotka przewodnika („Mruczka”).
+   * wyświetlane obok przez czarnego kotka przewodnika („Maksa”).
    */
   async computeLiveHighlight(
     scene: string,

@@ -14,6 +14,22 @@ export interface LiveCoachPayload {
   openTarget?: boolean;
 }
 
+export interface MaksAiPayload {
+  question: string;
+  missionTitle?: string;
+  stepInstruction?: string;
+  stepHint?: string;
+  osVersion?: string | null;
+  frontmostApp?: string | null;
+  mode?: 'step' | 'pogotowie' | 'theory';
+}
+
+export interface MaksAiResult {
+  answer: string;
+  steps?: string[];
+  source: 'gemini' | 'local';
+}
+
 contextBridge.exposeInMainWorld('macknowDesktop', {
   isElectron: true,
   frontmostApp: (): Promise<string | null> => ipcRenderer.invoke('macknow:frontmostApp'),
@@ -42,9 +58,13 @@ contextBridge.exposeInMainWorld('macknowDesktop', {
     ipcRenderer.invoke('macknow:openPrivacySettings', osVersion),
   startLiveCoach: (
     payload: LiveCoachPayload
-  ): Promise<{ active: boolean; openedTarget?: string }> =>
+  ): Promise<{ active: boolean; openedTarget?: string; targetApp?: string }> =>
     ipcRenderer.invoke('macknow:startLiveCoach', payload),
-  updateLiveCoachStep: (payload: LiveCoachPayload): Promise<{ active: boolean }> =>
+  updateLiveCoachStep: (
+    payload: LiveCoachPayload
+  ): Promise<{ active: boolean; openedTarget?: string; targetApp?: string }> =>
     ipcRenderer.invoke('macknow:updateLiveCoachStep', payload),
   stopLiveCoach: (): Promise<{ active: boolean }> => ipcRenderer.invoke('macknow:stopLiveCoach'),
+  askMaksAi: (payload: MaksAiPayload): Promise<MaksAiResult> =>
+    ipcRenderer.invoke('macknow:askMaksAi', payload),
 });

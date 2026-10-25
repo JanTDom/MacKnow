@@ -29,14 +29,27 @@ export interface ElectronMacKnowBridge {
     instruction: string;
     hint: string;
     openTarget?: boolean;
-  }): Promise<{ active: boolean; openedTarget?: string }>;
+  }): Promise<{ active: boolean; openedTarget?: string; targetApp?: string }>;
   updateLiveCoachStep?(payload: {
     scene: string;
     instruction: string;
     hint: string;
     openTarget?: boolean;
-  }): Promise<{ active: boolean }>;
+  }): Promise<{ active: boolean; openedTarget?: string; targetApp?: string }>;
   stopLiveCoach?(): Promise<{ active: boolean }>;
+  askMaksAi?(payload: {
+    question: string;
+    missionTitle?: string;
+    stepInstruction?: string;
+    stepHint?: string;
+    osVersion?: string | null;
+    frontmostApp?: string | null;
+    mode?: 'step' | 'pogotowie' | 'theory';
+  }): Promise<{
+    answer: string;
+    steps?: string[];
+    source: 'gemini' | 'local';
+  }>;
 }
 
 declare global {
