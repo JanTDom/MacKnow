@@ -47,6 +47,7 @@ import {
   UserProgressState,
 } from '@macknow/core';
 import {
+  BlackCatGuide,
   CelebrationEmblem,
   MacKnowLogo,
   MacLookIllustration,
@@ -91,6 +92,8 @@ export function MacKnowApp() {
   const [hintsUsedInMission, setHintsUsedInMission] = useState<number>(0);
   const [missionCompletedView, setMissionCompletedView] = useState<boolean>(false);
   const [realtimeNotice, setRealtimeNotice] = useState<string | null>(null);
+  const [liveCoachActive, setLiveCoachActive] = useState<boolean>(false);
+  const [liveCoachTargetName, setLiveCoachTargetName] = useState<string | null>(null);
 
   // Stan dla Mapy ścieżek, Biblioteki, Pogotowia i Ustawień
   const [selectedTrackFilter, setSelectedTrackFilter] = useState<TrackId | 'all'>('all');
@@ -265,14 +268,52 @@ export function MacKnowApp() {
   const handleAdvanceStep = () => {
     if (!activeMission) return;
     if (currentStepIndex + 1 < activeMission.steps.length) {
-      setCurrentStepIndex((idx) => idx + 1);
+      const nextIdx = currentStepIndex + 1;
+      setCurrentStepIndex(nextIdx);
       setHintLevel(0);
       setRealtimeNotice(null);
+      if (liveCoachActive && typeof window !== 'undefined' && window.macknowDesktop?.updateLiveCoachStep) {
+        const nextStep = activeMission.steps[nextIdx];
+        if (nextStep) {
+          window.macknowDesktop.updateLiveCoachStep({
+            scene: nextStep.simulatorScene || '',
+            instruction: pl(nextStep.instruction),
+            hint: pl(nextStep.hint || ''),
+            openTarget: false,
+          });
+        }
+      }
     } else {
+      if (liveCoachActive && typeof window !== 'undefined' && window.macknowDesktop?.stopLiveCoach) {
+        window.macknowDesktop.stopLiveCoach();
+        setLiveCoachActive(false);
+      }
       updateProgress((prev) =>
         recordMissionCompletion(prev, activeMission, hintsUsedInMission)
       );
       setMissionCompletedView(true);
+    }
+  };
+
+  const handleToggleLiveCoach = async (openTarget = true) => {
+    if (!resolvedStep) return;
+    if (typeof window !== 'undefined' && window.macknowDesktop?.startLiveCoach) {
+      if (liveCoachActive && !openTarget) {
+        await window.macknowDesktop.stopLiveCoach?.();
+        setLiveCoachActive(false);
+        setLiveCoachTargetName(null);
+        return;
+      }
+      const res = await window.macknowDesktop.startLiveCoach({
+        scene: resolvedStep.simulatorScene || '',
+        instruction: pl(resolvedStep.instruction),
+        hint: pl(resolvedStep.hint || ''),
+        openTarget: true,
+      });
+      setLiveCoachActive(res.active);
+      setLiveCoachTargetName(res.openedTarget || 'Prawdziwy Mac');
+    } else {
+      setLiveCoachActive((v) => !v);
     }
   };
 
@@ -410,21 +451,29 @@ export function MacKnowApp() {
         {/* ==================== EKRAN 1: START ==================== */}
         {activeScreen === 'start' && (
           <div className="space-y-10" data-testid="screen-start">
-            {/* Powitanie – imię maksymalnie raz na ekran, w wołaczu */}
+            {/* Powitanie z sympatycznym czarnym kotkiem Mruczkiem – imię maksymalnie raz na ekran, w wołaczu */}
             <section className="rounded-mk-xl border border-mk-border bg-mk-surface p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-              <div className="space-y-2 max-w-2xl">
-                <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-mk-primary">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>{pl('Dobrego dnia przy MacBooku')}</span>
-                </span>
-                <h1 className="mk-heading-1 font-bold text-mk-text">
-                  {pl('Małgorzato, co dziś wspólnie przećwiczymy?')}
-                </h1>
-                <p className="text-mk-muted mk-step-text">
-                  {pl(
-                    'Wybierz jedno z trzech zadań przygotowanych na dziś. Najpierw krótko i z humorem wyjaśnimy sobie, jak to działa, a potem zrobimy to krok po kroku.'
-                  )}
-                </p>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 max-w-2xl">
+                <div className="relative shrink-0">
+                  <BlackCatGuide mood="pointing" className="w-24 h-24 sm:w-28 sm:h-28 drop-shadow" />
+                  <span className=" -bottom-1 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-mk-primary text-white text-[11px] font-bold shadow whitespace-nowrap absolute">
+                    {pl('Kotek Mruczek')}
+                  </span>
+                </div>
+                <div className="space-y-2">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-mk-primary">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>{pl('Twój koci przewodnik po MacBooku (50 misji krok po kroku)')}</span>
+                  </span>
+                  <h1 className="mk-heading-1 font-bold text-mk-text">
+                    {pl('Małgorzato, co dziś wspólnie przećwiczymy?')}
+                  </h1>
+                  <p className="text-mk-muted mk-step-text">
+                    {pl(
+                      'Jestem Mruczek – Twój czarny kotek przewodnik. Mogę pokazywać Ci wszystko na symulatorze albo otwierać prawdziwe programy na Twoim Macu i zakreślać na ekranie dokładnie to, co warto kliknąć!'
+                    )}
+                  </p>
+                </div>
               </div>
               <button
                 type="button"
@@ -654,10 +703,13 @@ export function MacKnowApp() {
                       <strong className="text-mk-text">{pl(activeMission.theory.metaphor)}</strong>
                     </p>
                   </div>
-                  <TheoryIllustration
-                    illustrationId={activeMission.theory.illustrationId}
-                    className="w-24 h-24 shrink-0"
-                  />
+                  <div className="flex items-center gap-3 shrink-0">
+                    <BlackCatGuide mood="reading" className="w-20 h-20 hidden sm:block" />
+                    <TheoryIllustration
+                      illustrationId={activeMission.theory.illustrationId}
+                      className="w-24 h-24 shrink-0"
+                    />
+                  </div>
                 </div>
 
                 <div className="space-y-4 mk-step-text text-mk-text">
@@ -737,14 +789,65 @@ export function MacKnowApp() {
                   </div>
                 </div>
 
-                {/* Instrukcja kroku – zawsze min. 18 px (klasa mk-step-text) */}
+                {/* Instrukcja kroku z czarnym kotkiem Mruczkiem i trybem zakreślania na prawdziwym Macu */}
                 <div className="space-y-4">
-                  <p
-                    data-testid="step-instruction"
-                    className="mk-step-text font-semibold text-mk-text"
-                  >
-                    {pl(resolvedStep.instruction)}
-                  </p>
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 rounded-mk-lg bg-mk-elevated/70 border border-mk-border">
+                    <BlackCatGuide
+                      mood={hintLevel > 0 ? 'comforting' : 'pointing'}
+                      className="w-16 h-16 shrink-0"
+                    />
+                    <div className="space-y-1 flex-1">
+                      <span className="text-xs font-bold uppercase tracking-wider text-mk-primary block">
+                        {pl('Kotek Mruczek prowadzi Cię krok po kroku:')}
+                      </span>
+                      <p
+                        data-testid="step-instruction"
+                        className="mk-step-text font-semibold text-mk-text"
+                      >
+                        {pl(resolvedStep.instruction)}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Pasek pracy na prawdziwych aplikacjach Maca (zakreślanie na ekranie + otwieranie programu) */}
+                  <div className="p-4 rounded-mk-lg border-2 border-mk-primary/40 bg-mk-primarySoft/35 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                    <div className="space-y-1">
+                      <div className="text-xs font-bold uppercase tracking-wider text-mk-primary flex items-center gap-1.5">
+                        <Sparkles className="w-3.5 h-3.5" />
+                        <span>
+                          {liveCoachActive
+                            ? pl(`Tryb na żywo aktywny: Mruczek zakreśla na ekranie (${liveCoachTargetName || 'Twój Mac'})`)
+                            : pl('Chcesz zobaczyć to na prawdziwym programie swojego Maca?')}
+                        </span>
+                      </div>
+                      <p className="text-xs text-mk-muted leading-relaxed">
+                        {pl(
+                          'Kliknij przycisk obok, a Mruczek zadokuje to okno z boku, otworzy prawdziwy program na Twoim MacBooku i obrysuje na ekranie właściwe miejsce wraz z podpowiedziami obok!'
+                        )}
+                      </p>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2 shrink-0">
+                      <button
+                        type="button"
+                        data-testid="live-mac-coach-btn"
+                        onClick={() => handleToggleLiveCoach(true)}
+                        className="px-4 py-2.5 rounded-mk bg-mk-primary hover:bg-mk-primaryHover text-white text-xs font-bold shadow-sm transition-colors"
+                      >
+                        {liveCoachActive
+                          ? pl('Pokaż i zakreśl ponownie na Macu')
+                          : pl('Pokaż i zakreśl na żywo na moim Macu')}
+                      </button>
+                      {liveCoachActive && (
+                        <button
+                          type="button"
+                          onClick={() => handleToggleLiveCoach(false)}
+                          className="px-3 py-2 rounded-mk border border-mk-border bg-mk-surface text-xs font-semibold text-mk-text"
+                        >
+                          {pl('Ukryj zakreślenie')}
+                        </button>
+                      )}
+                    </div>
+                  </div>
 
                   {realtimeNotice && (
                     <div
@@ -802,6 +905,31 @@ export function MacKnowApp() {
                   onCompleteStep={handleAdvanceStep}
                 />
 
+                {/* Dodatkowe podpowiedzi Mruczka wyświetlane obok ćwiczenia („Co warto wiedzieć obok”) */}
+                <div className="rounded-mk-lg bg-mk-elevated/60 border border-mk-border p-4 grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-mk-text">
+                  <div className="flex items-start gap-2.5">
+                    <span className="px-2 py-0.5 rounded bg-mk-primary text-white font-bold shrink-0">
+                      {pl('Warto wiedzieć obok')}
+                    </span>
+                    <p className="text-mk-muted leading-relaxed">
+                      {pl(
+                        resolvedStep.hint ||
+                          'Zwróć uwagę na górny pasek menu ekranu – zawsze pokazuje nazwę tego programu, w którym aktualnie pracujesz.'
+                      )}
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <span className="px-2 py-0.5 rounded bg-mk-surface border border-mk-border font-bold text-mk-primary shrink-0">
+                      {pl('Bezpieczeństwo')}
+                    </span>
+                    <p className="text-mk-muted leading-relaxed">
+                      {pl(
+                        'Gdybyś kliknęła coś przez pomyłkę na prawdziwym Macu, skrót ⌘Z (Command + Z) natychmiast cofa ostatnią czynność.'
+                      )}
+                    </p>
+                  </div>
+                </div>
+
                 {/* Dolny pasek akcji kroku: „Zacięłam się” oraz „Zrobione” przy weryfikacji manual */}
                 <div className="pt-4 border-t border-mk-border flex flex-wrap items-center justify-between gap-4">
                   <button
@@ -858,7 +986,8 @@ export function MacKnowApp() {
                   </p>
                 </div>
 
-                <div className="max-w-sm mx-auto">
+                <div className="max-w-sm mx-auto flex flex-col items-center gap-3">
+                  <BlackCatGuide mood="celebrating" className="w-24 h-24" />
                   <CelebrationEmblem reward={activeMission.reward} />
                 </div>
 
@@ -1031,18 +1160,21 @@ export function MacKnowApp() {
         {activeScreen === 'emergency' && (
           <div className="max-w-3xl mx-auto space-y-6" data-testid="screen-emergency">
             <section className="rounded-mk-xl border border-mk-border bg-mk-surface p-6 sm:p-8 shadow-sm space-y-5">
-              <div className="space-y-2">
-                <span className="text-xs font-semibold uppercase tracking-widest text-mk-primary">
-                  {pl('Szybka pomoc bez żargonu')}
-                </span>
-                <h1 className="mk-heading-1 font-bold text-mk-text">
-                  {pl('Co ci nie wychodzi? Napisz po swojemu')}
-                </h1>
-                <p className="text-sm text-mk-muted">
-                  {pl(
-                    'Możesz wpisać potoczne słowo, z pamięci albo bez polskich znaków – na przykład „skrin”, „zniknęła faktura”, „blutut”, „spinacz w mailu”.'
-                  )}
-                </p>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="space-y-2">
+                  <span className="text-xs font-semibold uppercase tracking-widest text-mk-primary">
+                    {pl('Szybka pomoc bez żargonu – Kotek Detektyw Mruczek')}
+                  </span>
+                  <h1 className="mk-heading-1 font-bold text-mk-text">
+                    {pl('Co ci nie wychodzi? Napisz po swojemu')}
+                  </h1>
+                  <p className="text-sm text-mk-muted">
+                    {pl(
+                      'Możesz wpisać potoczne słowo, z pamięci albo bez polskich znaków – na przykład „skrin”, „zniknęła faktura”, „blutut”, „spinacz w mailu”, „co to jest plik”.'
+                    )}
+                  </p>
+                </div>
+                <BlackCatGuide mood="detective" className="w-20 h-20 shrink-0" />
               </div>
 
               <div className="relative">

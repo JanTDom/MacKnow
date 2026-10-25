@@ -29,7 +29,7 @@ import {
 } from 'lucide-react';
 import { SimulatorTheme } from '@macknow/core';
 import { TrackId } from '@macknow/missions';
-import { pl } from '@macknow/ui';
+import { BlackCatGuide, pl } from '@macknow/ui';
 import {
   AppleMenuLogo,
   ControlCenterIcon,
@@ -1282,6 +1282,22 @@ export function MacSimulator({
             isClassic={isClassic}
             onComplete={handleCorrectClick}
           />
+        </div>
+
+        {/* Sympatyczny Czarny Kotek Przewodnik („Mruczek”) w lewym dolnym rogu ekranu MacBooka */}
+        <div
+          className="hidden lg:flex items-center gap-2.5 absolute bottom-3 left-3 z-30 bg-slate-900/90 text-white px-3 py-2 rounded-2xl border border-amber-400/70 shadow-xl max-w-[250px] pointer-events-none"
+          aria-hidden="true"
+        >
+          <BlackCatGuide mood="pointing" className="w-11 h-11 shrink-0" />
+          <div className="text-[11px] leading-snug">
+            <span className="font-bold text-amber-300 block">
+              {pl('Mruczek podpowiada:')}
+            </span>
+            <span className="text-slate-100">
+              {pl('Kliknij element obrysowany złotą ramką na ekranie.')}
+            </span>
+          </div>
         </div>
 
         {/* ==================== 3. DOLNY PASEK DOCK MACOS ==================== */}

@@ -402,6 +402,134 @@ const RAW_AI_MISSIONS: Mission[] = [
       },
     ],
   },
+  {
+    id: 'ai-07-tlumaczenie-i-wyjasnianie-bledow',
+    track: 'ai',
+    level: 2,
+    title: 'Tłumacz z „komputerowego” na ludzki – wyjaśnianie niezrozumiałych komunikatów i pojęć z AI',
+    realLifeHook:
+      'Gdy na ekranie wyskakuje obco brzmiące okienko po angielsku albo pełne technicznych słów („Serwer IMAP nie odpowiada”, „Odmowa dostępu do pęku kluczy”) i nie wiesz, co kliknąć.',
+    estimatedMinutes: 5,
+    prerequisites: ['ai-02-chatgpt-claude-start', 'macos-02-zrzut-ekranu'],
+    reward: 'Odznaka Tłumaczki Zagadek',
+    synonyms: [
+      'nie rozumiem komunikatu na ekranie',
+      'komunikat po angielsku',
+      'co znaczy ten blad',
+      'wklejenie zrzutu ekranu do ai',
+      'wyjasnij po ludzku',
+      'trudne pojecie komputerowe',
+      'co kliknac w okienku',
+      'tlumaczenie z angielskiego',
+      'pek kluczy co to jest',
+      'zapytaj ai o blad na macu',
+    ],
+    theory: {
+      id: 'theory-ai-07-tlumaczenie-i-wyjasnianie-bledow',
+      category: 'Sztuczna inteligencja (AI)',
+      title: 'Twój prywatny tłumacz, któremu możesz pokazać zdjęcie niezrozumiałego okienka z ekranu',
+      metaphor: 'Cierpliwy przyjaciel informatyk, który zagląda Ci przez ramię i tłumaczy żargon na prosty polski',
+      story:
+        'Twórcy programów komputerowych mają czasem brzydki zwyczaj: zamiast napisać po ludzku „Wpisz ponownie hasło do poczty”, wyświetlają groźne okienko „Błąd uwierzytelniania serwera TLS/IMAP na porcie 993” albo komunikat po angielsku z trzema przyciskami. Dawniej w takiej chwili trzeba było dzwonić do rodziny albo zamykać okienko ze strachem. Dziś nasz czarny kotek Mruczek podpowiada dużo prostszy sposób: zrób wycinek tego niezrozumiałego okienka skrótem ⌘⇧4 (lub skopiuj z niego tekst) i wrzuć go prosto do okna rozmowy z ChatGPT albo Claude z dopiskiem: „Mam MacBooka. Wyskoczyło mi takie okienko – wyjaśnij mi prostym językiem, co ono oznacza i który przycisk powinnam kliknąć”. Sztuczna inteligencja w kilka sekund przetłumaczy komputerowy żargon na ludzki język i krok po kroku powie Ci, co zrobić.',
+      realExplanation:
+        'Współczesne asystenty AI (ChatGPT, Claude) potrafią rozpoznawać obraz (funkcja Vision). Możesz przeciągnąć plik zrzutu ekranu z Pulpitu prosto w pole wpisywania wiadomości w czacie AI lub wkleić go skrótem ⌘V. AI odczyta tekst z obrazka, przetłumaczy go z języka angielskiego lub technicznego i podpowie bezpieczne rozwiązanie dopasowane do systemu macOS.',
+      oneLiner:
+        'Zrób zrzut niezrozumiałego komunikatu, wklej go do czatu AI i poproś: „Wyjaśnij mi po ludzku, co to znaczy i co kliknąć”.',
+      commonMyth:
+        'Wiele osób myśli, że do czatu AI można wpisywać tylko tekst z klawiatury. A tymczasem wrzucenie zdjęcia lub zrzutu ekranu dziwnego komunikatu to najszybszy sposób na uzyskanie precyzyjnej pomocy.',
+      illustrationId: 'ai-error-translator',
+    },
+    steps: [
+      {
+        instruction:
+          'Gdy zobaczysz niezrozumiałe okienko lub tekst w obcym języku, zrób jego wycinek (⌘⇧4) lub skopiuj treść komunikatu.',
+        hint: 'Nawet jeśli tekst w okienku nie daje się zaznaczyć myszką, zrzut ekranu uchwyci go w całości.',
+        hint2: 'Kliknij zrzut komunikatu w ćwiczeniu poniżej.',
+        verify: { type: 'simulatorAction', action: 'ai-07-step-1' },
+        simulatorScene: 'ai-07-step-1',
+      },
+      {
+        instruction:
+          'Przeciągnij zrzut ekranu do pola rozmowy z AI (lub kliknij ikonę spinacza/plusika) i napisz: „Pracuję na MacBooku. Wyjaśnij mi prostym językiem, co oznacza to okienko i co mam kliknąć”.',
+        hint: 'Wspomnienie na początku, że używasz MacBooka, sprawi, że AI poda nazwy przycisków dokładnie z systemu macOS.',
+        hint2: 'Kliknij przycisk wysłania zapytania w ćwiczeniu poniżej.',
+        verify: { type: 'simulatorAction', action: 'ai-07-step-2' },
+        simulatorScene: 'ai-07-step-2',
+      },
+      {
+        instruction:
+          'Przeczytaj spokojne wyjaśnienie od AI i wykonaj zalecany krok bez stresu i zgadywania.',
+        hint: 'Jeśli któryś wyraz w odpowiedzi nadal brzmi niejasno, śmiało dopytaj: „A gdzie dokładnie znajdę ten przycisk?”.',
+        hint2: 'Kliknij potwierdzenie poniżej, aby ukończyć misję.',
+        verify: { type: 'simulatorAction', action: 'ai-07-step-3' },
+        simulatorScene: 'ai-07-step-3',
+      },
+    ],
+  },
+  {
+    id: 'ai-08-planowanie-podrozy-i-listy',
+    track: 'ai',
+    level: 2,
+    title: 'Planowanie wyjazdu, zakupów i list zadań z AI oraz zapisywanie ich w Notatkach',
+    realLifeHook:
+      'Gdy szykujesz się na wyjazd, większe przyjęcie rodzinne albo chcesz uporządkować sprawy na cały tydzień i potrzebujesz gotowej listy do odhaczania.',
+    estimatedMinutes: 5,
+    prerequisites: ['ai-02-chatgpt-claude-start', 'macos-03-kopiuj-wklej-schowek'],
+    reward: 'Odznaka Mistrzyni Organizacji',
+    synonyms: [
+      'lista na wyjazd',
+      'planowanie podrozy z ai',
+      'lista zakupow',
+      'notatki na macu',
+      'aplikacja notatki',
+      'co zabrac na wyjazd',
+      'plan wycieczki',
+      'przepisy i lista zakupow',
+      'odhaczanie listy w notatkach',
+      'organizacja dnia z ai',
+    ],
+    theory: {
+      id: 'theory-ai-08-planowanie-podrozy-i-listy',
+      category: 'Sztuczna inteligencja (AI)',
+      title: 'Od pustej kartki do gotowego planu w pół minuty – duet AI i żółtych Notatek na Macu',
+      metaphor: 'Pomocna organizatorka, która układa dla Ciebie listę rzeczy do spakowania, a Ty tylko wykreślasz gotowe punkty',
+      story:
+        'Najtrudniejszy moment każdego pakowania na wyjazd albo planowania świątecznego obiadu to siedzenie przed pustą kartką i zastanawianie się: „O czym jeszcze zapomniałam?”. Sztuczna inteligencja w połączeniu z wbudowaną w MacBooka aplikacją „Notatki” (ta ikona z żółtym nagłówkiem notatnika w Docku) zamienia to w czystą przyjemność. Napisz w czacie AI jedno zdanie: „Jadę na cztery dni nad morze w październiku pociągiem – przygotuj mi praktyczną listę rzeczy do spakowania podzieloną na kategorie” albo „Ułóż menu na niedzielny obiad dla sześciu osób i zrób z tego jedną wspólną listę zakupów według działów w sklepie”. Po pięciu sekundach masz gotową listę! A gdy skopiujesz ją (⌘C) i wkleisz (⌘V) do aplikacji Notatki na MacBooku, dzięki chmurze iCloud ta sama lista pojawi się automatycznie w Notatkach na Twoim iPhonie – gotowa do odhaczania w sklepie albo przy walizce!',
+      realExplanation:
+        'Aplikacja „Notatki” (Notes) w systemie macOS synchronizuje wszystkie zapiski z Twoim iPhonem przez iCloud. Wklejając listę przygotowaną przez AI do nowej notatki i klikając ikonę kółeczka z ptaszkiem na pasku narzędzi Notatek, zamieniasz zwykły tekst w interaktywną listę zadań do odhaczania na komputerze i telefonie.',
+      oneLiner:
+        'Poproś AI o ułożenie listy zakupów lub pakowania i wklej ją do aplikacji Notatki – od razu będziesz ją miała także w iPhonie.',
+      commonMyth:
+        'Wiele osób zostawia wygenerowane plany wewnątrz przeglądarki w czacie AI, gdzie potem trudno je znaleźć w sklepie czy w podróży. Wklejenie ich do aplikacji Notatki daje dostęp do listy zawsze pod ręką.',
+      illustrationId: 'ai-notes-checklist',
+    },
+    steps: [
+      {
+        instruction:
+          'Napisz do AI konkretne zadanie organizacyjne, np.: „Ułóż mi przejrzystą listę rzeczy do zabrania na 4-dniowy wyjazd jesienią, podzieloną na: dokumenty, ubrania, kosmetyczkę i elektronikę”.',
+        hint: 'Im dokładniej opiszesz porę roku i środek transportu, tym trafniejsza będzie lista.',
+        hint2: 'Kliknij polecenie w ćwiczeniu poniżej.',
+        verify: { type: 'simulatorAction', action: 'ai-08-step-1' },
+        simulatorScene: 'ai-08-step-1',
+      },
+      {
+        instruction:
+          'Skopiuj przygotowaną przez AI listę (⌘C) i otwórz na MacBooku aplikację „Notatki” (ikona notatnika z żółtym paskiem u góry).',
+        hint: 'W aplikacji Notatki utwórz nową kartkę skrótem ⌘N i wklej listę skrótem ⌘V.',
+        hint2: 'Kliknij przycisk wklejenia do Notatek w ćwiczeniu poniżej.',
+        verify: { type: 'simulatorAction', action: 'ai-08-step-2' },
+        simulatorScene: 'ai-08-step-2',
+      },
+      {
+        instruction:
+          'Zamień punkty w kółeczka do odhaczania na pasku narzędzi Notatek – od teraz widzisz tę samą listę na MacBooku i na swoim iPhonie!',
+        hint: 'Każde kliknięcie kółeczka przy spakowanej rzeczy od razu aktualizuje listę na obu Twoich urządzeniach.',
+        hint2: 'Kliknij przycisk poniżej, aby ukończyć całą rozszerzoną ścieżkę Sztucznej Inteligencji!',
+        verify: { type: 'simulatorAction', action: 'ai-08-step-3' },
+        simulatorScene: 'ai-08-step-3',
+      },
+    ],
+  },
 ];
 
 export const AI_MISSIONS: Mission[] = RAW_AI_MISSIONS.map(polishMission);

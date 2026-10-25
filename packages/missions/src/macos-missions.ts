@@ -747,6 +747,655 @@ const RAW_MACOS_MISSIONS: Mission[] = [
       },
     ],
   },
+  {
+    id: 'macos-11-plik-teczka-drzewo',
+    track: 'macos',
+    level: 1,
+    title: 'Plik, teczka i drzewo katalogów – jak ułożone są rzeczy w komputerze',
+    realLifeHook:
+      'Gdy słyszysz słowa „plik”, „folder”, „katalog nadrzędny” albo „ścieżka dostępu” i chcesz wreszcie zobaczyć w głowie jasny, uporządkowany obraz zamiast labiryntu.',
+    estimatedMinutes: 5,
+    prerequisites: ['macos-01-pulpit-dock', 'macos-05-finder-foldery'],
+    reward: 'Odznaka Architektki Porządku',
+    synonyms: [
+      'co to jest plik',
+      'co to jest folder',
+      'co to jest katalog',
+      'drzewo katalogow',
+      'sciezka do pliku',
+      'gdzie lezy plik',
+      'roznica miedzy plikiem a folderem',
+      'teczka w komputerze',
+      'pasek sciezki',
+      'widok kolumn',
+      'struktura folderow',
+    ],
+    theory: {
+      id: 'theory-macos-11-plik-teczka-drzewo',
+      category: 'Podstawy systemu macOS',
+      title: 'Kartka papieru, niebieska teczka i komoda z szufladami – cała tajemnica drzewa katalogów',
+      metaphor: 'Pojedyncza kartka z tekstem lub zdjęciem (plik) włożona do tekturowej teczki (folderu), która leży w szufladzie komody (drzewie katalogów)',
+      story:
+        'Nasz czarny kotek przewodnik uwielbia wskakiwać do pustych pudełek, więc wyjaśni Ci to najlepiej na świecie. W komputerze istnieją tylko dwa podstawowe przedmioty: PLIKI oraz TECZKI (nazywane też folderami albo katalogami). Plik to konkretna rzecz z treścią: jedna kartka z umową, jedno zdjęcie z wakacji, jedna piosenka. Sam plik nie ma w środku żadnych przegródek – można go tylko przeczytać, obejrzeć albo wysłać. Z kolei teczka (niebieska ikonka w Finderze) sama w sobie nie ma żadnej treści do czytania – jest jak tekturowe pudełko albo segregator, do którego wkłada się pliki, żeby nie leżały luzem na blacie. Co najciekawsze, do dużej teczki „Dom” możesz włożyć mniejszą teczkę „Rachunki”, a do niej jeszcze mniejszą teczkę „Prąd 2026”. Taki układ teczek schowanych jedna w drugiej informatycy nazwali dumnie „drzewem katalogów” – bo z jednego głównego pnia (dysku Macintosh HD) wyrastają gałęzie (Biurko, Dokumenty, Pobrane), a z nich mniejsze gałązki (Twoje własne teczki).',
+      realExplanation:
+        'Plik (ang. file) to pojedynczy dokument, obraz lub program zapisany na dysku. Folder (teczka / katalog) to pojemnik grupujący pliki oraz podfoldery. Pełny adres pokazujący, w której teczce leży plik (np. Macintosh HD ▸ Użytkownicy ▸ malgorzata ▸ Dokumenty ▸ Rachunki), nazywamy ścieżką. W Finderze możesz włączyć „Pasek ścieżki” na dole okna oraz „Widok kolumn” (⌘3), który pokazuje całe drzewo katalogów od lewej do prawej.',
+      oneLiner:
+        'Plik to pojedyncza kartka z treścią, teczka (folder) to pudełko na kartki, a drzewo katalogów to układ pudełek w szafie.',
+      commonMyth:
+        'Wiele osób boi się, że zmiana nazwy teczki skasuje pliki w środku. A tymczasem to tylko zmiana napisu na pudełku – wszystkie kartki wewnątrz zostają nietknięte.',
+      illustrationId: 'file-folder-tree',
+    },
+    steps: [
+      {
+        instruction:
+          'Otwórz okno Findera i przełącz układ na „Widok kolumn” (trzecia ikonka z pionowymi kolumnami na górnym pasku okna lub skrót ⌘3).',
+        hint: 'Widok kolumn pokazuje po lewej szufladę główną, w środkowej kolumnie teczki, a po prawej pliki w środku.',
+        hint2: 'Kliknij podświetlony przycisk widoku kolumn na górnym pasku okna Findera.',
+        verify: { type: 'simulatorAction', action: 'macos-11-step-1' },
+        simulatorScene: 'macos-11-step-1',
+      },
+      {
+        instruction:
+          'Kliknij teczkę „Dokumenty” w pierwszej kolumnie, a następnie teczkę „Rachunki” w drugiej kolumnie, aby zobaczyć, jak gałąź prowadzi do pliku.',
+        hint: 'Każde kliknięcie teczki otwiera jej zawartość w kolejnej kolumnie po prawej stronie.',
+        hint2: 'Kliknij podświetloną teczkę w środkowej kolumnie okna Findera.',
+        verify: { type: 'simulatorAction', action: 'macos-11-step-2' },
+        simulatorScene: 'macos-11-step-2',
+      },
+      {
+        instruction:
+          'Spójrz na sam dół okna Findera na „Pasek ścieżki” (Macintosh HD ▸ Użytkownicy ▸ malgorzata ▸ Dokumenty ▸ Rachunki) i kliknij go, aby potwierdzić, że widzisz całą drogę do pliku.',
+        hint: 'Jeśli na prawdziwym Macu nie widzisz tego paska na dole, włączysz go w górnym menu: Widok → Pokaż pasek ścieżki.',
+        hint2: 'Kliknij podświetlony pasek ścieżki na samym dole okna Findera.',
+        verify: { type: 'simulatorAction', action: 'macos-11-step-3' },
+        simulatorScene: 'macos-11-step-3',
+      },
+    ],
+  },
+  {
+    id: 'macos-12-rozszerzenia-plikow',
+    track: 'macos',
+    level: 1,
+    title: 'Końcówki nazw plików (.pdf, .docx, .jpg, .zip) – dlaczego nie w każdym pliku da się pisać',
+    realLifeHook:
+      'Gdy otwierasz otrzymany dokument PDF i dziwisz się, dlaczego nie można w nim dopisać zdania klawiaturą, albo dostajesz spakowaną paczkę .zip.',
+    estimatedMinutes: 4,
+    prerequisites: ['macos-11-plik-teczka-drzewo'],
+    reward: 'Odznaka Znawczyni Formatów',
+    synonyms: [
+      'co to jest pdf',
+      'co to jest zip',
+      'co to jest docx',
+      'co to jest jpg',
+      'jak rozpakowac zip',
+      'dlaczego nie moge pisac w pdf',
+      'rozszerzenie pliku',
+      'format pliku',
+      'jaki to rodzaj pliku',
+      'spakowany plik',
+    ],
+    theory: {
+      id: 'theory-macos-12-rozszerzenia-plikow',
+      category: 'Pliki i foldery',
+      title: 'Etykiety na słoikach w spiżarni: po czym poznać zeszyt do pisania, fotografię i zapiętą walizkę',
+      metaphor: 'Kropka i trzy litery na końcu nazwy pliku działają jak plakietka mówiąca Macowi, jakim narzędziem otworzyć dany przedmiot',
+      story:
+        'Zauważyłaś, że niemal każdy plik ma na końcu nazwy kropkę i trzy albo cztery tajemnicze literki? Nasz czarny kotek zagląda do spiżarni i tłumaczy cztery najważniejsze z nich. Pierwsza to „.docx” (lub „.pages”) – to otwarty zeszyt w linię: kiedy go otworzysz, możesz w nim swobodnie dopisywać i kasować słowa. Druga to „.pdf” – to kartka zalaminowana w sztywną folię: wygląda jak wydruk na papierze, na każdym komputerze ma identyczny układ i nikt przypadkiem nie przestawi w niej przecinka (dlatego w takim kształcie przysyłają umowy i faktury!). Trzecia to „.jpg” oraz „.png” – to wywołane zdjęcia i obrazki. A czwarta to „.zip” – czyli walizka zapięta na zamek błyskawiczny, do której ktoś spakował dziesięć zdjęć naraz, żeby łatwiej przeszły mailem. Na Macu rozpakowanie takiej walizki „.zip” jest bajecznie wygodne: klikasz ją dwa razy, a obok niej od razu wyskakuje gotowa, rozpakowana niebieska teczka!',
+      realExplanation:
+        'Rozszerzenie pliku (litery po ostatniej kropce w nazwie) określa format danych: .pdf to dokument do odczytu i druku (otwierany w Podglądzie), .docx/.pages to edytowalny dokument tekstowy, .jpg/.png/.heic to fotografie, a .zip to archiwum skompresowane (dwukrotne kliknięcie pliku .zip w Finderze automatycznie wypakowuje z niego zwykłą teczkę z plikami). Szczegółowy rodzaj i rozmiar każdego pliku sprawdzisz skrótem ⌘I (Plik → Informacje).',
+      oneLiner:
+        '.docx to zeszyt do pisania, .pdf to zalaminowany wydruk, .jpg to zdjęcie, a .zip to walizka rozpakowywana dwuklikiem.',
+      commonMyth:
+        'Wiele osób szuka w internecie płatnych programów do rozpakowywania plików .zip. A tymczasem Mac ma narzędzie rozpakowujące wbudowane fabrycznie – działa po zwykłym podwójnym kliknięciu.',
+      illustrationId: 'file-extensions-jars',
+    },
+    steps: [
+      {
+        instruction:
+          'W oknie Findera spójrz na spakowaną paczkę „Zdjecia-z-urodzin.zip” i kliknij ją dwukrotnie, aby Mac automatycznie wyjął z niej zwykłą niebieską teczkę.',
+        hint: 'Plik z końcówką .zip przypomina kartkę z zamkiem błyskawicznym.',
+        hint2: 'Kliknij podświetlony plik „Zdjecia-z-urodzin.zip” w oknie Findera.',
+        verify: { type: 'simulatorAction', action: 'macos-12-step-1' },
+        simulatorScene: 'macos-12-step-1',
+      },
+      {
+        instruction:
+          'Otwórz wypakowaną niebieską teczkę „Zdjecia-z-urodzin”, w której czekają gotowe zdjęcia .jpg oraz dokument .pdf.',
+        hint: 'Po rozpakowaniu pliku .zip tuż obok pojawia się normalna niebieska teczka o tej samej nazwie.',
+        hint2: 'Kliknij podświetloną niebieską teczkę „Zdjecia-z-urodzin”.',
+        verify: { type: 'simulatorAction', action: 'macos-12-step-2' },
+        simulatorScene: 'macos-12-step-2',
+      },
+      {
+        instruction:
+          'Wyświetl kartę „Informacje” o pliku (skrót ⌘I lub Plik → Informacje), aby zobaczyć dokładny rodzaj dokumentu, jego rozmiar i datę utworzenia.',
+        hint: 'Skrót ⌘I otwiera wąskie okienko z pełną metryczką wybranego pliku.',
+        hint2: 'Kliknij podświetlony przycisk „Pokaż Informacje (⌘I)”.',
+        verify: { type: 'simulatorAction', action: 'macos-12-step-3' },
+        simulatorScene: 'macos-12-step-3',
+      },
+    ],
+  },
+  {
+    id: 'macos-13-gdzie-jestem-okna-widoki',
+    track: 'macos',
+    level: 1,
+    title: 'Cztery widoki Findera i sortowanie po dacie – jak zawsze mieć dzisiejszy plik na samej górze',
+    realLifeHook:
+      'Gdy w teczce Pobrane masz sto plików wymieszanych w losowej kolejności i nie wiesz, który z nich pobrałaś przed chwilą.',
+    estimatedMinutes: 4,
+    prerequisites: ['macos-02-gdzie-zniknal-plik'],
+    reward: 'Odznaka Mistrzyni Widoków',
+    synonyms: [
+      'jak posortowac pliki po dacie',
+      'najnowszy plik na gorze',
+      'zmienil mi sie wyglad folderu',
+      'wielkie ikony w finderze',
+      'widok listy',
+      'sortowanie w pobranych',
+      'gdzie jest plik z dzisiaj',
+      'widok ikon lista kolumny',
+      'jak ulozyc pliki',
+      'porzadek w pobranych',
+    ],
+    theory: {
+      id: 'theory-macos-13-gdzie-jestem-okna-widoki',
+      category: 'Pliki i foldery',
+      title: 'Cztery pary okularów do tej samej szuflady i magiczny nagłówek „Data modyfikacji”',
+      metaphor: 'Ta sama zawartość szuflady oglądana jako rozłożone pocztówki (Ikony) albo jako uporządkowany spis w zeszycie (Lista)',
+      story:
+        'Czasem otwierasz teczkę w Finderze i masz wrażenie, że ktoś w nocy poprzestawiał Ci meble: wczoraj pliki były ułożone w równą listę z datami, a dziś widzisz ogromne kafelki na pół ekranu. Nasz czarny kotek mruczy uspokajająco: żaden plik nie zginął, po prostu przełączył się przycisk widoku na górnym pasku okna! Finder ma cztery sposoby pokazywania tej samej szuflady: Ikony (świetne do przeglądania zdjęć), Lista (najlepsza na co dzień, bo obok nazwy pokazuje datę i rozmiar), Kolumny (pokazujące drzewo katalogów) oraz Galeria. A kiedy włączysz widok Listy i klikniesz napis „Data modyfikacji” na szarym pasku nad plikami, wydarzy się cud: wszystkie dokumenty ustawią się grzecznie według zegarka, a plik pobrany przed minutą stanie na pierwszym miejscu u samej góry!',
+      realExplanation:
+        'Na górnym pasku narzędzi każdego okna Findera znajdują się cztery przyciski widoku (skróty ⌘1 – Ikony, ⌘2 – Lista, ⌘3 – Kolumny, ⌘4 – Galeria). W widoku Listy (⌘2) kliknięcie nagłówka kolumny „Data modyfikacji” lub „Data dołączenia” sortuje pliki od najnowszych do najstarszych.',
+      oneLiner:
+        'Włącz w Finderze widok Listy (⌘2) i kliknij nagłówek „Data modyfikacji”, aby dzisiejsze pliki były zawsze na górze.',
+      commonMyth:
+        'Wiele osób myśli, że pliki w komputerze muszą leżeć wyłącznie alfabetycznie od A do Z. A tymczasem sortowanie po dacie jest o wiele wygodniejsze przy szukaniu świeżo pobranych dokumentów.',
+      illustrationId: 'finder-four-views',
+    },
+    steps: [
+      {
+        instruction:
+          'W oknie Findera kliknij przycisk „Widok listy” (cztery poziome kreski na górnym pasku narzędzi lub skrót ⌘2).',
+        hint: 'Widok listy zamienia duże obrazki w czytelną tabelę z kolumnami.',
+        hint2: 'Kliknij podświetloną ikonę czterech poziomych kresek na pasku narzędzi Findera.',
+        verify: { type: 'simulatorAction', action: 'macos-13-step-1' },
+        simulatorScene: 'macos-13-step-1',
+      },
+      {
+        instruction:
+          'Kliknij nagłówek kolumny „Data modyfikacji” nad listą plików, aby ułożyć dokumenty od najnowszego z dzisiaj.',
+        hint: 'Nagłówek „Data modyfikacji” znajduje się w szarym pasku bezpośrednio nad pierwszym plikiem.',
+        hint2: 'Kliknij podświetlony nagłówek „Data modyfikacji” w tabeli Findera.',
+        verify: { type: 'simulatorAction', action: 'macos-13-step-2' },
+        simulatorScene: 'macos-13-step-2',
+      },
+      {
+        instruction:
+          'Kliknij świeżo znaleziony plik z napisem „Dzisiaj, 12:30”, który wskoczył na samą górę listy.',
+        hint: 'Dzięki sortowaniu po dacie najnowszy dokument masz zawsze na pierwszym miejscu.',
+        hint2: 'Kliknij podświetlony pierwszy wiersz na górze listy plików.',
+        verify: { type: 'simulatorAction', action: 'macos-13-step-3' },
+        simulatorScene: 'macos-13-step-3',
+      },
+    ],
+  },
+  {
+    id: 'macos-14-gladzik-gesty-prawy-klik',
+    track: 'macos',
+    level: 1,
+    title: 'Tajemnice gładzika (Trackpada) – jak kliknąć „prawym przyciskiem”, gdy nie ma przycisków',
+    realLifeHook:
+      'Gdy instrukcja prosi o kliknięcie prawym przyciskiem myszy, a Ty masz przed sobą tylko gładką szklaną płytkę pod klawiaturą MacBooka.',
+    estimatedMinutes: 4,
+    prerequisites: ['macos-01-pulpit-dock'],
+    reward: 'Odznaka Wirtuozki Gładzika',
+    synonyms: [
+      'prawy przycisk myszy na macu',
+      'jak kliknac prawym na macbooku',
+      'gladzik',
+      'trackpad',
+      'przewijanie dwoma palcami',
+      'menu kontekstowe',
+      'klikniecie dwoma palcami',
+      'jak powiększyc palcami',
+      'myszka na macbooku',
+      'gesty na macu',
+    ],
+    theory: {
+      id: 'theory-macos-14-gladzik-gesty-prawy-klik',
+      category: 'Podstawy systemu macOS',
+      title: 'Jeden palec wskazuje, dwa palce otwierają podręczne menu pomocnicze',
+      metaphor: 'Szklana płytka gładzika rozpoznaje, czy dotykasz jej jedną łapką, czy dwiema naraz',
+      story:
+        'Kiedy pierwszy raz siadasz przed MacBookiem bez zewnętrznej myszki, możesz poczuć lekką konsternację: pod klawiaturą leży gładka, szklana płytka (Gładzik, czyli Trackpad), na której nie widać ani lewego, ani prawego przycisku! Nasz czarny kotek pokazuje na niej swoją ulubioną sztuczkę: gładzik MacBooka wyczuwa liczbę palców, którymi go dotykasz. Kiedy stukniesz lub naciśniesz płytkę JEDNYM palcem – to zwykłe lewe kliknięcie. Kiedy jednak położysz obok siebie DWA palce (wskazujący i środkowy) i stukniesz nimi jednocześnie – Mac rozumie to dokładnie jako „prawy przycisk myszy” i natychmiast rozwija podręczne menu z opcjami (takimi jak Zmień nazwę, Skopiuj, Nowy folder czy Przenieś do Kosza)! A gdy przesuwasz dwa palce lekko w górę i w dół, przewijasz stronę internetową tak płynnie, jakbyś przesuwała kartkę papieru po stole.',
+      realExplanation:
+        'Na gładziku MacBooka tzw. kliknięcie pomocnicze (odpowiednik prawego przycisku myszy) wykonuje się przez naciśnięcie lub stuknięcie płytki dwoma palcami jednocześnie (alternatywnie: kliknięcie jednym palcem z przytrzymanym klawiszem Control na klawiaturze). Przesuwanie dwoma palcami góra/dół przewija zawartość okna, a zsunięcie lub rozsunięcie dwóch palców działa jak lupa powiększająca.',
+      oneLiner:
+        'Jeden palec na gładziku to zwykły klik, a stuknięcie dwoma palcami naraz to „prawy przycisk myszy”.',
+      commonMyth:
+        'Wiele osób szuka prawego dolnego rogu gładzika, próbując trafić w niewidzialny przycisk. A tymczasem stuknięcie dwoma palcami działa wygodnie w dowolnym miejscu na środku płytki.',
+      illustrationId: 'trackpad-two-fingers',
+    },
+    steps: [
+      {
+        instruction:
+          'Otwórz Ustawienia systemowe (lub Preferencje systemowe) i wybierz sekcję „Gładzik” na dole listy.',
+        hint: 'Ikona Gładzika przedstawia prostokątną płytkę dotykową.',
+        hint2: 'Kliknij podświetloną pozycję „Gładzik” w oknie ustawień.',
+        verify: { type: 'simulatorAction', action: 'macos-14-step-1' },
+        simulatorScene: 'macos-14-step-1',
+      },
+      {
+        instruction:
+          'Upewnij się, że opcja „Kliknięcie pomocnicze (Kliknięcie dwoma palcami)” oraz „Dotknij, aby kliknąć” są włączone.',
+        hint: 'Dzięki opcji „Dotknij, aby kliknąć” nie musisz mocno wciskać płytki – możesz jej lekko dotknąć opuszkiem palca.',
+        hint2: 'Kliknij podświetlony przełącznik „Kliknięcie dwoma palcami”.',
+        verify: { type: 'simulatorAction', action: 'macos-14-step-2' },
+        simulatorScene: 'macos-14-step-2',
+      },
+      {
+        instruction:
+          'Przetestuj kliknięcie dwoma palcami na ikonie teczki, aby rozwinęło się menu pomocnicze z opcją „Zmień nazwę…”.',
+        hint: 'Dotknij gładzika dwoma złączonymi palcami (wskazującym i środkowym) jednocześnie.',
+        hint2: 'Kliknij podświetlone pole testu dwupalcowego kliknięcia.',
+        verify: { type: 'simulatorAction', action: 'macos-14-step-3' },
+        simulatorScene: 'macos-14-step-3',
+      },
+    ],
+  },
+  {
+    id: 'macos-15-instalacja-dmg-i-appstore',
+    track: 'macos',
+    level: 2,
+    title: 'Pudełko .dmg i biała ikonka dysku na Biurku – jak instalować programy i sprzątać po instalacji',
+    realLifeHook:
+      'Gdy po zainstalowaniu programu na Biurku wciąż wisi tajemnicza biała ikonka dysku i boisz się ją usunąć, żeby nie skasować programu.',
+    estimatedMinutes: 4,
+    prerequisites: ['macos-11-plik-teczka-drzewo'],
+    reward: 'Odznaka Bezpiecznych Instalacji',
+    synonyms: [
+      'co to jest plik dmg',
+      'biala ikonka dysku na pulpicie',
+      'jak zainstalowac program na macu',
+      'jak usunac dmg',
+      'wysun dysk',
+      'przeciagnij do aplikacji',
+      'app store na macu',
+      'instalator na macu',
+      'wirtualny dysk na biurku',
+      'czy moge usunac plik dmg',
+    ],
+    theory: {
+      id: 'theory-macos-15-instalacja-dmg-i-appstore',
+      category: 'Podstawy systemu macOS',
+      title: 'Kartonowe pudełko od kuriera: wyjmij fotel do mieszkania, a pusty karton wystaw za drzwi',
+      metaphor: 'Plik .dmg to tylko opakowanie transportowe – po przeciągnięciu programu do szafy „Aplikacje” opakowanie można bezpiecznie wysunąć',
+      story:
+        'Na komputerach z Windowsem instalacja programu przypomina ankietę urzędową: trzeba dziesięć razy klikać „Dalej, Dalej, Zgadzam się, Zakończ”. Na Macu wymyślono to zupełnie inaczej i przez to wiele osób zostaje z „pudłami” na środku pokoju! Kiedy pobierasz program z internetu jako plik „.dmg” i klikasz go dwa razy, na Biurku pojawia się biała skrzyneczka przypominająca dysk, a na ekranie otwiera się małe okienko z dwiema ikonami: ikoną nowego programu oraz teczką „Aplikacje” (Applications). Nasz czarny kotek tłumaczy: ta biała skrzyneczka to tylko kartonowe pudełko kurierskie! Żeby zainstalować program na stałe, chwytasz go myszką i przeciągasz do teczki „Aplikacje” (czyli wstawiasz nowy mebel do swojego mieszkania). Kiedy już tam stoi, puste pudełko kurierskie na Biurku nie jest Ci do niczego potrzebne – klikasz obok niego małą strzałkę „Wysuń” (⏏), a sam plik .dmg z Pobranych możesz spokojnie wyrzucić do Kosza.',
+      realExplanation:
+        'Plik .dmg (Disk Image) to wirtualny obraz dysku służący do dostarczania programów na macOS. Po otwarciu pliku .dmg przeciągasz ikonę aplikacji do skrótu „Applications / Aplikacje”. Od tej chwili program jest zainstalowany w systemowej teczce Aplikacje, a wirtualny dysk możesz odłączyć przyciskiem „Wysuń” (⏏) w pasku bocznym Findera.',
+      oneLiner:
+        'Przeciągnij program z okna .dmg do teczki Aplikacje, a potem wysuń białą ikonkę dysku (⏏).',
+      commonMyth:
+        'Wiele osób uruchamia program codziennie prosto z otwartego pudełka .dmg na Biurku. A tymczasem po przeciągnięciu do Aplikacji pudełko .dmg należy wysunąć i skasować.',
+      illustrationId: 'dmg-box-unpack',
+    },
+    steps: [
+      {
+        instruction:
+          'W otwartym okienku instalatora .dmg przeciągnij (lub kliknij) ikonę programu do teczki „Aplikacje”, aby wstawić go na stałe do swojego Maca.',
+        hint: 'Strzałka między ikoną programu a teczką Aplikacje podpowiada kierunek przeciągnięcia.',
+        hint2: 'Kliknij podświetlone połączenie prowadzące do teczki „Aplikacje”.',
+        verify: { type: 'simulatorAction', action: 'macos-15-step-1' },
+        simulatorScene: 'macos-15-step-1',
+      },
+      {
+        instruction:
+          'Sprawdź w teczce „Aplikacje” w Finderze, że nowy program już tam bezpiecznie stoi.',
+        hint: 'Wszystkie zainstalowane na stałe programy mieszkają w teczce „Aplikacje”.',
+        hint2: 'Kliknij podświetloną pozycję „Aplikacje” na lewym pasku Findera.',
+        verify: { type: 'simulatorAction', action: 'macos-15-step-2' },
+        simulatorScene: 'macos-15-step-2',
+      },
+      {
+        instruction:
+          'Kliknij mały znaczek wysuwania „⏏” obok wirtualnego dysku Instalatora na pasku bocznym Findera, aby posprzątać puste opakowanie z Biurka.',
+        hint: 'Znaczek ⏏ (trójkącik z kreską pod spodem) odłącza wirtualne pudełko instalacyjne.',
+        hint2: 'Kliknij podświetlony przycisk „Wysuń ⏏” na pasku bocznym Findera.',
+        verify: { type: 'simulatorAction', action: 'macos-15-step-3' },
+        simulatorScene: 'macos-15-step-3',
+      },
+    ],
+  },
+  {
+    id: 'macos-16-pendrive-dysk-wysuwanie',
+    track: 'macos',
+    level: 2,
+    title: 'Pendrive i dysk zewnętrzny – gdzie go znaleźć po podłączeniu i jak bezpiecznie wyjąć',
+    realLifeHook:
+      'Gdy wkładasz pendrive’a ze zdjęciami i nic nie wyskakuje na ekranie, a po jego wyjęciu Mac wyświetla groźne ostrzeżenie o nieprawidłowym odłączeniu dysku.',
+    estimatedMinutes: 4,
+    prerequisites: ['macos-11-plik-teczka-drzewo'],
+    reward: 'Odznaka Opiekunki Nośników',
+    synonyms: [
+      'pendrive na macu',
+      'gdzie jest pendrive',
+      'dysk zewnetrzny nie widac',
+      'nieprawidlowe odlaczenie dysku',
+      'jak bezpiecznie wyjac pendrive',
+      'wysun pendrive',
+      'jak zgrac zdjecia na pendrive',
+      'pamiec usb na macbooku',
+      'karta pamieci',
+      'sekcja miejsca w finderze',
+    ],
+    theory: {
+      id: 'theory-macos-16-pendrive-dysk-wysuwanie',
+      category: 'Pliki i foldery',
+      title: 'Uprzejme pożegnanie gościa z walizką – dlaczego przed wyjęciem pendrive’a klikamy strzałkę ⏏',
+      metaphor: 'Pozwól gościowi dopiąć zamek walizki (przycisk Wysuń ⏏), zanim zamkniesz za nim drzwi',
+      story:
+        'Kiedy podłączasz pendrive’a albo zewnętrzny dysk ze zdjęciami do MacBooka, komputer nie otwiera hałaśliwego okienka na cały ekran – zamiast tego po cichu stawia nową ikonkę na Biurku oraz dopisuje nazwę Twojego pendrive’a na lewym pasku bocznym Findera w sekcji „Miejsca” (na samym dole listy). Możesz tam wchodzić, oglądać zdjęcia i przeciągać na niego swoje dokumenty dokładnie tak jak do zwykłej teczki. Jest tylko jeden ważny zwyczaj, którego nasz czarny kotek pilnuje jak oka w głowie: nigdy nie wyrywamy pendrive’a z gniazdka znienacka! Dlaczego? Bo Mac często jeszcze przez kilka sekund w tle dopisuje ostatnie fragmenty pliku. Kiedy klikniesz małą strzałkę „Wysuń” (⏏) obok nazwy pendrive’a w Finderze, Mac dokończy zapisywanie, zamknie walizkę na klucz i zgasi ikonkę. Dopiero wtedy wyjmujesz pendrive’a z gniazda – bez żadnych czerwonych ostrzeżeń i bez ryzyka uszkodzenia zdjęć!',
+      realExplanation:
+        'Podłączone pamięci USB (pendrive’y), karty SD oraz dyski zewnętrzne pojawiają się w lewym pasku bocznym okna Findera w sekcji „Miejsca” (Locations) oraz na Biurku. Przed fizycznym odłączeniem przewodu USB zawsze kliknij ikonę wysuwania (⏏) obok nazwy nośnika w Finderze i zaczekaj sekundę, aż zniknie z listy.',
+      oneLiner:
+        'Pendrive’a znajdziesz na lewym pasku Findera w sekcji „Miejsca”, a przed wyjęciem zawsze kliknij przy nim znaczek ⏏.',
+      commonMyth:
+        'Wiele osób myśli, że ostrzeżenie „Nieprawidłowe odłączenie dysku” to tylko formalność. A tymczasem wyjęcie pendrive’a w trakcie zapisu może uszkodzić przesyłane zdjęcie lub dokument.',
+      illustrationId: 'usb-drive-eject',
+    },
+    steps: [
+      {
+        instruction:
+          'W oknie Findera spójrz na lewy pasek boczny na sekcję „Miejsca” i kliknij podłączony nośnik „PENDRIVE-ZDJECIA”.',
+        hint: 'Zewnętrzne pamięci USB pojawiają się na dole lewego paska bocznego Findera.',
+        hint2: 'Kliknij podświetloną pozycję „PENDRIVE-ZDJECIA” w pasku bocznym Findera.',
+        verify: { type: 'simulatorAction', action: 'macos-16-step-1' },
+        simulatorScene: 'macos-16-step-1',
+      },
+      {
+        instruction:
+          'Skopiuj dokument lub zdjęcie na pendrive’a, klikając przycisk przeniesienia pliku do otwartego okna nośnika.',
+        hint: 'Kiedy przeciągasz plik z Maca na pendrive’a, na Macu zostaje oryginał, a na pendrive’a trafia jego druga kopia.',
+        hint2: 'Kliknij podświetlony plik, aby skopiować go na pendrive’a.',
+        verify: { type: 'simulatorAction', action: 'macos-16-step-2' },
+        simulatorScene: 'macos-16-step-2',
+      },
+      {
+        instruction:
+          'Zanim wyjmiesz pendrive’a z gniazdka, kliknij symbol „Wysuń ⏏” tuż obok jego nazwy na pasku bocznym Findera.',
+        hint: 'Po kliknięciu ⏏ nazwa pendrive’a zniknie z listy – to znak, że można go bezpiecznie wyjąć z portu USB.',
+        hint2: 'Kliknij podświetloną strzałkę „Wysuń ⏏” obok nazwy pendrive’a.',
+        verify: { type: 'simulatorAction', action: 'macos-16-step-3' },
+        simulatorScene: 'macos-16-step-3',
+      },
+    ],
+  },
+  {
+    id: 'macos-17-brak-miejsca-na-dysku',
+    track: 'macos',
+    level: 2,
+    title: 'Prawie pełny dysk – jak sprawdzić, co zajmuje miejsce na MacBooku i bezpiecznie zrobić porządki',
+    realLifeHook:
+      'Gdy Mac wyświetla komunikat „Dysk startowy jest prawie pełny”, a Ty nie wiesz, co zajmuje tyle miejsca i co wolno usunąć bez uszkodzenia systemu.',
+    estimatedMinutes: 5,
+    prerequisites: ['macos-10-kosz', 'macos-13-gdzie-jestem-okna-widoki'],
+    reward: 'Odznaka Mistrzyni Przestrzeni',
+    synonyms: [
+      'brak miejsca na dysku',
+      'dysk startowy jest prawie pelny',
+      'jak zwolnic miejsce na macu',
+      'co zajmuje tyle miejsca',
+      'czyszczenie dysku maca',
+      'malo pamieci na macbooku',
+      'gdzie sprawdzic ile mam wolnego miejsca',
+      'porzadki na dysku',
+      'duze pliki w pobranych',
+      'pamiec masowa',
+    ],
+    theory: {
+      id: 'theory-macos-17-brak-miejsca-na-dysku',
+      category: 'Ustawienia i porządki',
+      title: 'Rentgen domowej szafy: kolorowy pasek, który od razu pokazuje, gdzie leżą najcięższe walizki',
+      metaphor: 'Zamiast zgadywać po omacku, włączasz podświetlany spis pokazujący dokładnie, ile półek zajmują zdjęcia, programy i stare przesyłki w Pobranych',
+      story:
+        'Samotne pisma w Wordzie czy rachunki PDF są lekkie jak piórko – można ich mieć dziesięć tysięcy i nadal nie zapełnią nawet ułamka dysku. Skąd więc bierze się komunikat o pełnym dysku? Nasz czarny kotek zagląda z latarką w trzy miejsca, w których najczęściej gromadzą się „ciężkie walizki”: po pierwsze – teczka „Pobrane”, gdzie od lat leżą zapomniane instalatory programów i duże filmy z załączników; po drugie – nieopróżniony od miesięcy „Kosz” (pamiętasz, że dopóki go nie opróżnisz, pliki nadal zajmują miejsce w szafie!); po trzecie – długie nagrania wideo. Mac ma wbudowany genialny „rentgen” pamięci (w Ustawieniach systemowych → Ogólne → Miejsce lub w menu  → Ten Mac → Pamięć masowa), który rysuje kolorowy pasek i jednym kliknięciem pokazuje największe zapomniane pliki gotowe do bezpiecznego posprzątania.',
+      realExplanation:
+        'W macOS Ventura i nowszych stan dysku sprawdzisz w Ustawieniach systemowych → Ogólne → Miejsce (w starszych wersjach: menu  → Ten Mac → zakładka Pamięć masowa). System dzieli zajęte miejsce na czytelne kategorie (Aplikacje, Dokumenty, Zdjęcia, Kosz) i pozwala jednym kliknięciem przejrzeć największe pliki w teczce Pobrane oraz opróżnić Kosz.',
+      oneLiner:
+        'Zajrzyj do Ustawienia → Ogólne → Miejsce (lub  → Ten Mac → Pamięć masowa), aby zobaczyć, co zajmuje dysk.',
+      commonMyth:
+        'Wiele osób kupuje podejrzane programy „Mac Cleaner” z reklam w internecie. A tymczasem fabryczne narzędzie „Miejsce” w macOS jest w 100% darmowe, bezpieczne i o wiele skuteczniejsze.',
+      illustrationId: 'storage-xray-bar',
+    },
+    steps: [
+      {
+        instruction:
+          'Otwórz Ustawienia systemowe → „Ogólne” → „Miejsce” (na starszym Macu: menu  → „Ten Mac” → zakładka „Pamięć masowa”).',
+        hint: 'Zobaczysz tam kolorowy pasek pokazujący, ile gigabajtów (GB) masz jeszcze wolnych.',
+        hint2: 'Kliknij podświetloną sekcję „Miejsce (Pamięć masowa)” w oknie ustawień.',
+        verify: { type: 'simulatorAction', action: 'macos-17-step-1' },
+        simulatorScene: 'macos-17-step-1',
+        variants: [
+          {
+            osRange: '<13',
+            instruction:
+              'Kliknij menu  → „Ten Mac” i przejdź do zakładki „Pamięć masowa”, aby zobaczyć kolorowy wykres zajętości dysku.',
+            simulatorScene: 'macos-17-step-1-classic',
+          },
+        ],
+      },
+      {
+        instruction:
+          'Kliknij kategorię „Pobrane / Dokumenty” pod wykresem dysku, aby wyświetlić listę największych, niepotrzebnych już plików instalacyjnych.',
+        hint: 'Najwięcej miejsca zwalnia usunięcie starych plików .dmg i dawno obejrzanych filmów wideo.',
+        hint2: 'Kliknij podświetloną pozycję „Przejrzyj duże pliki w Pobranych”.',
+        verify: { type: 'simulatorAction', action: 'macos-17-step-2' },
+        simulatorScene: 'macos-17-step-2',
+      },
+      {
+        instruction:
+          'Usuń zbędny stary instalator (1,8 GB), aby odzyskać wolną przestrzeń na dysku bez dotykania swoich prywatnych dokumentów.',
+        hint: 'Zawsze możesz bezpiecznie kasować stare pliki instalacyjne .dmg z teczki Pobrane.',
+        hint2: 'Kliknij podświetlony przycisk „Usuń stary instalator (1,8 GB)”.',
+        verify: { type: 'simulatorAction', action: 'macos-17-step-3' },
+        simulatorScene: 'macos-17-step-3',
+      },
+    ],
+  },
+  {
+    id: 'macos-18-zawieszony-program-wymus-koniec',
+    track: 'macos',
+    level: 2,
+    title: 'Kręcące się kolorowe kółeczko – co zrobić, gdy jeden program się zawiesi (Wymuś koniec)',
+    realLifeHook:
+      'Gdy kursor zamienia się w kręcącą się tęczową piłeczkę, program nie reaguje na kliknięcia, a Ty boisz się wyłączyć cały komputer z prądu.',
+    estimatedMinutes: 3,
+    prerequisites: ['macos-01-pulpit-dock'],
+    reward: 'Odznaka Zimnej Krwi',
+    synonyms: [
+      'zaciety program',
+      'zawiesil sie mac',
+      'krecace sie kolorowe koleczko',
+      'teczowa pileczka',
+      'program nie odpowiada',
+      'wymus koniec',
+      'jak wylaczyc zawieszony program',
+      'nie moge zamknac programu',
+      'zacial sie word',
+      'zacialo sie safari',
+    ],
+    theory: {
+      id: 'theory-macos-18-zawieszony-program-wymus-koniec',
+      category: 'Rozwiązywanie problemów',
+      title: 'Dlaczego nie trzeba wyłączać korków w całym mieszkaniu, gdy w kuchni zaciął się jeden toster',
+      metaphor: 'Okienko „Wymuś koniec” pozwala grzecznie wyprowadzić za drzwi tylko jeden zamyślony program, podczas gdy reszta Maca działa bez przerwy',
+      story:
+        'Czasem zdarza się, że któryś program dostaje czkawki – kursor myszy zamienia się nad nim w kręcący się kolorowy wiatraczek (nazywany pieszczotliwie tęczową piłeczką plażową) i żaden przycisk w tym oknie nie chce działać. Najgorsze, co można wtedy zrobić, to trzymać przycisk zasilania i gasić cały komputer na siłę! Nasz czarny kotek pokazuje znacznie mądrzejsze wyjście: w systemie macOS każdy program żyje w swoim osobnym pokoju. Jeśli jeden program się zaciął, wszystkie pozostałe (oraz sam system) są w pełni zdrowe! Klikasz po prostu nadgryzione jabłuszko  w lewym górnym rogu ekranu i wybierasz „Wymuś koniec…” (albo wciskasz skrót ⌥⌘Esc). Otworzy się małe, niezawodne okienko ratunkowe: zaznaczasz na liście ten jeden program, obok którego widnieje napis „(nie odpowiada)”, klikasz „Wymuś koniec” i po sekundzie zacięty program znika, a Ty spokojnie pracujesz dalej.',
+      realExplanation:
+        'Gdy pojedyncza aplikacja na Macu przestaje reagować (widoczna jest kręcąca się kolorowa ikona kursora), otwórz menu  w lewym górnym rogu ekranu i wybierz „Wymuś koniec…” (skrót klawiszowy: Option + Command + Esc). Na liście wskaż zawieszony program i kliknij „Wymuś koniec” – zamknie to wyłącznie tę jedną aplikację bez konieczności restartowania całego MacBooka.',
+      oneLiner:
+        'Gdy program się zawiesi, kliknij  → „Wymuś koniec…” (⌥⌘Esc) i zamknij tylko ten jeden program.',
+      commonMyth:
+        'Wiele osób przy zaciętym programie wyłącza MacBooka długim przytrzymaniem przycisku zasilania. A tymczasem takie twarde wyłączenie jest potrzebne niezwykle rzadko – w 99% sytuacji pomaga „Wymuś koniec”.',
+      illustrationId: 'force-quit-rescue',
+    },
+    steps: [
+      {
+        instruction:
+          'Kliknij ikonę jabłuszka  w lewym górnym rogu ekranu i wybierz z menu ratunkową opcję „Wymuś koniec…” (skrót ⌥⌘Esc).',
+        hint: 'Menu  działa nawet wtedy, gdy bieżący program się zaciął.',
+        hint2: 'Kliknij podświetloną pozycję „Wymuś koniec…” w menu Apple .',
+        verify: { type: 'simulatorAction', action: 'macos-18-step-1' },
+        simulatorScene: 'macos-18-step-1',
+      },
+      {
+        instruction:
+          'W oknie „Wymuś koniec aplikacji” kliknij program oznaczony czerwonym dopiskiem „(nie odpowiada)”.',
+        hint: 'Mac sam podpowiada, który program się zawiesił, dopisując przy nim „(nie odpowiada)”.',
+        hint2: 'Kliknij podświetlony wiersz zawieszonego programu na liście.',
+        verify: { type: 'simulatorAction', action: 'macos-18-step-2' },
+        simulatorScene: 'macos-18-step-2',
+      },
+      {
+        instruction:
+          'Kliknij niebieski przycisk „Wymuś koniec” w prawym dolnym rogu okienka, aby bezpiecznie zamknąć zawieszony program.',
+        hint: 'Pozostałe otwarte programy i dokumenty na Twoim Macu pozostaną całkowicie nienaruszone.',
+        hint2: 'Kliknij podświetlony przycisk „Wymuś koniec”.',
+        verify: { type: 'simulatorAction', action: 'macos-18-step-3' },
+        simulatorScene: 'macos-18-step-3',
+      },
+    ],
+  },
+  {
+    id: 'macos-19-polskie-znaki-klawiatura',
+    track: 'macos',
+    level: 1,
+    title: 'Polskie litery (ą, ć, ę, ł, ś, ź, ż) na MacBooku – gdzie jest prawy Alt i jak działa przytrzymanie klawisza',
+    realLifeHook:
+      'Gdy chcesz napisać „ą” albo „ś”, naciskasz klawisz obok spacji z przyzwyczajenia i nagle kasuje Ci się tekst albo wyskakuje dziwne okno.',
+    estimatedMinutes: 4,
+    prerequisites: ['macos-06-skroty-klawiszowe'],
+    reward: 'Odznaka Mistrzyni Polszczyzny',
+    synonyms: [
+      'polskie znaki na macu',
+      'jak zrobic a z ogonkiem',
+      'gdzie jest prawy alt',
+      'nie dzialaja polskie litery',
+      'jak napisac l krecha',
+      'jak napisac z z kropka',
+      'klawisz option',
+      'uklad klawiatury polski pro',
+      'zniknal mi tekst przy pisaniu a',
+      'ogonki na klawiaturze maca',
+    ],
+    theory: {
+      id: 'theory-macos-19-polskie-znaki-klawiatura',
+      category: 'Wyszukiwanie i skróty',
+      title: 'Bliźniacy obok spacji: Command (⌘) wydaje rozkazy, a Option (⌥) maluje polskie ogonki i kreseczki',
+      metaphor: 'Klawisz Option (⌥) stoi o jeden krok dalej od spacji niż w Windowsie – a przytrzymanie litery działa jak podręczna kawiarenka z ogonkami',
+      story:
+        'Dlaczego każda osoba przesiadająca się na MacBooka przez pierwszy tydzień zamiast napisać „ą” przypadkiem zaznacza cały tekst?! Odpowiedź leży na samym dole klawiatury, tuż po prawej stronie długiego klawisza spacji. W zwykłych komputerach zaraz obok spacji stoi klawisz Alt (od polskich znaków). Natomiast na MacBooku tuż przy spacji stoi klawisz Command (⌘ – od rozkazów systemowych, takich jak ⌘A „Zaznacz wszystko”!), a klawisz od polskich znaków – nazywany Option (⌥) albo Alt – stoi o jedno miejsce dalej w prawo! Kiedy więc chcesz napisać „ą, ć, ę, ł, ń, ó, ś, ź, ż”, kciuk prawej dłoni wędruje o jeden klawisz dalej od spacji, na prawy Option (⌥). Ale to nie koniec! Nasz czarny kotek zdradza drugi, uroczy sekret Maca: jeśli w ogóle nie chcesz szukać klawisza Option, przytrzymaj jednym palcem przez sekundę zwykłą literę „a”, „e”, „s” albo „z” – nad kursorem wyskoczy mały dymek z polską literką, dokładnie tak jak na ekranie iPhone’a!',
+      realExplanation:
+        'W standardowym układzie klawiatury macOS „Polski – Pro” polskie znaki diakrytyczne uzyskujemy, przytrzymując prawy (lub lewy) klawisz Option (⌥) wraz z odpowiednią literą (np. ⌥A = ą, ⌥S = ś, ⌥Z = ż, ⌥X = ź). Dodatkowo w macOS działa menu akcentów: dłuższe przytrzymanie klawisza litery wyświetla nad tekstem okienko wyboru polskiego znaku.',
+      oneLiner:
+        'Polskie znaki robisz klawiszem Option (⌥ – drugi klawisz od spacji) albo przytrzymując literę przez sekundę.',
+      commonMyth:
+        'Wiele osób myśli, że ma zepsutą klawiaturę, gdy wciśnięcie klawisza tuż przy spacji + A zaznacza cały tekst. A tymczasem tuż przy spacji leży Command (⌘), a klawisz polskich liter Option (⌥) jest tuż obok niego.',
+      illustrationId: 'polish-keyboard-option',
+    },
+    steps: [
+      {
+        instruction:
+          'Spójrz na dolny rząd klawiatury MacBooka i wskaż prawy klawisz „Option (⌥)” (drugi klawisz na prawo od długiej spacji).',
+        hint: 'Tuż przy spacji leży klawisz Command (⌘), a zaraz za nim w prawo leży klawisz Option (⌥) służący do pisania polskich liter.',
+        hint2: 'Kliknij podświetlony klawisz „Option (⌥)” na schemacie klawiatury MacBooka.',
+        verify: { type: 'simulatorAction', action: 'macos-19-step-1' },
+        simulatorScene: 'macos-19-step-1',
+      },
+      {
+        instruction:
+          'Wypróbuj drugi sposób: przytrzymaj klawisz litery „a” i wybierz „ą” z małego dymku akcentów, który wyskoczył nad tekstem.',
+        hint: 'Ten sposób działa na Macu identycznie jak na klawiaturze iPhone’a.',
+        hint2: 'Kliknij podświetloną literę „ą” w dymku nad tekstem.',
+        verify: { type: 'simulatorAction', action: 'macos-19-step-2' },
+        simulatorScene: 'macos-19-step-2',
+      },
+      {
+        instruction:
+          'Sprawdź na górnym pasku menu (lub w Ustawieniach Klawiatury), że wybrany układ klawiatury to „Polski – Pro”.',
+        hint: 'Układ „Polski – Pro” to oficjalny układ Apple, w którym wszystkie litery są na swoich miejscach.',
+        hint2: 'Kliknij podświetlone potwierdzenie układu „Polski – Pro”.',
+        verify: { type: 'simulatorAction', action: 'macos-19-step-3' },
+        simulatorScene: 'macos-19-step-3',
+      },
+    ],
+  },
+  {
+    id: 'macos-20-uspienie-zamykanie-bateria',
+    track: 'macos',
+    level: 1,
+    title: 'Zamykanie klapy czy Wyłączanie? Jak dbać o baterię i dlaczego MacBook budzi się w sekundę',
+    realLifeHook:
+      'Gdy zastanawiasz się, czy na noc trzeba wyłączać MacBooka z menu , czy można po prostu zamknąć klapę jak książkę i czy ładowarka może być podłączona podczas pracy.',
+    estimatedMinutes: 4,
+    prerequisites: ['macos-01-pulpit-dock'],
+    reward: 'Odznaka Opiekunki MacBooka',
+    synonyms: [
+      'czy wylaczac macbooka na noc',
+      'zamykanie klapy macbooka',
+      'uspienie maca',
+      'jak wylaczyc maca',
+      'jak dbac o baterie w macbooku',
+      'czy ladowarka moze byc podlaczona caly czas',
+      'zablokuj ekran',
+      'uruchom ponownie',
+      'bateria szybko spada',
+      'tryb uspienia',
+    ],
+    theory: {
+      id: 'theory-macos-20-uspienie-zamykanie-bateria',
+      category: 'Ustawienia i porządki',
+      title: 'Drzemka kota na kanapie: dlaczego zamknięcie klapy jest bezpieczne i kiedy warto zrobić pełny restart',
+      metaphor: 'Zamknięcie klapy to lekka drzemka, z której Mac budzi się w pół sekundy – a pełne „Uruchom ponownie” robimy raz na tydzień dla odświeżenia głowy',
+      story:
+        'Patrząc na naszego czarnego kotka drzemiącego na poduszce, od razu zrozumiesz, jak zaprojektowano nowoczesnego MacBooka. Dawniej komputery buczały wiatrakami i grzały się nawet wtedy, gdy nikt na nich nie pisał – dlatego po skończonej pracy trzeba je było całkowicie wyłączać. MacBook działa jak Twój iPhone albo jak kot: kiedy skończysz czytać i po prostu zamkniesz klapę ekranu, komputer w ułamku sekundy zasypia (wchodzi w tryb „Uśpienia”). W czasie snu jest całkowicie cichy, zimny i zużywa zaledwie kilka procent baterii przez całą noc. A rano, gdy tylko uniesiesz klapę i dotkniesz czytnika linii papilarnych (Touch ID), ekran rozbłyska w pół sekundy dokładnie na tym zdaniu, na którym skończyłaś wieczorem! Czy trzeba też bać się zostawienia podłączonej ładowarki przy biurku? Nie – Mac ma wbudowany inteligentny układ, który sam zatrzymuje ładowanie po napełnieniu baterii. A raz na tydzień lub dwa warto wybrać z menu  opcję „Uruchom ponownie…”, żeby przewietrzyć pamięć.',
+      realExplanation:
+        'Na co dzień po zakończeniu pracy na MacBooku możesz po prostu przymknąć pokrywę ekranu (tryb Uśpienia / Sleep). System macOS posiada funkcję „Zoptymalizowane ładowanie baterii” (w Ustawieniach systemowych → Bateria), która chroni ogniwa przed przeładowaniem, gdy komputer stoi podłączony do zasilacza. Całkowite wyłączenie („Wyłącz…”) przydaje się przy dłuższej podróży lub wielodniowej przerwie, natomiast „Uruchom ponownie…” warto wykonać raz na 1–2 tygodnie.',
+      oneLiner:
+        'Na co dzień po prostu zamykaj klapę MacBooka (Uśpienie), a raz na tydzień wybierz  → „Uruchom ponownie…”.',
+      commonMyth:
+        'Wiele osób boi się, że podłączona ładowarka „przeładuje” baterię MacBooka. A tymczasem Mac sam odcina dopływ prądu do pełnego akumulatora i zasila komputer bezpośrednio z gniazdka.',
+      illustrationId: 'sleep-battery-cat',
+    },
+    steps: [
+      {
+        instruction:
+          'Otwórz menu  w lewym górnym rogu ekranu i zobacz trzy opcje na dole: „Uśpij”, „Uruchom ponownie…” oraz „Zablokuj ekran (⌃⌘Q)”.',
+        hint: '„Zablokuj ekran” przydaje się, gdy odchodzisz od stolika w kawiarni lub w pracy.',
+        hint2: 'Kliknij podświetlone menu  na górnym pasku ekranu.',
+        verify: { type: 'simulatorAction', action: 'macos-20-step-1' },
+        simulatorScene: 'macos-20-step-1',
+      },
+      {
+        instruction:
+          'Otwórz sekcję „Bateria” w Ustawieniach systemowych i sprawdź stan kondycji baterii oraz „Zoptymalizowane ładowanie”.',
+        hint: 'Zoptymalizowane ładowanie uczy się Twojego rytmu dnia i dba o żywotność akumulatora.',
+        hint2: 'Kliknij podświetloną kartę „Bateria – Kondycja: W normie”.',
+        verify: { type: 'simulatorAction', action: 'macos-20-step-2' },
+        simulatorScene: 'macos-20-step-2',
+      },
+      {
+        instruction:
+          'Kliknij potwierdzenie zasady: na co dzień zamykam klapę (Uśpienie), a raz w tygodniu robię „Uruchom ponownie…”.',
+        hint: 'Dzięki temu MacBook od razu budzi się do działania w pół sekundy po otwarciu klapy.',
+        hint2: 'Kliknij podświetlony przycisk potwierdzenia w oknie.',
+        verify: { type: 'simulatorAction', action: 'macos-20-step-3' },
+        simulatorScene: 'macos-20-step-3',
+      },
+    ],
+  },
 ];
 
 export const MACOS_MISSIONS: Mission[] = RAW_MACOS_MISSIONS.map(polishMission);

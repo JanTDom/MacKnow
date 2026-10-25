@@ -159,4 +159,40 @@ describe('MacAdapter dla różnych wersji macOS (10.13, 10.15, 12, 15)', () => {
     expect(htmlContent.toLowerCase()).toContain('<!doctype html>');
     expect(htmlContent).toContain('MacKnow');
   });
+
+  it('wylicza zakreślenia na żywo (computeLiveHighlight) na prawdziwych oknach aplikacji macOS (Finder, Safari, Dock, Menu )', async () => {
+    const mockWindows = [
+      { owner: 'Finder', name: 'Dokumenty', x: 120, y: 90, width: 880, height: 520 },
+      { owner: 'Safari', name: 'Start', x: 160, y: 110, width: 960, height: 600 },
+    ];
+    const adapter = new MacAdapter({
+      exec: async (cmd, args) => {
+        if (cmd === 'osascript' && args[0] === '-l' && args[1] === 'JavaScript') {
+          return { stdout: JSON.stringify(mockWindows), stderr: '' };
+        }
+        return { stdout: '', stderr: '' };
+      },
+    });
+
+    const finderPathHighlight = await adapter.computeLiveHighlight(
+      'macos-11-step-3',
+      'Spójrz na pasek ścieżki na dole okna Findera.',
+      'Pasek ścieżki pokazuje drzewo katalogów.',
+      { width: 1440, height: 900 }
+    );
+    expect(finderPathHighlight.targetApp).toBe('Finder');
+    expect(finderPathHighlight.rect.x).toBe(130);
+    expect(finderPathHighlight.rect.y).toBe(90 + 520 - 38);
+    expect(finderPathHighlight.shortcutBadge).toContain('⌘3');
+
+    const appleMenuHighlight = await adapter.computeLiveHighlight(
+      'macos-18-step-1',
+      'Kliknij menu  w lewym górnym rogu.',
+      'Wybierz Wymuś koniec.',
+      { width: 1440, height: 900 }
+    );
+    expect(appleMenuHighlight.rect.x).toBe(8);
+    expect(appleMenuHighlight.rect.y).toBe(4);
+    expect(appleMenuHighlight.shortcutBadge).toContain('⌥⌘Esc');
+  });
 });

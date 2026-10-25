@@ -24,6 +24,19 @@ export interface ElectronMacKnowBridge {
   saveProgress(json: string): Promise<void>;
   checkPermissions(): Promise<{ accessibility: boolean; fullDiskAccess: boolean }>;
   openPrivacySettings(osVersion: string | null): Promise<void>;
+  startLiveCoach?(payload: {
+    scene: string;
+    instruction: string;
+    hint: string;
+    openTarget?: boolean;
+  }): Promise<{ active: boolean; openedTarget?: string }>;
+  updateLiveCoachStep?(payload: {
+    scene: string;
+    instruction: string;
+    hint: string;
+    openTarget?: boolean;
+  }): Promise<{ active: boolean }>;
+  stopLiveCoach?(): Promise<{ active: boolean }>;
 }
 
 declare global {

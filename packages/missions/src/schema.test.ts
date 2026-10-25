@@ -49,12 +49,12 @@ describe('Mission schema and Polish typography formatter', () => {
     expect(validatePolishText(formatted.steps[0].variants![0].instruction)).toEqual([]);
   });
 
-  it('posiada pełny zestaw 32 misji (10 macOS, 10 Programy, 6 iPhone, 6 AI) zgodnych ze schematem i polszczyzną', () => {
-    expect(ALL_MISSIONS).toHaveLength(32);
-    expect(ALL_MISSIONS.filter((m) => m.track === 'macos')).toHaveLength(10);
-    expect(ALL_MISSIONS.filter((m) => m.track === 'programy')).toHaveLength(10);
-    expect(ALL_MISSIONS.filter((m) => m.track === 'iphone')).toHaveLength(6);
-    expect(ALL_MISSIONS.filter((m) => m.track === 'ai')).toHaveLength(6);
+  it('posiada pełny zestaw 50 misji (20 macOS, 14 Programy, 8 iPhone, 8 AI) zgodnych ze schematem i polszczyzną', () => {
+    expect(ALL_MISSIONS).toHaveLength(50);
+    expect(ALL_MISSIONS.filter((m) => m.track === 'macos')).toHaveLength(20);
+    expect(ALL_MISSIONS.filter((m) => m.track === 'programy')).toHaveLength(14);
+    expect(ALL_MISSIONS.filter((m) => m.track === 'iphone')).toHaveLength(8);
+    expect(ALL_MISSIONS.filter((m) => m.track === 'ai')).toHaveLength(8);
 
     for (const m of ALL_MISSIONS) {
       expect(m.synonyms?.length || 0).toBeGreaterThanOrEqual(10);

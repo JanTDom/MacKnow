@@ -435,9 +435,154 @@ const RAW_IPHONE_MISSIONS: Mission[] = [
         instruction:
           'Spójrz na górne menu FaceTime → Ustawienia, gdzie w razie potrzeby możesz włączyć lub wyciszyć dzwonienie połączeń z iPhone’a na Macu.',
         hint: 'Dzięki temu sama decydujesz, czy Mac ma dzwonić razem z telefonem.',
-        hint2: 'Kliknij „Zrobione”, aby ukończyć całą ścieżkę iPhone + Mac!',
+        hint2: 'Kliknij „Zrobione”, aby ukończyć misję o FaceTime!',
         verify: { type: 'simulatorAction', action: 'iphone-06-step-3' },
         simulatorScene: 'iphone-06-step-3',
+      },
+    ],
+  },
+  {
+    id: 'iphone-07-chmura-icloud-pelna',
+    track: 'iphone',
+    level: 2,
+    title: 'Komunikat „Miejsce w iCloud jest pełne” – czym różni się chmura od pamięci telefonu i Maca',
+    realLifeHook:
+      'Gdy na iPhonie i MacBooku wyskakuje denerwujący komunikat „Brak miejsca w iCloud”, chociaż na dysku komputera masz jeszcze mnóstwo wolnej przestrzeni.',
+    estimatedMinutes: 6,
+    prerequisites: ['iphone-02-zdjecia-icloud'],
+    reward: 'Odznaka Strażniczki Chmury',
+    synonyms: [
+      'miejsce w icloud jest pelne',
+      'brak miejsca w icloud',
+      'pelna chmura icloud',
+      '5 gb icloud',
+      'roznica miedzy icloud a pamiecia',
+      'backup iphone nie powiodl sie',
+      'zarzadzaj miejscem w icloud',
+      'ile miejsca w chmurze',
+      'czyszczenie icloud',
+      'icloud+ 50 gb',
+    ],
+    theory: {
+      id: 'theory-iphone-07-chmura-icloud-pelna',
+      category: 'Chmura i pamięć (iPhone + Mac)',
+      title: 'Mała skrytka pocztowa na dachu kontra wielka szafa w Twoim salonie',
+      metaphor: 'Bezpłatna skrytka o pojemności 5 GB w chmurze a ogromny dysk 512 GB wewnątrz MacBooka',
+      story:
+        'To jedno z najbardziej mylących powiadomień na świecie. Kupujesz MacBooka z ogromnym dyskiem (na przykład 256 albo 512 gigabajtów), masz na nim mnóstwo wolnego miejsca, a tu nagle wyskakuje czerwony wykrzyknik: „Miejsce w iCloud jest pełne! Twój iPhone nie może wykonać kopii zapasowej”. Nasz czarny kotek Mruczek od razu spieszy z wyjaśnieniem: pamięć wewnątrz komputera i miejsce w chmurze iCloud to dwa zupełnie osobne światy! Dysk w MacBooku jest jak wielka, trzydrzwiowa szafa w Twoim mieszkaniu. Natomiast chmura iCloud to internetowa skrytka Apple, która łączy Twojego iPhone’a z MacBookiem. Na start Apple daje każdemu za darmo bardzo malutką skrytkę – tylko 5 GB (gigabajtów). Kiedy robisz zdjęcia i filmy na iPhonie, ta mała 5-gigabajtowa skrytka zapełnia się błyskawicznie, nawet jeśli w szafie Twojego MacBooka hula wiatr! Na szczęście na MacBooku w Ustawieniach systemowych → Twoje imię (Apple ID) → iCloud zobaczysz kolorowy pasek pokazujący dokładnie, co zapchało chmurę: stare kopie zapasowe sprzed lat czy filmy z wakacji.',
+      realExplanation:
+        'Każde konto Apple ID otrzymuje bezpłatnie 5 GB przestrzeni na serwerach iCloud, niezależnie od pojemności dysku twardego w MacBooku lub iPhonie. Gdy te 5 GB się zapełni, przestają synchronizować się nowe zdjęcia oraz kopie zapasowe telefonu. W Ustawieniach systemowych → Apple ID → iCloud → Zarządzaj można usunąć stare, niepotrzebne kopie zapasowe lub zdecydować, które aplikacje mają korzystać z chmury.',
+      oneLiner:
+        'Komunikat o pełnym iCloud dotyczy internetowej skrytki (zwykle 5 GB), a nie dysku twardego Twojego MacBooka.',
+      commonMyth:
+        'Wiele osób myśli, że skoro w chmurze iCloud skończyło się miejsce, to ich MacBook jest zepsuty lub zapchany. A tymczasem na dysku komputera może być w tym samym czasie kilkaset gigabajtów wolnej pamięci.',
+      illustrationId: 'icloud-vs-disk-closet',
+    },
+    steps: [
+      {
+        instruction:
+          'Otwórz na MacBooku Ustawienia systemowe (lub Preferencje systemowe) i kliknij na samej górze swoje imię i nazwisko (Apple ID), a następnie wybierz „iCloud”.',
+        hint: 'Twoje imię i nazwisko ze zdjęciem lub inicjałami znajduje się zawsze na szczycie Ustawień systemowych.',
+        hint2: 'Kliknij kartę iCloud w oknie poniżej.',
+        verify: { type: 'simulatorAction', action: 'iphone-07-step-1' },
+        simulatorScene: 'iphone-07-step-1',
+        variants: [
+          {
+            osRange: '<13',
+            instruction:
+              'Otwórz Preferencje systemowe, kliknij u góry ikonę „Apple ID”, a po lewej stronie wybierz „iCloud”.',
+            hint: 'Na dole okna zobaczysz kolorowy wykres wykorzystania pamięci iCloud.',
+            simulatorScene: 'iphone-07-step-1',
+          },
+          {
+            osRange: '>=13',
+            instruction:
+              'W Ustawieniach systemowych kliknij swoje imię i nazwisko na górze paska bocznego, a potem wybierz „iCloud”.',
+            hint: 'U góry okna iCloud zobaczysz kolorowy pasek zajętego miejsca w chmurze.',
+            simulatorScene: 'iphone-07-step-1',
+            verifyNeeded: true,
+          },
+        ],
+      },
+      {
+        instruction:
+          'Spójrz na kolorowy pasek miejsca w iCloud i kliknij przycisk „Zarządzaj…”, aby zobaczyć, które dane zajmują najwięcej miejsca w chmurze.',
+        hint: 'Najczęściej największą część zajmują Zdjęcia oraz Kopie zapasowe (Backupy) z iPhone’a.',
+        hint2: 'Kliknij przycisk „Zarządzaj…” w ćwiczeniu poniżej.',
+        verify: { type: 'simulatorAction', action: 'iphone-07-step-2' },
+        simulatorScene: 'iphone-07-step-2',
+      },
+      {
+        instruction:
+          'Sprawdź sekcję „Backup” (Kopie zapasowe) – często leży tam zapomniana kopia starego telefonu sprzed wymiany, którą można bezpiecznie usunąć.',
+        hint: 'Teraz już zawsze odróżnisz internetową skrytkę iCloud od dysku wewnątrz swojego MacBooka.',
+        hint2: 'Kliknij przycisk w ćwiczeniu poniżej, aby ukończyć misję.',
+        verify: { type: 'simulatorAction', action: 'iphone-07-step-3' },
+        simulatorScene: 'iphone-07-step-3',
+      },
+    ],
+  },
+  {
+    id: 'iphone-08-znajdz-moj-iphone-z-maca',
+    track: 'iphone',
+    level: 1,
+    title: 'Gdzie położyłam telefon? Jak zadzwonić na wyciszonego iPhone’a prosto z MacBooka',
+    realLifeHook:
+      'Gdy za pięć minut wychodzisz z domu, iPhone zapadł się pod ziemię między poduszkami kanapy, a na dodatek ma przełączony boczny pstryczek na tryb cichy.',
+    estimatedMinutes: 4,
+    prerequisites: ['iphone-01-airdrop'],
+    reward: 'Odznaka Domowego Detektywa',
+    synonyms: [
+      'gdzie jest moj telefon',
+      'zgubilam iphone w domu',
+      'znajdz moj iphone',
+      'aplikacja znajdz na macu',
+      'jak zadzwonic na wyciszony telefon',
+      'odtworz dzwiek na iphone',
+      'szukanie telefonu z komputera',
+      'lokalizacja iphone na mapie',
+      'find my mac',
+      'zgubione sluchawki airpods',
+    ],
+    theory: {
+      id: 'theory-iphone-08-znajdz-moj-iphone-z-maca',
+      category: 'iPhone i Mac (Ratunek na co dzień)',
+      title: 'Detektyw w MacBooku, który potrafi rozdzwonić nawet całkowicie wyciszony telefon',
+      metaphor: 'Pilot z przyciskiem „Odezwij się!”, który przebija się przez tryb cichy w telefonie',
+      story:
+        'Każda z nas zna tę chwilę: stoisz w płaszczu w przedpokoju, ręka wędruje do torebki… i pustka. Telefon został gdzieś w mieszkaniu. Gdyby miał włączony dźwięk, można byłoby zadzwonić z telefonu domownika. Ale oczywiście iPhone – jak na złość – jest wyciszony! Nasz czarny kotek Mruczek ma na to genialny sposób prosto z Twojego MacBooka. Na komputerze jest wbudowana aplikacja o nazwie „Znajdź” (zielona tarcza radaru). Kiedy ją otworzysz i wybierzesz na liście swojego iPhone’a, zobaczysz przycisk „Odtwórz dźwięk”. I teraz najlepsze: ten specjalny sygnał ratunkowy ignoruje wyciszenie telefonu! Nawet jeśli Twój iPhone jest całkowicie ściszony i schowany pod stertą swetrów albo na dnie koszyka z zakupami, zacznie głośno i wyraźnie pikać, dopóki nie weźmiesz go do ręki.',
+      realExplanation:
+        'Aplikacja „Znajdź” (Find My) w systemie macOS pokazuje na mapie wszystkie urządzenia przypisane do Twojego konta Apple ID (iPhone’a, MacBooka, iPada, słuchawki AirPods). Funkcja „Odtwórz dźwięk” wysyła do wybranego urządzenia sygnał alarmowy o pełnej głośności, który działa nawet przy włączonym trybie cichym oraz trybie Nie przeszkadzać.',
+      oneLiner:
+        'Aplikacja „Znajdź” na MacBooku potrafi głośno zadzwonić na Twojego iPhone’a, nawet gdy telefon jest wyciszony.',
+      commonMyth:
+        'Wiele osób myśli, że wyciszonego telefonu nie da się usłyszeć w mieszkaniu i trzeba przeszukiwać pokój po pokoju. A tymczasem przycisk „Odtwórz dźwięk” w aplikacji Znajdź omija blokadę wyciszenia.',
+      illustrationId: 'find-my-iphone-radar',
+    },
+    steps: [
+      {
+        instruction:
+          'Otwórz na MacBooku aplikację „Znajdź” (przez lupkę Spotlight ⌘Spacja lub z folderu Aplikacje) i przejdź do zakładki „Urządzenia” po lewej stronie.',
+        hint: 'Ikona aplikacji „Znajdź” wygląda jak zielony ekran radaru z niebieskim punktem w środku.',
+        hint2: 'Kliknij zakładkę „Urządzenia” w ćwiczeniu poniżej.',
+        verify: { type: 'simulatorAction', action: 'iphone-08-step-1' },
+        simulatorScene: 'iphone-08-step-1',
+      },
+      {
+        instruction:
+          'Kliknij na liście nazwę swojego telefonu („iPhone – Małgorzata”), aby zobaczyć jego położenie na mapie i dymek z symbolem „i”.',
+        hint: 'Obok telefonu zobaczysz też stan naładowania jego baterii.',
+        hint2: 'Kliknij swojego iPhone’a na liście poniżej.',
+        verify: { type: 'simulatorAction', action: 'iphone-08-step-2' },
+        simulatorScene: 'iphone-08-step-2',
+      },
+      {
+        instruction:
+          'Kliknij przycisk „Odtwórz dźwięk”, aby Twój iPhone natychmiast odezwał się głośnym sygnałem – nawet jeśli był wyciszony!',
+        hint: 'Gdy tylko weźmiesz telefon do ręki i naciśniesz dowolny przycisk na jego obudowie, dźwięk od razu ucichnie.',
+        hint2: 'Kliknij „Odtwórz dźwięk” poniżej, aby ukończyć całą ścieżkę iPhone + Mac!',
+        verify: { type: 'simulatorAction', action: 'iphone-08-step-3' },
+        simulatorScene: 'iphone-08-step-3',
       },
     ],
   },

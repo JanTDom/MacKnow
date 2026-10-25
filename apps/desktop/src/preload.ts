@@ -7,6 +7,13 @@ export interface FileEventPayload {
   timestamp: number;
 }
 
+export interface LiveCoachPayload {
+  scene: string;
+  instruction: string;
+  hint: string;
+  openTarget?: boolean;
+}
+
 contextBridge.exposeInMainWorld('macknowDesktop', {
   isElectron: true,
   frontmostApp: (): Promise<string | null> => ipcRenderer.invoke('macknow:frontmostApp'),
@@ -33,4 +40,11 @@ contextBridge.exposeInMainWorld('macknowDesktop', {
     ipcRenderer.invoke('macknow:checkPermissions'),
   openPrivacySettings: (osVersion: string | null): Promise<void> =>
     ipcRenderer.invoke('macknow:openPrivacySettings', osVersion),
+  startLiveCoach: (
+    payload: LiveCoachPayload
+  ): Promise<{ active: boolean; openedTarget?: string }> =>
+    ipcRenderer.invoke('macknow:startLiveCoach', payload),
+  updateLiveCoachStep: (payload: LiveCoachPayload): Promise<{ active: boolean }> =>
+    ipcRenderer.invoke('macknow:updateLiveCoachStep', payload),
+  stopLiveCoach: (): Promise<{ active: boolean }> => ipcRenderer.invoke('macknow:stopLiveCoach'),
 });

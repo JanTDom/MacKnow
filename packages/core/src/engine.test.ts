@@ -87,8 +87,8 @@ describe('Core mission engine & progress persistence', () => {
 
     const summaries = getTrackProgressSummaries(SAMPLE_MISSIONS, progress, '14.5');
     expect(summaries.macos.completed).toBe(1);
-    expect(summaries.macos.total).toBe(10);
-    expect(summaries.macos.percentage).toBe(10);
+    expect(summaries.macos.total).toBe(20);
+    expect(summaries.macos.percentage).toBe(5);
 
     const exported = exportProgressToJson(progress);
     const reimported = importProgressFromJson(exported);

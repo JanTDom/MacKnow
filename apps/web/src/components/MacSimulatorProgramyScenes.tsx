@@ -841,6 +841,10 @@ export function MacSimulatorProgramyAndExtraScenes({
                     pl('Po lewej stronie Docka pojawia się dodatkowa ikona Safari z małym symbolem telefonu.')}
                   {currentScene.indexOf('iphone-06') === 0 &&
                     pl('Kliknięcie prawym przyciskiem na Pulpicie pozwala wybrać „Importuj z iPhone’a → Skanuj dokumenty”.')}
+                  {currentScene.indexOf('iphone-07') === 0 &&
+                    pl('Bezpłatny iCloud ma 5 GB na serwerze (widać tu zajęte 4,9 GB przez kopie i zdjęcia), a dysk Maca ma setki gigabajtów.')}
+                  {currentScene.indexOf('iphone-08') === 0 &&
+                    pl('Aplikacja „Znajdź” na Macu wysyła głośny sygnał alarmowy na Twojego iPhone’a – nawet gdy telefon ma włączony tryb cichy!')}
                 </div>
               </div>
             </div>
@@ -852,7 +856,13 @@ export function MacSimulatorProgramyAndExtraScenes({
               className="mk-sim-highlight mt-3 w-full py-2.5 px-4 rounded-lg bg-blue-600 text-white font-bold flex items-center justify-center gap-2 shadow"
             >
               <Check className="w-4 h-4" />
-              <span>{pl('Wykonaj ten krok na ekranie Maca / iPhone’a')}</span>
+              <span>
+                {currentScene.indexOf('iphone-07') === 0
+                  ? pl('Sprawdź i zarządzaj miejscem w iCloud')
+                  : currentScene.indexOf('iphone-08') === 0
+                    ? pl('Odtwórz dźwięk na iPhonie w aplikacji Znajdź')
+                    : pl('Wykonaj ten krok na ekranie Maca / iPhone’a')}
+              </span>
             </button>
           </div>
         </div>
@@ -871,6 +881,8 @@ export function MacSimulatorProgramyAndExtraScenes({
                 {currentScene.indexOf('iphone-04') === 0 && pl('Schowek: Skopiowano z iPhone’a')}
                 {currentScene.indexOf('iphone-05') === 0 && pl('Safari: Otwarty artykuł')}
                 {currentScene.indexOf('iphone-06') === 0 && pl('Aparat: Skanowanie dokumentu A4')}
+                {currentScene.indexOf('iphone-07') === 0 && pl('iCloud: 4,9 GB z 5 GB (Kopie i Zdjęcia)')}
+                {currentScene.indexOf('iphone-08') === 0 && pl('Sygnał „Znajdź mój iPhone” dzwoni!')}
               </div>
             </div>
             <div className="w-20 h-1 bg-white/50 rounded-full mx-auto mt-2" />
@@ -880,7 +892,7 @@ export function MacSimulatorProgramyAndExtraScenes({
     );
   }
 
-  // ==================== 7. SZTUCZNA INTELIGENCJA & DYKTOWANIE (ai-01 .. ai-06) ====================
+  // ==================== 7. SZTUCZNA INTELIGENCJA & DYKTOWANIE (ai-01 .. ai-08) ====================
   if (currentScene.indexOf('ai-') === 0) {
     const isDictation = currentScene.indexOf('ai-01-') === 0;
     const isSafety = currentScene.indexOf('ai-06-') === 0;
@@ -891,7 +903,7 @@ export function MacSimulatorProgramyAndExtraScenes({
             <TrafficLights />
             <span className="font-semibold text-slate-700 ml-1">
               {isDictation
-                ? pl('Notatki + Dyktowanie głosowe macOS (Klawisz F5 🎙️)')
+                ? pl('Notatki + Dyktowanie głosowe macOS (Klawisz F5 – Mikrofon)')
                 : pl('Safari — Asystent AI (ChatGPT / Claude po polsku)')}
             </span>
           </div>
@@ -906,10 +918,10 @@ export function MacSimulatorProgramyAndExtraScenes({
               {/* Górny rząd klawiszy MacBooka z klawiszem F5 (Mikrofon) */}
               <div className="p-2.5 rounded-xl bg-slate-800 text-white flex items-center justify-center gap-2 shadow-inner">
                 <span className="px-2.5 py-1 rounded bg-slate-700 text-[10px]">esc</span>
-                <span className="px-2.5 py-1 rounded bg-slate-700 text-[10px]">F1 🔅</span>
-                <span className="px-2.5 py-1 rounded bg-slate-700 text-[10px]">F2 🔆</span>
-                <span className="px-2.5 py-1 rounded bg-slate-700 text-[10px]">F3  Mission Control</span>
-                <span className="px-2.5 py-1 rounded bg-slate-700 text-[10px]">F4 🔍</span>
+                <span className="px-2.5 py-1 rounded bg-slate-700 text-[10px]">F1</span>
+                <span className="px-2.5 py-1 rounded bg-slate-700 text-[10px]">F2</span>
+                <span className="px-2.5 py-1 rounded bg-slate-700 text-[10px]">F3 Mission Control</span>
+                <span className="px-2.5 py-1 rounded bg-slate-700 text-[10px]">F4</span>
                 <span className="px-3 py-1 rounded bg-amber-400 text-slate-950 font-bold flex items-center gap-1">
                   <Mic className="w-3.5 h-3.5" /> F5 Dyktowanie
                 </span>
@@ -941,6 +953,10 @@ export function MacSimulatorProgramyAndExtraScenes({
                     pl('„Sprawdź poniższy tekst pod kątem literówek i przecinków, ale zachowaj mój własny styl.”')}
                   {isSafety &&
                     pl('Zasada bezpieczeństwa: Zanim wkleisz umowę do AI, zastąp swój PESEL i numer dowodu słowem [DANE UKRYTE].')}
+                  {currentScene.indexOf('ai-07') === 0 &&
+                    pl('„Mam MacBooka. Wklejam zrzut okienka z błędem: wyjaśnij mi prostym językiem, co to oznacza i co mam kliknąć.”')}
+                  {currentScene.indexOf('ai-08') === 0 &&
+                    pl('„Ułóż listę rzeczy do zabrania na 4-dniowy wyjazd jesienią nad morze z podziałem na kategorie do wklejenia w Notatki.”')}
                 </div>
               </div>
 
@@ -953,7 +969,7 @@ export function MacSimulatorProgramyAndExtraScenes({
                 <div className="text-slate-700">
                   {isSafety
                     ? pl('Chronisz swoje dane: AI widzi treść pisma, ale nie zna Twojego numeru PESEL ani hasła do banku.')
-                    : pl('Odpowiedź gotowa w 2 sekundy — możesz ją od razu skopiować jednym kliknięciem do swojego dokumentu lub maila.')}
+                    : pl('Odpowiedź gotowa w 2 sekundy — możesz ją od razu skopiować jednym kliknięciem do swojego dokumentu lub Notatek.')}
                 </div>
               </div>
             </div>
@@ -967,6 +983,291 @@ export function MacSimulatorProgramyAndExtraScenes({
           >
             {isDictation ? <Mic className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
             <span>{pl('Wykonaj podświetloną czynność w oknie na Macu')}</span>
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // ==================== 8. NOWE MISJE GŁĘBOKIEGO ZROZUMIENIA MACOS (macos-11 .. macos-20) ORAZ PROGRAMY (programy-11 .. programy-14) ====================
+  if (
+    currentScene.indexOf('macos-1') === 0 ||
+    currentScene.indexOf('macos-2') === 0 ||
+    currentScene.indexOf('programy-1') === 0
+  ) {
+    return (
+      <div className="w-full max-w-3xl rounded-xl overflow-hidden shadow-2xl border border-black/25 bg-white text-slate-800 text-xs">
+        <div className="h-10 px-3.5 bg-gradient-to-b from-[#F8FAFC] to-[#E2E8F0] border-b border-slate-300 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <TrafficLights />
+            <span className="font-bold text-slate-800 ml-1">
+              {currentScene.indexOf('macos-11') === 0 &&
+                pl('Finder — Drzewo katalogów (Widok kolumn ⌘3 i Pasek ścieżki)')}
+              {currentScene.indexOf('macos-12') === 0 &&
+                pl('Finder — Rozszerzenia plików (.pdf, .docx, .jpg, .zip)')}
+              {currentScene.indexOf('macos-13') === 0 &&
+                pl('Finder — Cztery widoki i sortowanie po Dacie modyfikacji')}
+              {currentScene.indexOf('macos-14') === 0 &&
+                pl('Ustawienia systemowe — Gładzik (Kliknięcie dwoma palcami)')}
+              {currentScene.indexOf('macos-15') === 0 &&
+                pl('Instalator .dmg — Przeciągnij program do teczki Aplikacje i Wysuń ⏏')}
+              {currentScene.indexOf('macos-16') === 0 &&
+                pl('Finder — Pendrive w sekcji Miejsca i bezpieczne wysuwanie (⏏)')}
+              {currentScene.indexOf('macos-17') === 0 &&
+                pl('Pamięć masowa MacBooka — Co zajmuje miejsce na dysku')}
+              {currentScene.indexOf('macos-18') === 0 &&
+                pl('Menu  → Wymuś koniec aplikacji (⌥⌘Esc)')}
+              {currentScene.indexOf('macos-19') === 0 &&
+                pl('Klawiatura MacBooka — Polskie znaki (Prawy Option ⌥ oraz przytrzymanie litery)')}
+              {currentScene.indexOf('macos-20') === 0 &&
+                pl('Menu  i Bateria — Uśpienie po zamknięciu klapy i Zoptymalizowane ładowanie')}
+              {currentScene.indexOf('programy-11') === 0 &&
+                pl('Finder — iCloud Drive vs Dysk Maca (Chmurka ze strzałką ⬇)')}
+              {currentScene.indexOf('programy-12') === 0 &&
+                pl('Okno drukowania macOS (⌘P) — Wybór stron Od 1 do 1 oraz zapis PDF')}
+              {currentScene.indexOf('programy-13') === 0 &&
+                pl('Safari — Powiększanie tekstu (⌘+) oraz czysty Tryb Czytnika')}
+              {currentScene.indexOf('programy-14') === 0 &&
+                pl('Safari — Lista pobranych plików (Kółeczko ze strzałką w prawym górnym rogu)')}
+            </span>
+          </div>
+          <span className="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 font-bold text-[10px]">
+            {pl('Ćwiczenie z Mruczkiem')}
+          </span>
+        </div>
+
+        <div className="p-4 bg-[#F8FAFC] min-h-[225px] flex flex-col justify-between gap-3">
+          {/* Widok drzewa katalogów i kolumn Findera (macos-11, macos-12, macos-13, macos-16, programy-11) */}
+          {(currentScene.indexOf('macos-11') === 0 ||
+            currentScene.indexOf('macos-12') === 0 ||
+            currentScene.indexOf('macos-13') === 0 ||
+            currentScene.indexOf('macos-16') === 0 ||
+            currentScene.indexOf('programy-11') === 0) && (
+            <div className="grid grid-cols-12 border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm">
+              <div className="col-span-4 bg-slate-100 border-r border-slate-200 p-2.5 space-y-1.5">
+                <div className="text-[10px] font-bold uppercase text-slate-400">{pl('Ulubione i Chmura')}</div>
+                <div className="px-2 py-1 rounded bg-blue-600/10 text-blue-800 font-bold flex items-center gap-1.5">
+                  <MacFolderIcon className="w-4 h-3.5" />
+                  <span>{pl('Dokumenty')}</span>
+                </div>
+                <div className="px-2 py-1 rounded text-slate-700 flex items-center justify-between">
+                  <span>iCloud Drive</span>
+                  <span className="text-[10px] text-sky-600">⬇</span>
+                </div>
+                <div className="pt-1 text-[10px] font-bold uppercase text-slate-400">{pl('Miejsca (USB)')}</div>
+                <div className="px-2 py-1 rounded bg-amber-50 border border-amber-200 text-slate-800 font-semibold flex items-center justify-between">
+                  <span>PENDRIVE</span>
+                  <span className="font-bold text-mk-primary">⏏</span>
+                </div>
+              </div>
+              <div className="col-span-4 border-r border-slate-200 p-2.5 space-y-1.5">
+                <div className="text-[10px] font-bold uppercase text-slate-400">{pl('Teczki (Foldery)')}</div>
+                <div className="px-2 py-1.5 rounded bg-blue-600 text-white font-bold flex items-center justify-between">
+                  <span className="flex items-center gap-1.5">
+                    <MacFolderIcon className="w-4 h-3.5" />
+                    <span>{pl('Rachunki 2026')}</span>
+                  </span>
+                  <span>▸</span>
+                </div>
+                <div className="px-2 py-1.5 rounded hover:bg-slate-50 text-slate-700 flex items-center justify-between">
+                  <span className="flex items-center gap-1.5">
+                    <MacFolderIcon className="w-4 h-3.5" />
+                    <span>{pl('Zdjęcia z urodzin')}</span>
+                  </span>
+                  <span>▸</span>
+                </div>
+              </div>
+              <div className="col-span-4 p-2.5 space-y-1.5 bg-slate-50/60">
+                <div className="text-[10px] font-bold uppercase text-slate-400">{pl('Pliki w teczce')}</div>
+                <div className="p-2 rounded bg-white border border-slate-200 flex items-center gap-2">
+                  <MacPdfFileIcon className="w-5 h-6 shrink-0" badge="PDF" />
+                  <div className="truncate">
+                    <div className="font-bold text-slate-900 truncate">Polisa-mieszkania.pdf</div>
+                    <div className="text-[10px] text-emerald-700">{pl('Dzisiaj, 12:30 • Na dysku Maca')}</div>
+                  </div>
+                </div>
+                <div className="p-2 rounded bg-white border border-slate-200 flex items-center gap-2">
+                  <MacPdfFileIcon className="w-5 h-6 shrink-0" badge="ZIP" />
+                  <div className="truncate">
+                    <div className="font-semibold text-slate-800 truncate">Zdjecia-z-urodzin.zip</div>
+                    <div className="text-[10px] text-slate-500">{pl('Walizka .zip (dwuklik rozpakowuje)')}</div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-span-12 px-3 py-1.5 bg-slate-100 border-t border-slate-200 text-[11px] font-medium text-slate-600 flex items-center justify-between">
+                <span>Macintosh HD ▸ Użytkownicy ▸ malgorzata ▸ Dokumenty ▸ Rachunki 2026</span>
+                <span className="text-emerald-700 font-bold">{pl('Wolne: 384 GB z 512 GB')}</span>
+              </div>
+            </div>
+          )}
+
+          {/* Widok gładzika, instalatora .dmg, pamięci dysku, Wymuś koniec, polskich znaków i baterii (macos-14, 15, 17, 18, 19, 20) */}
+          {(currentScene.indexOf('macos-14') === 0 ||
+            currentScene.indexOf('macos-15') === 0 ||
+            currentScene.indexOf('macos-17') === 0 ||
+            currentScene.indexOf('macos-18') === 0 ||
+            currentScene.indexOf('macos-19') === 0 ||
+            currentScene.indexOf('macos-20') === 0) && (
+            <div className="p-3.5 rounded-xl bg-white border border-slate-200 shadow-sm space-y-2.5">
+              {currentScene.indexOf('macos-14') === 0 && (
+                <div className="flex items-center justify-between gap-4">
+                  <div className="space-y-1">
+                    <div className="font-bold text-sm text-slate-900">
+                      {pl('Gładzik (Trackpad) — Kliknięcie pomocnicze dwoma palcami')}
+                    </div>
+                    <p className="text-slate-600">
+                      {pl('Jeden palec na płytce = lewy przycisk myszy. Stuknięcie dwoma palcami naraz = prawy przycisk myszy (menu pomocnicze).')}
+                    </p>
+                  </div>
+                  <div className="px-4 py-2 rounded-xl bg-emerald-100 text-emerald-900 font-bold shrink-0">
+                    {pl('Włączone ✓')}
+                  </div>
+                </div>
+              )}
+
+              {currentScene.indexOf('macos-15') === 0 && (
+                <div className="flex items-center justify-around py-2 bg-slate-50 rounded-xl border border-slate-200">
+                  <div className="text-center">
+                    <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white font-bold flex items-center justify-center mx-auto shadow">
+                      App
+                    </div>
+                    <div className="font-bold mt-1">{pl('Nowy Program.app')}</div>
+                  </div>
+                  <div className="text-lg font-bold text-mk-primary">➔ {pl('Przeciągnij do szafy')} ➔</div>
+                  <div className="text-center">
+                    <MacFolderIcon className="w-12 h-10 mx-auto" />
+                    <div className="font-bold mt-1">{pl('Teczka Aplikacje')}</div>
+                  </div>
+                </div>
+              )}
+
+              {currentScene.indexOf('macos-17') === 0 && (
+                <div className="space-y-2">
+                  <div className="flex justify-between font-bold text-slate-800">
+                    <span>Macintosh HD (Dysk wewnętrzny)</span>
+                    <span className="text-emerald-700">{pl('Wolne 142 GB z 256 GB')}</span>
+                  </div>
+                  <div className="w-full h-4 rounded-full bg-slate-200 overflow-hidden flex">
+                    <div className="w-1/4 bg-rose-500" title="Aplikacje" />
+                    <div className="w-1/6 bg-amber-400" title="Pobrane i duże instalatory" />
+                    <div className="w-1/6 bg-sky-500" title="Zdjęcia" />
+                  </div>
+                  <div className="text-[11px] text-slate-600">
+                    {pl('Najwięcej zbędnego miejsca zajmują stare instalatory .dmg w teczce Pobrane oraz nieopróżniony Kosz.')}
+                  </div>
+                </div>
+              )}
+
+              {currentScene.indexOf('macos-18') === 0 && (
+                <div className="space-y-1.5">
+                  <div className="font-bold text-slate-900">
+                    {pl('Wymuś koniec aplikacji (⌥⌘Esc) — Zamknij tylko ten jeden zawieszony program:')}
+                  </div>
+                  <div className="p-2 rounded bg-rose-50 border border-rose-200 flex items-center justify-between font-bold text-rose-900">
+                    <span>Microsoft Word — (nie odpowiada)</span>
+                    <span className="px-2.5 py-0.5 rounded bg-rose-600 text-white text-[11px]">
+                      {pl('Wymuś koniec')}
+                    </span>
+                  </div>
+                  <div className="p-1.5 text-slate-600">Finder • Safari • Mail — {pl('działają normalnie')}</div>
+                </div>
+              )}
+
+              {currentScene.indexOf('macos-19') === 0 && (
+                <div className="space-y-2">
+                  <div className="font-bold text-slate-900">
+                    {pl('Dolny rząd klawiatury MacBooka (Układ: Polski – Pro):')}
+                  </div>
+                  <div className="flex items-center justify-center gap-2 py-2 bg-slate-900 text-white rounded-xl font-mono">
+                    <span className="px-3 py-1.5 rounded bg-slate-700">⌘ Command</span>
+                    <span className="px-10 py-1.5 rounded bg-slate-700">{pl('Spacja')}</span>
+                    <span className="px-3 py-1.5 rounded bg-slate-700">⌘ Command</span>
+                    <span className="px-3.5 py-1.5 rounded bg-amber-400 text-slate-950 font-bold ring-2 ring-white">
+                      ⌥ Option (Prawy Alt → ą, ć, ę, ł, ś, ź, ż)
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {currentScene.indexOf('macos-20') === 0 && (
+                <div className="flex items-center justify-between gap-4">
+                  <div className="space-y-1">
+                    <div className="font-bold text-sm text-slate-900">
+                      {pl('Drzemka MacBooka (Uśpienie) i Zoptymalizowane ładowanie baterii')}
+                    </div>
+                    <p className="text-slate-600">
+                      {pl('Na co dzień po skończonej pracy po prostu przymknij klapę ekranu – Mac obudzi się w pół sekundy. Raz na tydzień wybierz  → Uruchom ponownie.')}
+                    </p>
+                  </div>
+                  <span className="px-3 py-1.5 rounded-lg bg-emerald-100 text-emerald-900 font-bold shrink-0">
+                    98% {pl('W normie')}
+                  </span>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Widok drukowania ⌘P, powiększania ⌘+ / Czytnika i Pobrań w Safari (programy-12, 13, 14) */}
+          {(currentScene.indexOf('programy-12') === 0 ||
+            currentScene.indexOf('programy-13') === 0 ||
+            currentScene.indexOf('programy-14') === 0) && (
+            <div className="p-3.5 rounded-xl bg-white border border-slate-200 shadow-sm space-y-2">
+              {currentScene.indexOf('programy-12') === 0 && (
+                <div className="flex items-center justify-between gap-4">
+                  <div className="space-y-1">
+                    <div className="font-bold text-slate-900">
+                      {pl('Okno drukowania (⌘P) — Podgląd wydruku')}
+                    </div>
+                    <div className="text-slate-600">
+                      {pl('Zakres stron: wybrano „Od: 1 do: 1” (pominięto 7 stron reklam i regulaminu). Na dole dostępny również przycisk „PDF → Zachowaj jako PDF”.')}
+                    </div>
+                  </div>
+                  <span className="px-3 py-1.5 rounded bg-blue-50 border border-blue-200 text-blue-900 font-bold shrink-0">
+                    {pl('Strony: 1 z 1')}
+                  </span>
+                </div>
+              )}
+
+              {currentScene.indexOf('programy-13') === 0 && (
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between border-b border-slate-200 pb-1.5">
+                    <span className="px-2.5 py-0.5 rounded bg-amber-100 text-amber-900 font-bold">
+                      {pl('Tryb Czytnika aktywny (0 reklam)')}
+                    </span>
+                    <span className="font-bold text-blue-700">{pl('Rozmiar tekstu: 135% (⌘+)')}</span>
+                  </div>
+                  <p className="text-sm font-medium text-slate-900 leading-relaxed">
+                    {pl('Duże, wyraźne litery na spokojnym kremowym tle – bez ani jednego migającego baneru reklamowego.')}
+                  </p>
+                </div>
+              )}
+
+              {currentScene.indexOf('programy-14') === 0 && (
+                <div className="flex items-center justify-between gap-4">
+                  <div className="space-y-1">
+                    <div className="font-bold text-slate-900">
+                      {pl('Prawy górny róg okna Safari — Kółeczko pobrań (⬇)')}
+                    </div>
+                    <div className="text-slate-600">
+                      {pl('Potwierdzenie-przelewu.pdf (Pobrano przed chwilą do teczki Pobrane — kliknij lupkę, aby pokazać w Finderze).')}
+                    </div>
+                  </div>
+                  <span className="px-3 py-1.5 rounded bg-emerald-100 text-emerald-900 font-bold shrink-0">
+                    ⬇ Potwierdzenie.pdf
+                  </span>
+                </div>
+              )}
+            </div>
+          )}
+
+          <button
+            type="button"
+            onClick={onComplete}
+            data-testid="simulator-target"
+            className="mk-sim-highlight w-full py-2.5 px-4 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center gap-2 shadow-md"
+          >
+            <Check className="w-4 h-4" />
+            <span>{pl('Wykonaj podświetlony krok w oknie na Macu')}</span>
           </button>
         </div>
       </div>

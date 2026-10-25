@@ -660,6 +660,262 @@ const RAW_PROGRAMY_MISSIONS: Mission[] = [
       },
     ],
   },
+  {
+    id: 'programy-11-chmura-vs-dysk',
+    track: 'programy',
+    level: 1,
+    title: 'Czym jest chmura (iCloud Drive, Google Drive, OneDrive) i co oznacza mała chmurka ze strzałką obok pliku',
+    realLifeHook:
+      'Gdy nie jesteś pewna, czy Twój dokument leży naprawdę na Twoim Macu, czy gdzieś w internecie, i czy otworzysz go w pociągu bez Wi-Fi.',
+    estimatedMinutes: 5,
+    prerequisites: ['programy-05-word-pages-zapis'],
+    reward: 'Odznaka Pani Chmury i Ziemi',
+    synonyms: [
+      'co to jest chmura',
+      'icloud drive co to jest',
+      'chmurka ze strzalka obok pliku',
+      'google drive na macu',
+      'onedrive w wordzie',
+      'gdzie jest zapisany plik w chmurze',
+      'czy otworze plik bez internetu',
+      'pobierz teraz z icloud',
+      'plik w chmurze a na dysku',
+      'synchronizacja chmury',
+    ],
+    theory: {
+      id: 'theory-programy-11-chmura-vs-dysk',
+      category: 'Dokumenty i PDF',
+      title: 'Książka w Twojej torebce kontra książka w skrytce bankowej – cała prawda o chmurze',
+      metaphor: 'Plik na dysku Maca leży fizycznie w Twojej szufladzie; plik w chmurze ma zapasową kopię na serwerze, a chmurka ze strzałką (⬇) pobiera go na miejsce',
+      story:
+        'Słowo „chmura” brzmi tak ulotnie, jakby Twoje cenne dokumenty unosiły się nad dachem domu i przy pierwszym deszczu miały spaść sąsiadowi do ogródka! Nasz czarny kotek tłumaczy to bez żadnej magii: „chmura” (na przykład iCloud Drive od Apple, Google Drive albo OneDrive w Wordzie) to po prostu bardzo bezpieczna szafa pancerna w strzeżonym budynku firmy Apple lub Google, do której Twój MacBook ma prywatny kluczyk. Kiedy zapisujesz plik w teczce „iCloud Drive”, wydarza się coś bardzo praktycznego: plik leży u Ciebie na Macu, a jednocześnie przez internet leci jego bliźniacza kopia do tej szafy pancernej. Dzięki temu, nawet gdybyś zalała komputer herbatą, Twoje dokumenty są bezpieczne! Jest tylko jeden drobiazg, o którym trzeba pamiętać przed podróżą pociągiem bez internetu: jeśli obok nazwy pliku w Finderze widzisz małą ikonkę chmurki ze strzałką w dół, oznacza to, że Mac zostawił ten dawno nieużywany plik w szafie pancernej, żeby oszczędzić miejsce na dysku. Kliknij tę chmurkę przed wyjściem z domu, a plik w sekundę pobierze się na stałe do Twojego MacBooka!',
+      realExplanation:
+        'Pliki zapisane w lokalnych folderach Maca (lub pobrane z iCloud Drive) znajdują się fizycznie na dysku SSD komputera i działają bez dostępu do internetu. Ikona chmurki ze strzałką w dół obok pliku w iCloud Drive oznacza, że plik jest aktualnie przechowywany wyłącznie na serwerze – kliknięcie tej ikony (lub wybranie „Pobierz teraz” pod prawym przyciskiem myszy) ściąga pełny plik na dysk Maca.',
+      oneLiner:
+        'Chmura to bezpieczna kopia zapasowa w sieci; kliknij chmurkę ze strzałką obok pliku, aby mieć go też bez internetu.',
+      commonMyth:
+        'Wiele osób myśli, że każdy człowiek w internecie może zajrzeć do „chmury”. A tymczasem Twoja przestrzeń w chmurze jest zamknięta Twoim prywatnym hasłem i szyfrowana.',
+      illustrationId: 'cloud-vs-local-disk',
+    },
+    steps: [
+      {
+        instruction:
+          'W oknie Findera spójrz na lewy pasek boczny na sekcję „iCloud” i kliknij „iCloud Drive”.',
+        hint: 'iCloud Drive to Twoja osobista teczka zsynchronizowana między Makiem a iPhonem.',
+        hint2: 'Kliknij podświetloną pozycję „iCloud Drive” na pasku bocznym Findera.',
+        verify: { type: 'simulatorAction', action: 'programy-11-step-1' },
+        simulatorScene: 'programy-11-step-1',
+      },
+      {
+        instruction:
+          'Zauważ ikonkę małej chmurki ze strzałką w dół obok pliku „Polisa-mieszkania.pdf” i kliknij ją, aby pobrać dokument fizycznie na dysk swojego MacBooka.',
+        hint: 'Po kliknięciu chmurki ze strzałką plik zostanie zapisany bezpośrednio na dysku Maca i otworzysz go nawet bez internetu.',
+        hint2: 'Kliknij podświetloną chmurkę ze strzałką przy pliku „Polisa-mieszkania.pdf”.',
+        verify: { type: 'simulatorAction', action: 'programy-11-step-2' },
+        simulatorScene: 'programy-11-step-2',
+      },
+      {
+        instruction:
+          'Potwierdź, że zniknięcie chmurki obok nazwy pliku oznacza: dokument leży teraz bezpiecznie zarówno na dysku Maca, jak i w kopii chmurowej.',
+        hint: 'Teraz możesz otworzyć ten plik w każdej chwili, nawet w samolocie lub w pociągu.',
+        hint2: 'Kliknij podświetlony pobrany plik „Polisa-mieszkania.pdf”.',
+        verify: { type: 'simulatorAction', action: 'programy-11-step-3' },
+        simulatorScene: 'programy-11-step-3',
+      },
+    ],
+  },
+  {
+    id: 'programy-12-drukowanie-i-zapis-pdf',
+    track: 'programy',
+    level: 1,
+    title: 'Drukowanie bez niespodzianek – jak wydrukować tylko wybraną stronę (Od 1 do 1) zamiast dwunastu',
+    realLifeHook:
+      'Gdy chcesz wydrukować jedną stronę potwierdzenia lub biletu, a drukarka zaczyna wypluwać dziesięć stron regulaminów i stopki maila.',
+    estimatedMinutes: 4,
+    prerequisites: ['programy-06-word-do-pdf'],
+    reward: 'Odznaka Oszczędnego Druku',
+    synonyms: [
+      'jak wydrukowac na macu',
+      'drukowanie jednej strony',
+      'drukarka drukuje za duzo stron',
+      'skrot do drukowania',
+      'okno drukowania',
+      'zapisz strone jako pdf',
+      'jak wydrukowac maila',
+      'wybor stron do druku',
+      'czarno bialy druk na macu',
+      'nie widac drukarki',
+    ],
+    theory: {
+      id: 'theory-programy-12-drukowanie-i-zapis-pdf',
+      category: 'Dokumenty i PDF',
+      title: 'Okienko kontrolne przed drukarką: zawsze spójrz na podgląd kartek i wybierz tylko tę stronę, której potrzebujesz',
+      metaphor: 'Bramka kontrolna (⌘P), w której odznaczasz zbędne kartki z regulaminem, zanim drukarka ruszy do pracy',
+      story:
+        'Banki i linie lotnicze mają dziwny zwyczaj: na pierwszej stronie umieszczają Twój bilet albo potwierdzenie przelewu, a na kolejnych siedmiu stronach doklejają reklamy ubezpieczeń i regulaminy drobnym drukiem. Kiedy od razu klikasz „Drukuj”, drukarka posłusznie zużywa papier i tusz na wszystkie osiem kartek! Nasz czarny kotek ma na to żelazną zasadę: po naciśnięciu skrótu drukowania ⌘P (Command + P) zawsze najpierw spoglądamy na podgląd kartek w oknie drukowania. Zamiast „Wszystkie strony”, przestawiamy zakres na „Od: 1 do: 1” (albo klikamy tylko pierwszą kartkę na podglądzie). A co zrobić, jeśli akurat nie masz podłączonej drukarki, a chcesz zachować potwierdzenie ze strony banku na dysku? Na samym dole okna drukowania (⌘P) czeka przycisk „PDF → Zachowaj jako PDF” – czyli wirtualna drukarka, która zamiast na papierze „wydrukuje” czystą kartkę prosto do pliku PDF na Twoim Biurku!',
+      realExplanation:
+        'W każdym programie na Macu okno drukowania wywołasz skrótem ⌘P (lub Plik → Drukuj…). W polu „Strony” możesz wybrać zakres (np. od 1 do 1), włączyć druk czarno-biały, a klikając przycisk „PDF” na dole okna – zapisać dowolny widok (nawet stronę internetową czy wiadomość e-mail) jako plik PDF na dysku.',
+      oneLiner:
+        'Wciśnij ⌘P, ustaw zakres stron „Od 1 do 1” (lub kliknij na dole „PDF”, aby zapisać kartkę bez drukarki).',
+      commonMyth:
+        'Wiele osób myśli, że trzeba wydrukować stronę na papierze i zeskanować ją z powrotem, żeby mieć ją w pliku. A tymczasem opcja „PDF” w oknie drukowania (⌘P) robi to cyfrowo w sekundę.',
+      illustrationId: 'print-page-range',
+    },
+    steps: [
+      {
+        instruction:
+          'Wywołaj okno drukowania (skrót ⌘P lub Plik → Drukuj…), w którym widzisz podgląd wszystkich stron dokumentu.',
+        hint: 'Skrót ⌘P działa identycznie w Safari, w Mailu, w Podglądzie i w Wordzie.',
+        hint2: 'Kliknij podświetlony przycisk „Drukuj… (⌘P)”.',
+        verify: { type: 'simulatorAction', action: 'programy-12-step-1' },
+        simulatorScene: 'programy-12-step-1',
+      },
+      {
+        instruction:
+          'W sekcji „Strony” przełącz z „Wszystkie (1–8)” na „Zakres: Od 1 do 1”, aby pominąć siedem stron zbędnego regulaminu.',
+        hint: 'Dzięki temu wydrukujesz wyłącznie pierwszą stronę z właściwym potwierdzeniem.',
+        hint2: 'Kliknij podświetloną opcję „Strony: Od 1 do 1”.',
+        verify: { type: 'simulatorAction', action: 'programy-12-step-2' },
+        simulatorScene: 'programy-12-step-2',
+      },
+      {
+        instruction:
+          'Kliknij przycisk „Drukuj” (lub „PDF → Zachowaj jako PDF”), aby wydrukować tylko tę jedną wybraną kartkę.',
+        hint: 'W ten sposób oszczędzasz papier, tusz i czas.',
+        hint2: 'Kliknij podświetlony przycisk „Drukuj 1 stronę”.',
+        verify: { type: 'simulatorAction', action: 'programy-12-step-3' },
+        simulatorScene: 'programy-12-step-3',
+      },
+    ],
+  },
+  {
+    id: 'programy-13-powiekszanie-tekstu-safari',
+    track: 'programy',
+    level: 1,
+    title: 'Za małe litery i reklamy na stronach – jak powiększyć tekst (⌘+) i włączyć czysty Czytnik w Safari',
+    realLifeHook:
+      'Gdy wchodzisz na stronę z artykułem lub przepisem kulinarnym, a litery są malutkie i dookoła migają dziesiątki reklam.',
+    estimatedMinutes: 3,
+    prerequisites: ['programy-03-safari-zakladki'],
+    reward: 'Odznaka Wygodnej Lektury',
+    synonyms: [
+      'za male litery w internecie',
+      'jak powiekszyc strone w safari',
+      'powiekszanie tekstu na macu',
+      'jak wylaczyc reklamy na stronie',
+      'tryb czytnika w safari',
+      'pokaz czytnik',
+      'command plus',
+      'za drobny druk na stronie',
+      'jak zmniejszyc strone',
+      'czytelny artykul',
+    ],
+    theory: {
+      id: 'theory-programy-13-powiekszanie-tekstu-safari',
+      category: 'Przeglądarka i bezpieczeństwo',
+      title: 'Lupa pod klawiszem ⌘+ oraz czarodziejska różdżka „Pokaż czytnik”, która zmiata reklamy ze stołu',
+      metaphor: 'Jednym skrótem (⌘+) powiększasz czcionkę do wygodnego rozmiaru, a przyciskiem Czytnika zamieniasz hałaśliwą gazetę w czystą książkę',
+      story:
+        'Wiele stron internetowych projektują dwudziestolatkowie o sokolim wzroku, umieszczając mikroskopijne szare literki pomiędzy pięcioma migającymi reklamami garnków. Nasz czarny kotek nigdy nie mruży oczu przed ekranem, bo zna dwie sztuczki wbudowane w przeglądarkę Safari. Pierwsza to skrót klawiszowy ⌘+ (trzymasz klawisz Command i naciskasz klawisz plusa u góry klawiatury): każde naciśnięcie powiększa całą stronę o jeden stopień, aż litery staną się duże i wyraźne (a co najwygodniejsze, Safari zapamięta to powiększenie dla tej strony na przyszłość!). Druga sztuczka jest jeszcze lepsza: kiedy czytasz artykuł lub przepis i na lewym końcu paska adresu Safari klikniesz ikonkę kartki z kreskami („Pokaż czytnik” lub skrót ⇧⌘R), z ekranu w ułamku sekundy znikną absolutnie wszystkie reklamy, wyskakujące okienka i banery – zostanie sam czysty, spokojny tekst artykułu ze zdjęciami!',
+      realExplanation:
+        'W przeglądarce Safari (oraz w większości innych programów na Macu) skrót ⌘+ (Command + znak plusa/równości) powiększa widok strony, ⌘- (Command + minus) go pomniejsza, a ⌘0 przywraca rozmiar domyślny. Funkcja „Pokaż czytnik” (ikona po lewej stronie paska adresu lub Widok → Pokaż czytnik) usuwa z artykułów reklamy i elementy rozpraszające.',
+      oneLiner:
+        'Powiększaj strony skrótem ⌘+, a do czytania artykułów bez reklam klikaj „Pokaż czytnik” na pasku adresu Safari.',
+      commonMyth:
+        'Wiele osób myśli, że powiększenie strony skrótem ⌘+ psuje jej działanie. A tymczasem to oficjalna funkcja przeglądarki, którą Safari pamięta osobno dla każdej witryny.',
+      illustrationId: 'safari-reader-zoom',
+    },
+    steps: [
+      {
+        instruction:
+          'W otwartym oknie Safari powiększ drobny tekst na stronie, używając skrótu ⌘+ (lub Widok → Powiększ).',
+        hint: 'Klawisz + znajduje się na górnym rzędzie klawiatury na lewo od klawisza Backspace.',
+        hint2: 'Kliknij podświetlony przycisk „Powiększ tekst (⌘+)” na pasku Safari.',
+        verify: { type: 'simulatorAction', action: 'programy-13-step-1' },
+        simulatorScene: 'programy-13-step-1',
+      },
+      {
+        instruction:
+          'Kliknij ikonę „Pokaż czytnik” po lewej stronie paska adresu Safari, aby ukryć wszystkie migające reklamy wokół artykułu.',
+        hint: 'Ikona Czytnika pojawia się na pasku adresu zawsze wtedy, gdy na stronie znajduje się artykuł lub przepis.',
+        hint2: 'Kliknij podświetlony przycisk „Pokaż czytnik” na pasku adresu Safari.',
+        verify: { type: 'simulatorAction', action: 'programy-13-step-2' },
+        simulatorScene: 'programy-13-step-2',
+      },
+      {
+        instruction:
+          'Ciesz się czystym widokiem artykułu w Trybie Czytnika i kliknij potwierdzenie wygodnego rozmiaru czcionki.',
+        hint: 'Aby wyjść z Trybu Czytnika, klikasz ten sam przycisk ponownie lub naciskasz Esc.',
+        hint2: 'Kliknij podświetlony przycisk potwierdzenia w czystym widoku Czytnika.',
+        verify: { type: 'simulatorAction', action: 'programy-13-step-3' },
+        simulatorScene: 'programy-13-step-3',
+      },
+    ],
+  },
+  {
+    id: 'programy-14-pobieranie-z-internetu',
+    track: 'programy',
+    level: 1,
+    title: 'Kliknęłam „Pobierz” w internecie i nic się nie otworzyło – gdzie w Safari lądują pobrane pliki',
+    realLifeHook:
+      'Gdy pobierasz ze strony banku lub urzędu potwierdzenie PDF, widzisz krótki ruch na ekranie, ale dokument sam się nie otwiera.',
+    estimatedMinutes: 3,
+    prerequisites: ['macos-02-gdzie-zniknal-plik', 'programy-03-safari-zakladki'],
+    reward: 'Odznaka Łowczyni Pobrań',
+    synonyms: [
+      'gdzie jest pobrany plik w safari',
+      'kliknelam pobierz i nic nie ma',
+      'strzalka pobierania w safari',
+      'pobieranie z internetu',
+      'gdzie zapisuja sie pliki z przegladarki',
+      'potwierdzenie przelewu nie otworzylo sie',
+      'lista pobranych w safari',
+      'lupka obok pobranego pliku',
+      'sciagnac plik z internetu',
+      'pobrane rzeczy w przegladarce',
+    ],
+    theory: {
+      id: 'theory-programy-14-pobieranie-z-internetu',
+      category: 'Przeglądarka i bezpieczeństwo',
+      title: 'Małe kółko ze strzałką w rogu Safari: okienko odbioru przesyłek prosto z przeglądarki',
+      metaphor: 'Okienko wydawcze na poczcie w prawym górnym rogu okna Safari – jedno kliknięcie pokazuje ostatnio odebrane paczki',
+      story:
+        'Znasz już z wcześniejszej misji teczkę „Pobrane” w Finderze. Ale czy wiedziałaś, że kiedy pobierasz plik w przeglądarce Safari, wcale nie musisz nawet wychodzić z okna przeglądarki, żeby go otworzyć? Kiedy klikniesz na stronie banku przycisk „Pobierz potwierdzenie PDF”, mała ikonka dokumentu przelatuje łukiem w prawy górny róg okna Safari i wpada do małego kółeczka ze strzałką skierowaną w dół. Nasz czarny kotek zawsze śledzi wzrokiem ten lot! Kiedy klikniesz to kółeczko ze strzałką w prawym górnym rogu Safari, rozwinie się mała, podręczna lista wszystkich plików pobranych przed chwilą. Możesz tam kliknąć plik dwa razy, żeby od razu się otworzył, albo kliknąć małą lupkę obok niego – która przeniesie Cię prosto do tego pliku w Finderze!',
+      realExplanation:
+        'W prawym górnym rogu paska narzędzi przeglądarki Safari (obok przycisku Udostępnij) pojawia się ikona listy pobranych plików (kółko ze strzałką w dół). Kliknięcie jej wyświetla ostatnio pobrane dokumenty: dwuklik otwiera plik, a kliknięcie ikony lupy po prawej stronie wiersza wskazuje plik bezpośrednio w folderze Pobrane w Finderze.',
+      oneLiner:
+        'Po pobraniu pliku kliknij kółko ze strzałką (⬇) w prawym górnym rogu okna Safari.',
+      commonMyth:
+        'Wiele osób klika przycisk „Pobierz” na stronie pięć razy pod rząd, bo plik nie otworzył się sam na ekranie. A tymczasem wszystkie pięć kopii czeka już grzecznie pod ikonką strzałki w rogu Safari.',
+      illustrationId: 'safari-downloads-button',
+    },
+    steps: [
+      {
+        instruction:
+          'Na stronie internetowej w oknie Safari kliknij przycisk „Pobierz potwierdzenie przelewu (PDF)”.',
+        hint: 'Zwróć uwagę na prawy górny róg paska narzędzi Safari.',
+        hint2: 'Kliknij podświetlony przycisk „Pobierz potwierdzenie przelewu (PDF)”.',
+        verify: { type: 'simulatorAction', action: 'programy-14-step-1' },
+        simulatorScene: 'programy-14-step-1',
+      },
+      {
+        instruction:
+          'Kliknij ikonę „Pokaż pobrane rzeczy” (kółko ze strzałką w dół ⬇) w prawym górnym rogu okna Safari.',
+        hint: 'Pod tą ikoną znajduje się lista wszystkich plików ściągniętych z internetu.',
+        hint2: 'Kliknij podświetlone kółko ze strzałką w prawym górnym rogu okna Safari.',
+        verify: { type: 'simulatorAction', action: 'programy-14-step-2' },
+        simulatorScene: 'programy-14-step-2',
+      },
+      {
+        instruction:
+          'W rozwiniętym dymku pobranych plików kliknij „Potwierdzenie-przelewu.pdf” (lub ikonę lupki obok niego), aby od razu otworzyć dokument.',
+        hint: 'Ikona lupki pokazuje plik w teczce Pobrane, a kliknięcie nazwy otwiera go w Podglądzie.',
+        hint2: 'Kliknij podświetlony plik „Potwierdzenie-przelewu.pdf” na liście pobranych.',
+        verify: { type: 'simulatorAction', action: 'programy-14-step-3' },
+        simulatorScene: 'programy-14-step-3',
+      },
+    ],
+  },
 ];
 
 export const PROGRAMY_MISSIONS: Mission[] = RAW_PROGRAMY_MISSIONS.map(polishMission);
