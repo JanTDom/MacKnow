@@ -135,4 +135,21 @@ describe('MacAdapter dla różnych wersji macOS (10.13, 10.15, 12, 15)', () => {
 
     fs.rmSync(tmpDir, { recursive: true, force: true });
   });
+
+  it('regresja: zbudowany pakiet dist/main.js zawiera wbudowany chokidar/readdirp i sql-wasm.wasm bez zewnętrznych zależności pnpm', () => {
+    const distDir = path.resolve(__dirname, '../dist');
+    const mainJsPath = path.join(distDir, 'main.js');
+    const preloadJsPath = path.join(distDir, 'preload.js');
+    const wasmPath = path.join(distDir, 'sql-wasm.wasm');
+
+    expect(fs.existsSync(mainJsPath)).toBe(true);
+    expect(fs.existsSync(preloadJsPath)).toBe(true);
+    expect(fs.existsSync(wasmPath)).toBe(true);
+
+    const mainCode = fs.readFileSync(mainJsPath, 'utf8');
+    // Upewniamy się, że readdirp oraz chokidar zostały wbundlowane do środka, a nie pozostawione jako zewnętrzne require("readdirp")
+    expect(mainCode).not.toMatch(/require\(["']readdirp["']\)/);
+    expect(mainCode).not.toMatch(/require\(["']chokidar["']\)/);
+    expect(mainCode).not.toMatch(/require\(["']@macknow\//);
+  });
 });

@@ -23,7 +23,12 @@ export class DesktopSqliteProgressStore {
       return this.db;
     }
     try {
-      const SQL = await initSqlJs();
+      const localWasm = path.join(__dirname, 'sql-wasm.wasm');
+      const SQL = await initSqlJs(
+        fs.existsSync(localWasm)
+          ? { locateFile: (file: string) => path.join(__dirname, file) }
+          : undefined
+      );
       if (fs.existsSync(this.dbPath)) {
         const fileBuffer = fs.readFileSync(this.dbPath);
         this.db = new SQL.Database(fileBuffer);

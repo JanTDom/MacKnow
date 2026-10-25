@@ -6,9 +6,9 @@
   "author": "MacKnow",
   "main": "dist/main.js",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json --noEmit && node scripts/bundle.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "dev": "tsc -p tsconfig.json && electron .",
+    "dev": "pnpm run build && electron .",
     "dist:x64": "pnpm run build && electron-builder --mac dmg --x64 --config.mac.artifactName='MacKnow-${version}-Intel-x64.${ext}'",
     "dist:arm64": "pnpm run build && electron-builder --mac dmg --arm64 --config.mac.artifactName='MacKnow-${version}-AppleSilicon-arm64.${ext}'",
     "dist:universal": "pnpm run build && electron-builder --mac dmg --universal --config.mac.artifactName='MacKnow-${version}-Universal.${ext}'",
@@ -18,13 +18,15 @@
     "appId": "pl.malgorzata.macknow",
     "productName": "MacKnow",
     "copyright": "Copyright © 2026 MacKnow dla Małgorzaty",
+    "npmRebuild": false,
     "directories": {
       "output": "release",
       "buildResources": "build"
     },
     "files": [
       "dist/**/*",
-      "package.json"
+      "package.json",
+      "!node_modules/**/*"
     ],
     "extraResources": [
       {
@@ -40,7 +42,10 @@
       "target": [
         {
           "target": "dmg",
-          "arch": ["x64", "arm64"]
+          "arch": [
+            "x64",
+            "arm64"
+          ]
         }
       ]
     },
@@ -59,6 +64,7 @@
     "@types/node": "^20.17.6",
     "electron": "26.6.10",
     "electron-builder": "^24.13.3",
+    "esbuild": "^0.28.2",
     "typescript": "^5.6.3"
   }
 }
