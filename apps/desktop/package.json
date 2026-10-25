@@ -9,8 +9,9 @@
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "dev": "tsc -p tsconfig.json && electron .",
-    "dist:x64": "pnpm run build && electron-builder --mac dmg --x64 --config.mac.artifactName=\"MacKnow-${version}-Intel-x64.${ext}\"",
-    "dist:arm64": "pnpm run build && electron-builder --mac dmg --arm64 --config.mac.artifactName=\"MacKnow-${version}-AppleSilicon-arm64.${ext}\"",
+    "dist:x64": "pnpm run build && electron-builder --mac dmg --x64 --config.mac.artifactName='MacKnow-${version}-Intel-x64.${ext}'",
+    "dist:arm64": "pnpm run build && electron-builder --mac dmg --arm64 --config.mac.artifactName='MacKnow-${version}-AppleSilicon-arm64.${ext}'",
+    "dist:universal": "pnpm run build && electron-builder --mac dmg --universal --config.mac.artifactName='MacKnow-${version}-Universal.${ext}'",
     "dist": "pnpm run dist:x64 && pnpm run dist:arm64"
   },
   "build": {

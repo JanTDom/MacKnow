@@ -29,7 +29,7 @@ const RAW_AI_MISSIONS: Mission[] = [
       title: 'Biegła maszynistka ukryta pod klawiszem mikrofonu, która rozumie polskie kropki i przecinki',
       metaphor: 'Osobista sekretarka, która zapisuje dokładnie to, co mówisz, w każdym programie na Macu',
       story:
-        'Zanim w ogóle otworzymy jakikolwiek czat ze sztuczną inteligencją, warto poznać umiejętność AI, którą Twój MacBook ma wbudowaną fabrycznie w samą klawiaturę: dyktowanie głosowe po polsku. Na górnym rzędzie klawiszy (często na klawiszu F5) narysowany jest mały mikrofonik. Kiedy klikniesz myszką w pole pisania wiadomości e-mail, w dokument Worda albo w notatkę i wciśniesz ten mikrofon (lub naciśniesz dwa razy klawisz Fn / Control), obok kursora pojawi się mały znaczek słuchającego mikrofonu. Od tej chwili mówisz naturalnym głosem, a litery same wskakują na ekran z prędkością, jakiej nie osiągnie żaden mistrz pisania na klawiaturze! Co najciekawsze, możesz podyktować również znaki przestankowe – wystarczy powiedzieć na głos: „Dzień dobry przecinek przesyłam dokumenty kropka nowy wiersz pozdrawiam”. Kiedy skończysz mówić, naciskasz Enter lub klawisz mikrofonu i tekst jest napisany.',
+        'Zanim w ogóle otworzymy jakikolwiek czat ze sztuczną inteligencją, warto poznać umiejętność AI, którą Twój MacBook ma wbudowaną fabrycznie w samą klawiaturę: dyktowanie głosowe po polsku. Na górnym rzędzie klawiszy (często na klawiszu F5) narysowany jest mały mikrofonik. Kiedy klikniesz myszką w pole pisania wiadomości e-mail, w dokument Worda albo w notatkę i wciśniesz ten mikrofon (lub naciśniesz dwa razy klawisz Fn / Control), obok kursora pojawi się mały znaczek słuchającego mikrofonu. Od tej chwili mówisz naturalnym głosem, a litery same wskakują na ekran z prędkością, jakiej nie osiągnie żaden mistrz pisania na klawiaturze! Co najciekawsze, możesz podyktować również znaki przestankowe – mówisz po prostu na głos: „Dzień dobry przecinek przesyłam dokumenty kropka nowy wiersz pozdrawiam”. Kiedy skończysz mówić, naciskasz Enter lub klawisz mikrofonu i tekst jest napisany.',
       realExplanation:
         'Funkcję Dyktowanie włączysz w Ustawieniach systemowych → Klawiatura → sekcja Dyktowanie (wybierając język polski). Po jej włączeniu w dowolnym polu tekstowym na Macu możesz nacisnąć klawisz dyktowania (ikona mikrofonu F5 lub dwukrotne naciśnięcie klawisza Fn/Control), mówić po polsku i wymawiać nazwy znaków interpunkcyjnych („przecinek”, „kropka”, „znak zapytania”).',
       oneLiner:
@@ -174,7 +174,7 @@ const RAW_AI_MISSIONS: Mission[] = [
       title: 'Tłumacz z języka urzędowego na ludzki, który wyciąga dla Ciebie samą esencję',
       metaphor: 'Zaprzyjaźniony prawnik, który czyta pięć stron regulaminu i mówi Ci w trzech punktach, o co chodzi',
       story:
-        'Urzędy, banki, firmy ubezpieczeniowe i administracje osiedli uwielbiają pisać wiadomości takimi zdaniami, że po trzeciej linijce człowiek zapomina, jak się nazywa. Zamiast czytać cztery razy ten sam akapit o „znowelizowanym taryfikatorze opłat eksploatacyjnych”, możesz wykorzystać najmocniejszą stronę sztucznej inteligencji: błyskawiczne streszczanie i tłumaczenie z zawiłego żargonu na normalny język polski. Wystarczy zaznaczyć tekst długiego maila lub regulaminu, skopiować go do schowka (⌘C), wkleić do okna rozmowy z AI (⌘V) i dopisać na górze jedno proste zdanie: „Podsumuj mi to pismo w trzech krótkich punktach po ludzku i napisz, czy muszę coś zrobić lub zapłacić”. W kilka sekund otrzymasz przejrzyste streszczenie bez prawniczej waty.',
+        'Urzędy, banki, firmy ubezpieczeniowe i administracje osiedli uwielbiają pisać wiadomości takimi zdaniami, że po trzeciej linijce człowiek zapomina, jak się nazywa. Zamiast czytać cztery razy ten sam akapit o „znowelizowanym taryfikatorze opłat eksploatacyjnych”, możesz wykorzystać najmocniejszą stronę sztucznej inteligencji: błyskawiczne streszczanie i tłumaczenie z zawiłego żargonu na normalny język polski. Zaznaczasz tekst długiego maila lub regulaminu, kopiujesz go do schowka (⌘C), wklejasz do okna rozmowy z AI (⌘V) i dopisujesz na górze jedno konkretne zdanie: „Podsumuj mi to pismo w trzech krótkich punktach po ludzku i napisz, czy muszę coś zrobić lub zapłacić”. W kilka sekund otrzymasz przejrzyste streszczenie bez prawniczej waty.',
       realExplanation:
         'Modele językowe AI doskonale radzą sobie z analizą i streszczaniem długich tekstów. Skopiuj tekst pisma (⌘C), wklej go do okna czatu (⌘V) i poproś o wypunktowanie najważniejszych wniosków, terminów oraz ewentualnych działań. Pamiętaj jedynie, aby przed wklejeniem usunąć z tekstu wrażliwe dane, takie jak numer PESEL czy pełny numer dowodu.',
       oneLiner:
@@ -308,7 +308,7 @@ const RAW_AI_MISSIONS: Mission[] = [
       oneLiner:
         'Poproś AI: „Popraw tylko przecinki i literówki, zachowując mój własny styl”.',
       commonMyth:
-        'Wiele osób myśli, że korekta przez AI zawsze zamienia tekst w sztuczny, komputerowy slogan. A tymczasem wystarczy zastrzec w poleceniu zachowanie oryginalnego stylu.',
+        'Wiele osób myśli, że korekta przez AI zawsze zamienia tekst w sztuczny, komputerowy slogan. A tymczasem dopisanie w poleceniu prośby o zachowanie oryginalnego stylu całkowicie temu zapobiega.',
       illustrationId: 'ai-proofreading-pen',
     },
     steps: [

@@ -45,6 +45,8 @@ const FORBIDDEN_ANGLICISMS = [
   plWord('dedykowan(?:y|a|e|ego|ej|emu|ym|ych)'),
   plWord('ikonk(?:a|i|ę) ekranu domowego'),
   plWord('ekran domowy'),
+  plWord('to proste'),
+  plWord('wystarczy'),
 ];
 
 const FORBIDDEN_VOCATIVE = /\bMałgorzata,\s+[a-ząćęłńóśźż]/;
