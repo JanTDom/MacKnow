@@ -5,6 +5,8 @@
   "description": "MacKnow – osobisty przewodnik po MacBooku dla Małgorzaty",
   "scripts": {
     "build": "pnpm --filter \"./packages/*\" run build && pnpm --filter @macknow/web run build && pnpm --filter @macknow/desktop run build",
+    "build:web": "pnpm --filter \"./packages/*\" run build && pnpm --filter @macknow/web run build",
+    "vercel-build": "pnpm --filter \"./packages/*\" run build && pnpm --filter @macknow/web run build",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",

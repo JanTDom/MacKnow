@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm --filter \"./packages/*\" run build && pnpm --filter @macknow/web run build",
+  "outputDirectory": "apps/web/out",
+  "cleanUrls": true
+}
